@@ -8,8 +8,8 @@ public class Student extends User {
     private int numarMatricol;
     private int anStudiu;
     private String grupa;
-    private List<Curs> cursuriInscrise;
-    private List<Curs> istoricCursuri;
+    private final List<Curs> cursuriInscrise;
+    private final List<Curs> istoricCursuri;
 
     public Student(
             int id,

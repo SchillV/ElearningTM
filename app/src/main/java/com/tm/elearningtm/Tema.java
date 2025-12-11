@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Tema extends Postare {
     private LocalDateTime deadline;
-    private List<SubmisieStudent> submisiiStudenti;
+    private final List<SubmisieStudent> submisiiStudenti;
 
     public Tema(int id, String titlu, LocalDateTime deadline) {
         super(id, titlu);

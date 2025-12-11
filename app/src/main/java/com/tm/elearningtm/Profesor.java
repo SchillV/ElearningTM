@@ -6,7 +6,7 @@ import java.util.List;
 public class Profesor extends User {
     private GradDidactic gradDidactic;
     private String departament;
-    private List<Curs> cursuriPredate;
+    private final List<Curs> cursuriPredate;
 
     public Profesor(
             int id,

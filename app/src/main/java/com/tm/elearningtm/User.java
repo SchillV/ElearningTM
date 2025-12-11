@@ -1,7 +1,7 @@
 package com.tm.elearningtm;
 
 public abstract class User {
-    private int id;
+    private final int id;
     private String nume;
     private String email;
     private String passHash;

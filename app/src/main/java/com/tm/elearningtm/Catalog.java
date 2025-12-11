@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 public class Catalog {
 
-    private List<Curs> cursuri;
-    private List<User> utilizatori;
-    private List<MaterialCurs> materiale;
-    private List<SubmisieStudent> submisii;
+    private final List<Curs> cursuri;
+    private final List<User> utilizatori;
+    private final List<MaterialCurs> materiale;
+    private final List<SubmisieStudent> submisii;
 
     public Catalog() {
         this.cursuri = new ArrayList<>();

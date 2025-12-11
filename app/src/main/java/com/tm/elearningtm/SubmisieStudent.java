@@ -3,11 +3,11 @@ package com.tm.elearningtm;
 import java.time.LocalDateTime;
 
 public class SubmisieStudent {
-    private int id;
-    private Student student;
-    private Tema tema;
-    private String continut;
-    private LocalDateTime dataSubmisie;
+    private final int id;
+    private final Student student;
+    private final Tema tema;
+    private final String continut;
+    private final LocalDateTime dataSubmisie;
     private Double nota;
 
     public SubmisieStudent(int id, Student student, Tema tema, String continut) {
