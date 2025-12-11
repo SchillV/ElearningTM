@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Profesor extends User {
-    private String gradDidactic;
+    private GradDidactic gradDidactic;
     private String departament;
     private List<Curs> cursuriPredate;
 
@@ -12,7 +12,7 @@ public class Profesor extends User {
             String nume,
             String email,
             String passHash,
-            String gradDidactic,
+            GradDidactic gradDidactic,
             String departament
     ) {
         super(id, nume, email, passHash);

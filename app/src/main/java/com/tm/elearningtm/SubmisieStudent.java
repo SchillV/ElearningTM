@@ -8,6 +8,7 @@ public class SubmisieStudent {
     private float nota;
     private String feedback;
     private LocalDateTime data;
+    private StatusSubmisie status;
 
     public SubmisieStudent(
             Student student,
@@ -18,5 +19,6 @@ public class SubmisieStudent {
         nota = -1;
         feedback = "";
         data = LocalDateTime.now();
+        status = StatusSubmisie.NEINCEPUTA;
     }
 }

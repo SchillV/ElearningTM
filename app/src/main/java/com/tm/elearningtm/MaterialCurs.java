@@ -1,7 +1,9 @@
 package com.tm.elearningtm;
 
 public class MaterialCurs extends Postare {
-    public MaterialCurs(int id, String titlu) {
+    private TipMaterial tipMaterial;
+    public MaterialCurs(int id, String titlu, TipMaterial tipMaterial) {
         super(id, titlu);
+        this.tipMaterial = tipMaterial;
     }
 }
