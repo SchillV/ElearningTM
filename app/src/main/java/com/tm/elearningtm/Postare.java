@@ -10,6 +10,22 @@ public abstract class Postare {
     public Postare(int id, String titlu) {
         this.id = id;
         this.titlu = titlu;
-        dataCreare = LocalDateTime.now();
+        this.dataCreare = LocalDateTime.now();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitlu() {
+        return titlu;
+    }
+
+    public LocalDateTime getDataCreare() {
+        return dataCreare;
+    }
+
+    public void setTitlu(String titlu) {
+        this.titlu = titlu;
     }
 }

@@ -1,8 +1,7 @@
 package com.tm.elearningtm;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import kotlin.collections.EmptyList;
 
 public class Student extends User {
 
@@ -12,7 +11,7 @@ public class Student extends User {
     private List<Curs> cursuriInscrise;
     private List<Curs> istoricCursuri;
 
-    public Student (
+    public Student(
             int id,
             String nume,
             String email,
@@ -25,11 +24,11 @@ public class Student extends User {
         this.numarMatricol = numarMatricol;
         this.anStudiu = anStudiu;
         this.grupa = grupa;
-        this.cursuriInscrise = new ArrayList<Curs>();
-        this.istoricCursuri = new ArrayList<Curs>();
+        this.cursuriInscrise = new ArrayList<>();
+        this.istoricCursuri = new ArrayList<>();
     }
 
-    public void inscrieLaCurs (Curs curs) {
+    public void inscrieLaCurs(Curs curs) {
         cursuriInscrise.add(curs);
         istoricCursuri.add(curs);
     }
@@ -40,5 +39,29 @@ public class Student extends User {
 
     public List<Curs> afiseazaIstoricCursuri() {
         return istoricCursuri;
+    }
+
+    public int getNumarMatricol() {
+        return numarMatricol;
+    }
+
+    public void setNumarMatricol(int numarMatricol) {
+        this.numarMatricol = numarMatricol;
+    }
+
+    public int getAnStudiu() {
+        return anStudiu;
+    }
+
+    public void setAnStudiu(int anStudiu) {
+        this.anStudiu = anStudiu;
+    }
+
+    public String getGrupa() {
+        return grupa;
+    }
+
+    public void setGrupa(String grupa) {
+        this.grupa = grupa;
     }
 }

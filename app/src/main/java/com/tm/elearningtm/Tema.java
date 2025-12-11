@@ -10,6 +10,25 @@ public class Tema extends Postare {
     public Tema(int id, String titlu, LocalDateTime deadline) {
         super(id, titlu);
         this.deadline = deadline;
-        submisiiStudenti = new ArrayList<SubmisieStudent>();
+        submisiiStudenti = new ArrayList<>();
+    }
+
+    public void adaugaSubmisie(SubmisieStudent submisie) {
+        submisiiStudenti.add(submisie);
+        System.out.println("Submisie adăugată pentru tema \"" + getTitlu() + "\".");
+    }
+
+    // Getters
+    public LocalDateTime getDeadline() {
+        return deadline;
+    }
+
+    public List<SubmisieStudent> getSubmisiiStudenti() {
+        return submisiiStudenti;
+    }
+
+    // Setter
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
     }
 }
