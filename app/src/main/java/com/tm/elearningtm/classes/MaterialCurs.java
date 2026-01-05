@@ -3,8 +3,8 @@ package com.tm.elearningtm.classes;
 public class MaterialCurs extends Postare {
     private TipMaterial tipMaterial;
 
-    public MaterialCurs(int id, String titlu, String descriere, TipMaterial tipMaterial) {
-        super(id, titlu, descriere);
+    public MaterialCurs(String titlu, String descriere, TipMaterial tipMaterial) {
+        super(titlu, descriere);
         this.tipMaterial = tipMaterial;
     }
 

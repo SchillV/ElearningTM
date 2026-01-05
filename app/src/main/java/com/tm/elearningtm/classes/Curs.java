@@ -1,26 +1,27 @@
 package com.tm.elearningtm.classes;
 
+import com.tm.elearningtm.data.AppData;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Curs {
-    private int id;
+    private final int id;
     private String titlu;
     private String descriere;
     private String categorie;
-    private Profesor profesor;
-    private List<MaterialCurs> materiale;
-    private List<Tema> teme;
-    private List<Student> studentiInscrisi;
+    private final Profesor profesor;
+    private final List<MaterialCurs> materiale;
+    private final List<Tema> teme;
+    private final List<Student> studentiInscrisi;
 
     public Curs(
-            int id,
             String titlu,
             String descriere,
             String categorie,
             Profesor profesor
     ) {
-        this.id = id;
+        this.id = AppData.generateCursID();
         this.titlu = titlu;
         this.descriere = descriere;
         this.categorie = categorie;

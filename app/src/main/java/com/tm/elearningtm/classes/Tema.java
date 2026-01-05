@@ -9,8 +9,7 @@ public class Tema extends Postare {
     private final List<SubmisieStudent> submisii;
 
     public Tema(String titlu, String descriere, LocalDateTime deadline) {
-        // TODO: add a way to give unique id's
-        super(0, titlu, descriere);
+        super(titlu, descriere);
         this.deadline = deadline;
         submisii = new ArrayList<>();
     }

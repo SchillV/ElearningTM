@@ -1,5 +1,7 @@
 package com.tm.elearningtm.classes;
 
+import com.tm.elearningtm.data.AppData;
+
 public abstract class User {
     private final int id;
     private String nume;
@@ -7,8 +9,8 @@ public abstract class User {
     private String passHash;
     private final UserRole role;
 
-    public User(int id, String nume, String email, String passHash, UserRole role) {
-        this.id = id;
+    public User(String nume, String email, String passHash, UserRole role) {
+        this.id = AppData.generateUserID();
         this.nume = nume;
         this.email = email;
         this.passHash = passHash;

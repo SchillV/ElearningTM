@@ -7,6 +7,11 @@ import com.tm.elearningtm.classes.UserRole;
 
 public class AppData {
 
+    //TODO: read the next id from a database
+    private static int nextCursID = 1;
+    private static int nextPostID = 1;
+    private static int nextSubID = 1;
+    private static int nextUserID = 1;
     private static final Catalog catalog = new Catalog();
     private static User utilizatorCurent;
     private static Curs cursCurent;
@@ -27,6 +32,21 @@ public class AppData {
         return utilizatorCurent.getRole() == UserRole.PROFESOR;
     }
 
+    public static int generateUserID() {
+        return nextUserID++;
+    }
+
+    public static int generateCursID() {
+        return nextCursID++;
+    }
+
+    public static int generateSubID() {
+        return nextSubID++;
+    }
+
+    public static int generatePostID() {
+        return nextPostID++;
+    }
     public static Curs getCursCurent() {
         return cursCurent;
     }

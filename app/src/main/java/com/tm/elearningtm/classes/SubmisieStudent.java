@@ -2,6 +2,8 @@ package com.tm.elearningtm.classes;
 
 import android.os.Build;
 
+import com.tm.elearningtm.data.AppData;
+
 import java.time.LocalDateTime;
 
 public class SubmisieStudent {
@@ -12,8 +14,7 @@ public class SubmisieStudent {
     private Double nota;
 
     public SubmisieStudent(Student student, String continut) {
-        //TODO: add way to make unique id's
-        this.id = 0;
+        this.id = AppData.generateSubID();
         this.student = student;
         this.continut = continut;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

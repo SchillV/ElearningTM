@@ -13,9 +13,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.tm.elearningtm.classes.Catalog;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.Tema;
+import com.tm.elearningtm.data.AppData;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -106,9 +106,7 @@ public class AddAssignment extends AppCompatActivity {
             return;
         }
 
-        //TODO: change placeholder code here
-        Catalog catalog = new Catalog();
-        Curs curs = catalog.getCursById(courseId);
+        Curs curs = AppData.getCatalog().getCursById(courseId);
 
         if (curs == null) {
             Toast.makeText(this, "Cursul nu a fost găsit", Toast.LENGTH_SHORT).show();

@@ -2,6 +2,8 @@ package com.tm.elearningtm.classes;
 
 import android.os.Build;
 
+import com.tm.elearningtm.data.AppData;
+
 import java.time.LocalDateTime;
 
 public abstract class Postare {
@@ -10,8 +12,8 @@ public abstract class Postare {
     private String descriere;
     private final LocalDateTime dataCreare;
 
-    public Postare(int id, String titlu, String descriere) {
-        this.id = id;
+    public Postare(String titlu, String descriere) {
+        this.id = AppData.generatePostID();
         this.titlu = titlu;
         this.descriere = descriere;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
