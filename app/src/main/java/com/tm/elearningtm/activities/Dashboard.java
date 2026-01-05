@@ -1,4 +1,4 @@
-package com.tm.elearningtm;
+package com.tm.elearningtm.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tm.elearningtm.R;
 import com.tm.elearningtm.adapters.CourseAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.User;

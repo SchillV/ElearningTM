@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    tools:context=".SubmitAssignment">
+    tools:context=".activities.SubmitAssignment">
 
     <TextView
         android:id="@+id/text_header_submit"

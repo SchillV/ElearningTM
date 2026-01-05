@@ -1,10 +1,12 @@
-package com.tm.elearningtm;
+package com.tm.elearningtm.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.tm.elearningtm.R;
 import com.tm.elearningtm.data.AppData;
 import com.tm.elearningtm.classes.Curs;
 

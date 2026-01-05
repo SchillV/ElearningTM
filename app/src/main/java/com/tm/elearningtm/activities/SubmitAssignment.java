@@ -1,4 +1,4 @@
-package com.tm.elearningtm;
+package com.tm.elearningtm.activities;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.Student;
 import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.classes.Tema;

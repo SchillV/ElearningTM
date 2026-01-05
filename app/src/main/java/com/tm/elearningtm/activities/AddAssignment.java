@@ -1,4 +1,4 @@
-package com.tm.elearningtm;
+package com.tm.elearningtm.activities;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.Tema;
 import com.tm.elearningtm.data.AppData;
