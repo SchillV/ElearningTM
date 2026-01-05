@@ -24,9 +24,20 @@ public class SubmitAssignment extends AppCompatActivity {
         setContentView(R.layout.activity_submit_assignment);
 
         int temaId = getIntent().getIntExtra("ASSIGNMENT_ID", -1);
-
-        Tema tema = AppData.getCursCurent().getTemaById(temaId);
+        Tema tema = null;
         User student = AppData.getUtilizatorCurent();
+
+        try {
+            tema = AppData.getCursCurent().getTemaById(temaId);
+            if (tema == null) {
+                Toast.makeText(this, "Tema nu există", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Eroare: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         if (tema == null || student == null) {
             finish();
@@ -39,6 +50,7 @@ public class SubmitAssignment extends AppCompatActivity {
 
         titleText.setText(tema.getTitlu());
 
+        Tema finalTema = tema;
         submitButton.setOnClickListener(v -> {
             String continut = Objects.requireNonNull(submissionText.getText()).toString().trim();
 
@@ -54,7 +66,7 @@ public class SubmitAssignment extends AppCompatActivity {
                                 continut
                         );
 
-                AppData.getCursCurent().getTemaById(tema.getId()).adaugaSubmisie(submisie);
+                AppData.getCursCurent().getTemaById(finalTema.getId()).adaugaSubmisie(submisie);
 
                 Toast.makeText(this, "Tema a fost trimisă!", Toast.LENGTH_SHORT).show();
             }
