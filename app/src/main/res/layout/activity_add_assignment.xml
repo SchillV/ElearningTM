@@ -12,7 +12,7 @@
         android:id="@+id/text_header_assignment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adaugă o Temă Nouă"
+        android:text="@string/adaug_o_tem_nou"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -31,7 +31,7 @@
             android:id="@+id/edit_text_assignment_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Titlul Temei"
+            android:hint="@string/titlul_temei"
             android:inputType="textCapSentences"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="top"
-            android:hint="Descriere și instrucțiuni"
+            android:hint="@string/descriere_i_instruc_iuni"
             android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,7 +68,7 @@
             android:id="@+id/edit_text_max_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Punctaj Maxim"
+            android:hint="@string/punctaj_maxim"
             android:inputType="numberDecimal"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,7 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Alege Deadline"
+        android:text="@string/alege_deadline"
         android:paddingVertical="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/input_layout_points"
@@ -89,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Data limită: Neselectată"
+        android:text="@string/data_limit_neselectat"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_points" />
@@ -98,7 +98,7 @@
         android:id="@+id/button_publish_assignment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Publică Tema"
+        android:text="@string/public_tema"
         android:textSize="16sp"
         android:paddingVertical="12dp"
         android:layout_marginBottom="16dp"

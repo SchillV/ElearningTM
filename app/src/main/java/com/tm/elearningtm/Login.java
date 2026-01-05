@@ -46,11 +46,10 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        // Login successful
         AppData.setUtilizatorCurent(user);
 
         Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
-        finish(); // prevent back to login
+        finish();
     }
 }

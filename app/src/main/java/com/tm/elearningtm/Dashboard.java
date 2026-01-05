@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tm.elearningtm.R;
 import com.tm.elearningtm.adapters.CourseAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.User;
@@ -30,7 +29,6 @@ public class Dashboard extends AppCompatActivity {
         TextView roleText = findViewById(R.id.text_user_role);
         Button logoutButton = findViewById(R.id.button_logout);
 
-        // 1️⃣ Get logged-in user safely
         User currentUser = AppData.getUtilizatorCurent();
         if (currentUser == null) {
             startActivity(new Intent(this, Login.class));
@@ -41,7 +39,6 @@ public class Dashboard extends AppCompatActivity {
         welcomeText.setText("Bine ai venit, " + currentUser.getNume() + "!");
         roleText.setText("Rol: " + currentUser.getRole());
 
-        // 2️⃣ Setup RecyclerView
         RecyclerView coursesRecyclerView = findViewById(R.id.recycler_view_courses);
         coursesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -53,7 +50,6 @@ public class Dashboard extends AppCompatActivity {
 
         coursesRecyclerView.setAdapter(adapter);
 
-        // 3️⃣ Logout
         logoutButton.setOnClickListener(v -> logout());
     }
 

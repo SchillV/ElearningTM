@@ -11,8 +11,9 @@ public class SubmisieStudent {
     private final LocalDateTime dataSubmisie;
     private Double nota;
 
-    public SubmisieStudent(int id, Student student, String continut) {
-        this.id = id;
+    public SubmisieStudent(Student student, String continut) {
+        //TODO: add way to make unique id's
+        this.id = 0;
         this.student = student;
         this.continut = continut;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

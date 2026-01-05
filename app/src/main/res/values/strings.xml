@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ElearningTM</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -12,4 +11,15 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="delogare">Delogare</string>
+    <string name="cursurile_mele">Cursurile mele:</string>
+    <string name="rol_student_profesor">Rol: [Student/Profesor]</string>
+    <string name="bine_ai_venit_nume_utilizator">Bine ai venit, [Nume Utilizator]!</string>
+    <string name="adaug_o_tem_nou">Adaugă o Temă Nouă</string>
+    <string name="titlul_temei">Titlul Temei</string>
+    <string name="descriere_i_instruc_iuni">Descriere și instrucțiuni</string>
+    <string name="punctaj_maxim">Punctaj Maxim</string>
+    <string name="alege_deadline">Alege Deadline</string>
+    <string name="data_limit_neselectat">Data limită: Neselectată</string>
+    <string name="public_tema">Publică Tema</string>
 </resources>

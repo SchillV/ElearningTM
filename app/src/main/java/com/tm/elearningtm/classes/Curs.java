@@ -47,6 +47,14 @@ public class Curs {
     public String getDescriere() { return descriere; }
     public String getCategorie() { return categorie; }
     public Profesor getProfesor() { return profesor; }
+    public Tema getTemaById(int id) {
+        for(Tema t:this.teme){
+            if (t.getId() == id) {
+                return t;
+            }
+        }
+        return null;
+    }
     public List<MaterialCurs> getMateriale() { return materiale; }
     public List<Student> getStudentiInscrisi() { return studentiInscrisi; }
 
