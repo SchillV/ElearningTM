@@ -6,7 +6,7 @@ import java.util.List;
 public class Profesor extends User {
     private GradDidactic gradDidactic;
     private String departament;
-    private List<Curs> cursuriPredate;
+    private final List<Curs> cursuriPredate;
 
     public Profesor(
             int id,
@@ -16,7 +16,7 @@ public class Profesor extends User {
             GradDidactic gradDidactic,
             String departament
     ) {
-        super(id, nume, email, passHash);
+        super(id, nume, email, passHash, UserRole.PROFESOR);
         this.gradDidactic = gradDidactic;
         this.departament = departament;
         this.cursuriPredate = new ArrayList<>();

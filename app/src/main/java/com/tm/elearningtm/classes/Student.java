@@ -8,8 +8,8 @@ public class Student extends User {
     private int numarMatricol;
     private int anStudiu;
     private String grupa;
-    private List<Curs> cursuriInscrise;
-    private List<Curs> istoricCursuri;
+    private final List<Curs> cursuriInscrise;
+    private final List<Curs> istoricCursuri;
 
     public Student(
             int id,
@@ -20,7 +20,7 @@ public class Student extends User {
             int anStudiu,
             String grupa
     ) {
-        super(id, nume, email, passHash);
+        super(id, nume, email, passHash, UserRole.STUDENT);
         this.numarMatricol = numarMatricol;
         this.anStudiu = anStudiu;
         this.grupa = grupa;
