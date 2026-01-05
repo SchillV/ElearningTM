@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElearningTM">
         <activity
+            android:name=".CourseDetailActivtity"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
