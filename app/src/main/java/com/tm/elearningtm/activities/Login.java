@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tm.elearningtm.R;
-import com.tm.elearningtm.classes.Catalog;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
@@ -28,6 +27,7 @@ public class Login extends AppCompatActivity {
         Button loginButton = findViewById(R.id.button_login);
 
         loginButton.setOnClickListener(v -> attemptLogin());
+        AppData.initialize(this);
     }
 
     private void attemptLogin() {

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tm.elearningtm.R;
-import com.tm.elearningtm.classes.Student;
 import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.classes.Tema;
 import com.tm.elearningtm.classes.User;
@@ -63,7 +62,7 @@ public class SubmitAssignment extends AppCompatActivity {
             if(AppData.isStudent()) {
                 SubmisieStudent submisie =
                         new SubmisieStudent(
-                                (Student) student,
+                                student,
                                 continut
                         );
 
