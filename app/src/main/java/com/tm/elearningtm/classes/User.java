@@ -1,4 +1,4 @@
-package com.tm.elearningtm;
+package com.tm.elearningtm.classes;
 
 public abstract class User {
     private int id;

@@ -1,4 +1,4 @@
-package com.tm.elearningtm;
+package com.tm.elearningtm.classes;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,21 +1,22 @@
-package com.tm.elearningtm;
+package com.tm.elearningtm.classes;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Tema extends Postare {
     private LocalDateTime deadline;
-    private List<SubmisieStudent> submisiiStudenti;
+    private final List<SubmisieStudent> submisii;
 
-    public Tema(int id, String titlu, LocalDateTime deadline) {
-        super(id, titlu);
+    public Tema(String titlu, String descriere, LocalDateTime deadline) {
+        // TODO: add a way to give unique id's
+        super(0, titlu, descriere);
         this.deadline = deadline;
-        submisiiStudenti = new ArrayList<>();
+        submisii = new ArrayList<>();
     }
 
     public void adaugaSubmisie(SubmisieStudent submisie) {
-        submisiiStudenti.add(submisie);
-        System.out.println("Submisie adăugată pentru tema \"" + getTitlu() + "\".");
+        submisii.add(submisie);
     }
 
     // Getters
@@ -24,7 +25,7 @@ public class Tema extends Postare {
     }
 
     public List<SubmisieStudent> getSubmisiiStudenti() {
-        return submisiiStudenti;
+        return submisii;
     }
 
     // Setter
