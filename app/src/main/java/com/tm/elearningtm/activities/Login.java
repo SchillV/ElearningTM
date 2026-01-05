@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.Catalog;
 import com.tm.elearningtm.classes.User;
-import com.tm.elearningtm.data.AppData;
+import com.tm.elearningtm.database.AppData;
 
 public class Login extends AppCompatActivity {
 
@@ -39,10 +39,9 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        Catalog catalog = AppData.getCatalog();
-        User user = catalog.autentifica(email, parola);
+        User user = AppData.getDatabase().userDao().getUserByEmail(email);
 
-        if (user == null) {
+        if (user == null || !user.getPassHash().equals(parola)) {
             Toast.makeText(this, "Email sau parolă incorectă", Toast.LENGTH_SHORT).show();
             return;
         }

@@ -14,7 +14,7 @@ import com.tm.elearningtm.R;
 import com.tm.elearningtm.adapters.CourseAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.User;
-import com.tm.elearningtm.data.AppData;
+import com.tm.elearningtm.database.AppData;
 
 import java.util.List;
 
@@ -43,12 +43,9 @@ public class Dashboard extends AppCompatActivity {
         RecyclerView coursesRecyclerView = findViewById(R.id.recycler_view_courses);
         coursesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Curs> cursuri =
-                AppData.getCatalog().getCursuri();
+        List<Curs> cursuri = AppData.getDatabase().cursDao().getAllCourses();
 
-        CourseAdapter adapter =
-                new CourseAdapter(cursuri, this::openCourse);
-
+        CourseAdapter adapter = new CourseAdapter(cursuri, this::openCourse);
         coursesRecyclerView.setAdapter(adapter);
 
         logoutButton.setOnClickListener(v -> logout());

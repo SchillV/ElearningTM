@@ -1,37 +1,104 @@
 package com.tm.elearningtm.classes;
 
-import android.os.Build;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
-import com.tm.elearningtm.data.AppData;
+import com.tm.elearningtm.database.Converters;
 
 import java.time.LocalDateTime;
 
+@Entity(
+        tableName = "submisii",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = User.class,
+                        parentColumns = "id",
+                        childColumns = "student_id",
+                        onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = Tema.class,
+                        parentColumns = "id",
+                        childColumns = "tema_id",
+                        onDelete = ForeignKey.CASCADE
+                )
+        }
+)
+@TypeConverters(Converters.class)
 public class SubmisieStudent {
-    private final int id;
-    private final Student student;
-    private final String continut;
-    private final LocalDateTime dataSubmisie;
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "student_id", index = true)
+    private int studentId;
+
+    @ColumnInfo(name = "tema_id", index = true)
+    private int temaId;
+
+    private String continut;
+
+    @ColumnInfo(name = "data_submisie")
+    private LocalDateTime dataSubmisie;
+
     private Double nota;
 
-    public SubmisieStudent(Student student, String continut) {
-        this.id = AppData.generateSubID();
-        this.student = student;
+    @Ignore
+    private User student; // loaded separately
+
+    // Full and Empty constructors for Room
+    public SubmisieStudent() {
+    }
+
+    public SubmisieStudent(int id, int studentId, int temaId, String continut,
+                           LocalDateTime dataSubmisie, Double nota) {
+        this.id = id;
+        this.studentId = studentId;
+        this.temaId = temaId;
         this.continut = continut;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        this.dataSubmisie = dataSubmisie;
+        this.nota = nota;
+    }
+
+    @Ignore
+    public SubmisieStudent(User student, String continut) {
+        this.student = student;
+        this.studentId = student.getId();
+        this.continut = continut;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             this.dataSubmisie = LocalDateTime.now();
-        } else {
-            this.dataSubmisie = null;
         }
         this.nota = null;
     }
 
-    public void setNota(double nota) {
-        this.nota = nota;
-    }
-
+    // Getters and Setters
     public int getId() { return id; }
-    public Student getStudent() { return student; }
+    public void setId(int id) { this.id = id; }
+
+    public int getStudentId() { return studentId; }
+    public void setStudentId(int studentId) { this.studentId = studentId; }
+
+    public int getTemaId() { return temaId; }
+    public void setTemaId(int temaId) { this.temaId = temaId; }
+
     public String getContinut() { return continut; }
+    public void setContinut(String continut) { this.continut = continut; }
+
     public LocalDateTime getDataSubmisie() { return dataSubmisie; }
+    public void setDataSubmisie(LocalDateTime dataSubmisie) { this.dataSubmisie = dataSubmisie; }
+
     public Double getNota() { return nota; }
+    public void setNota(Double nota) { this.nota = nota; }
+
+    public User getStudent() { return student; }
+    public void setStudent(User student) {
+        this.student = student;
+        if (student != null) {
+            this.studentId = student.getId();
+        }
+    }
 }

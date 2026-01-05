@@ -2,12 +2,11 @@ package com.tm.elearningtm.classes;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Deprecated
 public class Profesor extends User {
     private GradDidactic gradDidactic;
     private String departament;
     private final List<Curs> cursuriPredate;
-
     public Profesor(
             int id,
             String nume,
@@ -16,7 +15,6 @@ public class Profesor extends User {
             GradDidactic gradDidactic,
             String departament
     ) {
-        super(id, nume, email, passHash, UserRole.PROFESOR);
         this.gradDidactic = gradDidactic;
         this.departament = departament;
         this.cursuriPredate = new ArrayList<>();
@@ -46,10 +44,6 @@ public class Profesor extends User {
 
     public void noteazaSubmisie(SubmisieStudent submisie) {
         System.out.println("Submisia studentului " + submisie.getStudent().getNume() + " a fost notată.");
-    }
-
-    public GradDidactic getGradDidactic() {
-        return gradDidactic;
     }
 
     public void setGradDidactic(GradDidactic gradDidactic) {

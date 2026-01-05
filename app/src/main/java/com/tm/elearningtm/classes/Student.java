@@ -2,7 +2,7 @@ package com.tm.elearningtm.classes;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Deprecated
 public class Student extends User {
 
     private int numarMatricol;
@@ -20,7 +20,7 @@ public class Student extends User {
             int anStudiu,
             String grupa
     ) {
-        super(id, nume, email, passHash, UserRole.STUDENT);
+
         this.numarMatricol = numarMatricol;
         this.anStudiu = anStudiu;
         this.grupa = grupa;
@@ -41,7 +41,7 @@ public class Student extends User {
         return istoricCursuri;
     }
 
-    public int getNumarMatricol() {
+    public Integer getNumarMatricol() {
         return numarMatricol;
     }
 
@@ -49,7 +49,7 @@ public class Student extends User {
         this.numarMatricol = numarMatricol;
     }
 
-    public int getAnStudiu() {
+    public Integer getAnStudiu() {
         return anStudiu;
     }
 

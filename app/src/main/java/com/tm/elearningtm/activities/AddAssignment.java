@@ -16,7 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.Tema;
-import com.tm.elearningtm.data.AppData;
+import com.tm.elearningtm.database.AppData;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -107,7 +107,7 @@ public class AddAssignment extends AppCompatActivity {
             return;
         }
 
-        Curs curs = AppData.getCatalog().getCursById(courseId);
+        Curs curs = AppData.getDatabase().cursDao().getCursById(courseId);
 
         if (curs == null) {
             Toast.makeText(this, "Cursul nu a fost găsit", Toast.LENGTH_SHORT).show();

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.tm.elearningtm.R;
-import com.tm.elearningtm.data.AppData;
+import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.classes.Curs;
 
 public class CourseDetailActivity extends AppCompatActivity {
@@ -18,7 +18,7 @@ public class CourseDetailActivity extends AppCompatActivity {
         setContentView(R.layout.fragmentcourse);
 
         int courseId = getIntent().getIntExtra("COURSE_ID", -1);
-        Curs curs = AppData.getCatalog().getCursById(courseId);
+        Curs curs = AppData.getDatabase().cursDao().getCursById(courseId);
 
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView title = findViewById(R.id.text_course_title);
         title.setText(curs != null ? curs.getTitlu() : "Curs inexistent");

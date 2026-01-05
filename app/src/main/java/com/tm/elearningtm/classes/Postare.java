@@ -2,10 +2,11 @@ package com.tm.elearningtm.classes;
 
 import android.os.Build;
 
-import com.tm.elearningtm.data.AppData;
+import com.tm.elearningtm.database.AppData;
 
 import java.time.LocalDateTime;
 
+@Deprecated
 public abstract class Postare {
     private final int id;
     private String titlu;
@@ -13,7 +14,7 @@ public abstract class Postare {
     private final LocalDateTime dataCreare;
 
     public Postare(String titlu, String descriere) {
-        this.id = AppData.generatePostID();
+        this.id = 0;
         this.titlu = titlu;
         this.descriere = descriere;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
