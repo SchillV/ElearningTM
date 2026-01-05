@@ -25,7 +25,6 @@ public class AddAssignment extends AppCompatActivity {
 
     private TextInputEditText titleEditText;
     private TextInputEditText descriptionEditText;
-    private TextInputEditText pointsEditText;
     private TextView deadlineText;
 
     private LocalDateTime selectedDeadline;
@@ -39,7 +38,6 @@ public class AddAssignment extends AppCompatActivity {
         // Bind views
         titleEditText = findViewById(R.id.edit_text_assignment_title);
         descriptionEditText = findViewById(R.id.edit_text_assignment_description);
-        pointsEditText = findViewById(R.id.edit_text_max_points);
         deadlineText = findViewById(R.id.text_deadline_value);
 
         Button selectDateButton = findViewById(R.id.button_select_date);
