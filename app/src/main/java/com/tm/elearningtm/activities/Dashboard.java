@@ -16,6 +16,7 @@ import com.tm.elearningtm.adapters.CourseAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
+import com.tm.elearningtm.fragments.CourseOverview;
 
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     private void openCourse(Curs curs) {
-        Intent intent = new Intent(this, CourseDetail.class);
+        Intent intent = new Intent(this, CourseOverview.class);
         intent.putExtra("COURSE_ID", curs.getId());
         startActivity(intent);
     }

@@ -11,15 +11,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.tm.elearningtm.R;
-import com.tm.elearningtm.database.AppData;
+import com.tm.elearningtm.classes.Curs;
 
-public class CourseGrades extends Fragment {
+public class CourseOverview extends Fragment {
 
     private static final String ARG_COURSE_ID = "course_id";
     private int courseId;
+    private Curs course;
 
-    public static CourseGrades newInstance(int courseId) {
-        CourseGrades fragment = new CourseGrades();
+    public static CourseOverview newInstance(int courseId) {
+        CourseOverview fragment = new CourseOverview();
         Bundle args = new Bundle();
         args.putInt(ARG_COURSE_ID, courseId);
         fragment.setArguments(args);
@@ -38,22 +39,15 @@ public class CourseGrades extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_course_grades, container, false);
+        return inflater.inflate(R.layout.fragment_course_overview, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Check if user is a student
-        if (!AppData.isStudent()) {
-            TextView placeholderText = view.findViewById(R.id.text_placeholder);
-            placeholderText.setText("Grades are only visible to students.");
-            return;
-        }
-
         // TODO: Load from database
         TextView placeholderText = view.findViewById(R.id.text_placeholder);
-        placeholderText.setText("My Grades\n\n(Will show all your grades and course average)");
+        placeholderText.setText("Course Overview\n\n(Will show course description, professor info, and quick stats)");
     }
 }
