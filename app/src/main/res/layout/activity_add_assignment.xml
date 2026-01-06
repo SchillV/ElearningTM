@@ -25,7 +25,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -92,29 +93,13 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_layout_points"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edit_text_max_points"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/punctaj_maxim"
-                            android:inputType="numberDecimal"
-                            android:maxLines="1" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <Button
                         android:id="@+id/button_select_date"
                         style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/alege_deadline"
-                        android:paddingVertical="16dp" />
+                        android:paddingVertical="16dp"
+                        android:text="@string/alege_deadline" />
 
                     <TextView
                         android:id="@+id/text_deadline_value"
@@ -126,15 +111,16 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/button_publish_assignment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:paddingVertical="12dp"
-                android:text="@string/public_tema"
-                android:textSize="16sp" />
-
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/button_publish_assignment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:paddingVertical="12dp"
+        android:text="@string/public_tema"
+        android:textSize="16sp" />
+
 </LinearLayout>

@@ -21,6 +21,8 @@ import com.tm.elearningtm.database.AppData;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Objects;
 
 public class AddAssignment extends AppCompatActivity {
@@ -85,8 +87,9 @@ public class AddAssignment extends AppCompatActivity {
                 (view, hour, minute) -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         selectedDeadline = selectedDate.atTime(hour, minute);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
+                        deadlineText.setText("Deadline: " + selectedDeadline.format(formatter));
                     }
-                    deadlineText.setText("Deadline: " + selectedDeadline);
                 },
                 23,
                 59,
@@ -112,16 +115,10 @@ public class AddAssignment extends AppCompatActivity {
             return;
         }
 
-        Curs curs = AppData.getDatabase().cursDao().getCursById(courseId);
-
-        if (curs == null) {
-            Toast.makeText(this, "Cursul nu a fost găsit", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         Tema tema = new Tema(title, description, selectedDeadline);
-        curs.adaugaTema(tema);
+        AppData.getDatabase().temaDao().insert(tema, courseId);
 
+        Toast.makeText(this, "Tema publicată!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
