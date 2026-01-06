@@ -11,101 +11,112 @@
 
     <include layout="@layout/reusable_toolbar" />
 
-    <TextView
-        android:id="@+id/text_welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/textPrimary"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        tools:text="@string/bine_ai_venit_nume_utilizator" />
-
-    <TextView
-        android:id="@+id/text_user_role"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/textSecondary"
-        android:textSize="18sp"
-        tools:text="@string/rol_student_profesor" />
-
-    <TextView
-        android:id="@+id/text_courses_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        android:text="@string/cursurile_mele"
-        android:textColor="@color/textPrimary"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_courses"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/item_course" />
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/button_catalogue"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:paddingVertical="12dp"
-        android:text="View Catalogue"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/text_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/bine_ai_venit_nume_utilizator" />
 
-    <Button
-        android:id="@+id/button_create_course"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:paddingVertical="12dp"
-        android:text="Create New Course"
-        android:textSize="16sp"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        <TextView
+            android:id="@+id/text_user_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/textSecondary"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_welcome"
+            tools:text="@string/rol_student_profesor" />
 
-    <Button
-        android:id="@+id/button_admin_panel"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:paddingVertical="12dp"
-        android:text="Admin Panel"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:icon="@android:drawable/ic_lock_power_off"
-        tools:visibility="visible" />
+        <TextView
+            android:id="@+id/text_courses_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/cursurile_mele"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_user_role" />
 
-    <Button
-        android:id="@+id/button_logout"
-        style="@style/Widget.Material3.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:paddingVertical="12dp"
-        android:text="@string/delogare"
-        android:textSize="16sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_courses"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@id/button_catalogue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_courses_title"
+            tools:listitem="@layout/item_course" />
+
+        <Button
+            android:id="@+id/button_catalogue"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="View Catalogue"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/button_create_course"
+            app:layout_constraintEnd_toStartOf="@+id/button_admin_panel"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button_admin_panel"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Admin Panel"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:icon="@android:drawable/ic_lock_power_off"
+            app:layout_constraintBottom_toTopOf="@+id/button_create_course"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_catalogue"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/button_create_course"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Create New Course"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/button_logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/button_logout"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/delogare"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.tm.elearningtm.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.activities.admin.EditUserActivity;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
@@ -41,8 +43,9 @@ public class UserManagementAdapter extends RecyclerView.Adapter<UserManagementAd
         holder.role.setText("Role: " + user.getRole());
 
         holder.editButton.setOnClickListener(v -> {
-            // TODO: Implement Edit User
-            Toast.makeText(v.getContext(), "Edit User - Coming Soon!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), EditUserActivity.class);
+            intent.putExtra("USER_ID", user.getId());
+            v.getContext().startActivity(intent);
         });
 
         holder.deleteButton.setOnClickListener(v -> {

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tm.elearningtm.NotificationsManager;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.adapters.SubmissionAdapter;
 import com.tm.elearningtm.classes.SubmisieStudent;
@@ -109,6 +110,11 @@ public class SubmitAssignment extends AppCompatActivity {
                 SubmisieStudent newSubmission = new SubmisieStudent(AppData.getUtilizatorCurent(), submissionContent);
                 newSubmission.setTemaId(assignment.getId()); // <-- THE FIX
                 AppData.getDatabase().submisieDao().insert(newSubmission);
+
+                NotificationsManager.sendNotification(this, 
+                    "Assignment Submitted!", 
+                    "Your work for '" + assignment.getTitlu() + "' has been received.", 
+                    (int) System.currentTimeMillis());
 
                 Toast.makeText(this, "Assignment submitted successfully!", Toast.LENGTH_SHORT).show();
                 recreate(); // Recreate the activity to show the submission list

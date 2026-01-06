@@ -11,12 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tm.elearningtm.NotificationsManager;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.MaterialCurs;
+import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class AddMaterial extends AppCompatActivity {
@@ -110,7 +113,18 @@ public class AddMaterial extends AppCompatActivity {
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 MaterialCurs newMaterial = new MaterialCurs(0, title, content, courseId, type, LocalDateTime.now());
-                AppData.getDatabase().materialDao().insert(newMaterial);
+                long newMaterialId = AppData.getDatabase().materialDao().insert(newMaterial);
+
+                if ("ANUNT".equals(type)) {
+                    List<User> students = AppData.getDatabase().enrollmentDao().getStudentsForCourse(courseId);
+                    for (User student : students) {
+                        NotificationsManager.sendNotification(this,
+                                "New Announcement in " + AppData.getDatabase().cursDao().getCursById(courseId).getTitlu(),
+                                title,
+                                (int) newMaterialId + student.getId()); // Unique ID per student
+                    }
+                }
+
                 Toast.makeText(this, "Material published!", Toast.LENGTH_SHORT).show();
             }
         }

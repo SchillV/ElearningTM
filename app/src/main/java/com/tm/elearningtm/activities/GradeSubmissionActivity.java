@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.tm.elearningtm.NotificationsManager;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.database.AppData;
@@ -67,6 +68,12 @@ public class GradeSubmissionActivity extends AppCompatActivity {
             submission.setNota(grade);
             submission.setFeedback(feedback);
             AppData.getDatabase().submisieDao().update(submission);
+
+            NotificationsManager.sendNotification(this,
+                    "Submission Graded!",
+                    "You have received a grade for '" + AppData.getDatabase().temaDao().getTemaById(submission.getTemaId()).getTitlu() + "'.",
+                    submission.getId());
+
             Toast.makeText(this, "Grade saved!", Toast.LENGTH_SHORT).show();
             finish();
         } catch (NumberFormatException e) {

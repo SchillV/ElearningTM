@@ -30,4 +30,9 @@
         <item>ANUNT</item>
         <item>RESURSA</item>
     </string-array>
+    <string-array name="user_roles">
+        <item>STUDENT</item>
+        <item>PROFESOR</item>
+        <item>ADMIN</item>
+    </string-array>
 </resources>

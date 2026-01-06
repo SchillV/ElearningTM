@@ -73,7 +73,7 @@ public class CatalogueActivity extends AppCompatActivity {
                 if (assignment != null) {
                     Curs course = AppData.getDatabase().cursDao().getCursById(assignment.getCursId());
                     if (student != null && course != null) {
-                        allGrades.add(new CatalogueGrade(student.getNume(), course.getTitlu(), assignment.getTitlu(), sub.getNota()));
+                        allGrades.add(new CatalogueGrade(student.getNume(), course.getTitlu(), course.getCategorie(), assignment.getTitlu(), sub.getNota()));
                     }
                 }
             }
@@ -123,7 +123,7 @@ public class CatalogueActivity extends AppCompatActivity {
         String selectedStudent = AppData.isStudent() ? AppData.getUtilizatorCurent().getNume() : studentSpinner.getSelectedItem().toString();
 
         List<CatalogueGrade> filteredGrades = allGrades.stream()
-                .filter(grade -> ("All Categories".equals(selectedCategory) || grade.getCourseName().equals(selectedCategory)))
+                .filter(grade -> ("All Categories".equals(selectedCategory) || grade.getCourseCategory().equals(selectedCategory)))
                 .filter(grade -> ("All Students".equals(selectedStudent) || grade.getStudentName().equals(selectedStudent)))
                 .collect(Collectors.toList());
 
