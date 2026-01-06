@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> attemptLogin());
         AppData.initialize(this);
+        DatabaseSeeder.seedDatabase(this);
     }
 
     private void attemptLogin() {
