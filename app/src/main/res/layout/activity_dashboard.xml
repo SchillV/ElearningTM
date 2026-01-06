@@ -9,19 +9,7 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.Dashboard">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:title="Dashboard"
-            app:titleTextColor="@color/white" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/reusable_toolbar" />
 
     <TextView
         android:id="@+id/text_welcome"

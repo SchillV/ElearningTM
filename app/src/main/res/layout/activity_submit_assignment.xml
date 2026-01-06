@@ -9,19 +9,7 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.SubmitAssignment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:title="Assignment"
-            app:titleTextColor="@color/white" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include layout="@layout/reusable_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -140,11 +128,11 @@
                         tools:text="Status: Graded" />
 
                     <TextView
+                        android:id="@+id/text_your_submission"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/submission_background"
                         android:padding="12dp"
-                        android:id="@+id/text_your_submission"
                         android:textColor="@color/textSecondary"
                         android:textSize="14sp"
                         tools:text="This is my submission content." />
