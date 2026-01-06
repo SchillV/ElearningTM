@@ -66,7 +66,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     private void openCourse(Curs curs) {
-        Intent intent = new Intent(this, CourseDetailActivity.class);
+        Intent intent = new Intent(this, CourseDetail.class);
         intent.putExtra("COURSE_ID", curs.getId());
         startActivity(intent);
     }

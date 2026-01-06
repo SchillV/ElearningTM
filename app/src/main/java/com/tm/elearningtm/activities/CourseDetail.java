@@ -10,7 +10,7 @@ import com.tm.elearningtm.R;
 import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.classes.Curs;
 
-public class CourseDetailActivity extends AppCompatActivity {
+public class CourseDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

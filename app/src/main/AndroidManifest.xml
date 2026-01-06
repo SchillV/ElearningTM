@@ -12,11 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElearningTM">
         <activity
-            android:name=".activities.CourseDetailActivity"
+            android:name=".activities.CourseDetail"
             android:exported="false" />
         <activity
             android:name=".activities.Login"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.SubmitAssignment"
             android:exported="false" />
@@ -26,15 +32,6 @@
         <activity
             android:name=".activities.AddAssignment"
             android:exported="false" />
-        <activity
-            android:name=".activities.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
