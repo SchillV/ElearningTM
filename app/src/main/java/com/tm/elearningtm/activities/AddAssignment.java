@@ -107,7 +107,7 @@ public class AddAssignment extends AppCompatActivity {
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Tema newAssignment = new Tema(title, description, selectedDeadline);
-                AppData.getDatabase().temaDao().insert(newAssignment, courseId);
+                AppData.getDatabase().temaDao().insert(newAssignment);
                 Toast.makeText(this, "Assignment published!", Toast.LENGTH_SHORT).show();
             }
         }

@@ -110,7 +110,7 @@ public class SubmitAssignment extends AppCompatActivity {
                 }
 
                 SubmisieStudent newSubmission = new SubmisieStudent(AppData.getUtilizatorCurent(), submissionContent);
-                AppData.getDatabase().submisieDao().insert(newSubmission, assignment.getId());
+                AppData.getDatabase().submisieDao().insert(newSubmission);
 
                 Toast.makeText(this, "Assignment submitted successfully!", Toast.LENGTH_SHORT).show();
                 finish();
