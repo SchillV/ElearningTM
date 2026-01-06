@@ -25,9 +25,6 @@
             android:name=".activities.Login"
             android:exported="false" />
         <activity
-            android:name=".activities.SubmitAssignment"
-            android:exported="false" />
-        <activity
             android:name=".activities.Dashboard"
             android:exported="false" />
         <activity
@@ -44,6 +41,12 @@
             android:exported="false" />
         <activity
             android:name=".activities.MaterialDetail"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SubmitAssignment"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SubmissionDetail"
             android:exported="false" />
     </application>
 

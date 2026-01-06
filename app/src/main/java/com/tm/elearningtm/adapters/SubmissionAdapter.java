@@ -1,6 +1,7 @@
 package com.tm.elearningtm.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.activities.SubmissionDetail;
 import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
@@ -50,6 +52,12 @@ public class SubmissionAdapter extends RecyclerView.Adapter<SubmissionAdapter.Vi
         }
 
         holder.submissionContent.setText(submission.getContinut());
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), SubmissionDetail.class);
+            intent.putExtra("SUBMISSION_ID", submission.getId());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

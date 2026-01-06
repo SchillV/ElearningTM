@@ -1,6 +1,6 @@
 package com.tm.elearningtm.adapters;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.activities.SubmissionDetail;
 import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.classes.Tema;
 import com.tm.elearningtm.database.AppData;
@@ -32,7 +33,6 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SubmisieStudent submission = submissions.get(position);
@@ -47,6 +47,12 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
         } else {
             holder.grade.setText("Not graded yet");
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), SubmissionDetail.class);
+            intent.putExtra("SUBMISSION_ID", submission.getId());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
