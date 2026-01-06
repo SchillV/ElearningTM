@@ -43,6 +43,7 @@ public class DatabaseSeeder {
 
                 Log.d(TAG, "Database seeded successfully!");
                 Log.d(TAG, "Test Credentials:");
+                Log.d(TAG, "  Admin: admin@univ.ro / admin123");
                 Log.d(TAG, "  Professor: popescu@univ.ro / prof123");
                 Log.d(TAG, "  Professor: ionescu@univ.ro / prof123");
                 Log.d(TAG, "  Student: andrei@stud.univ.ro / student123");
@@ -57,6 +58,15 @@ public class DatabaseSeeder {
 
     private static void seedUsers(AppDatabase db) {
         Log.d(TAG, "Hashing passwords for test users...");
+
+        // ========== ADMIN ==========
+        User admin = new User();
+        admin.setId(0);
+        admin.setNume("Administrator");
+        admin.setEmail("admin@univ.ro");
+        admin.setPassHash(PasswordHelper.hashPassword("admin123"));
+        admin.setRole("ADMIN");
+        long adminId = db.userDao().insert(admin);
 
         // ========== PROFESSORS ==========
         User prof1 = User.createProfesor(

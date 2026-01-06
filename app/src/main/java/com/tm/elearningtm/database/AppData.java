@@ -41,6 +41,10 @@ public class AppData {
         return utilizatorCurent != null && "PROFESOR".equals(utilizatorCurent.getRole());
     }
 
+    public static boolean isAdmin() {
+        return utilizatorCurent != null && "ADMIN".equals(utilizatorCurent.getRole());
+    }
+
     public static Curs getCursCurent() {
         return cursCurent;
     }
