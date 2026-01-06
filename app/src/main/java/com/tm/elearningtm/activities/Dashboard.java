@@ -43,7 +43,21 @@ public class Dashboard extends AppCompatActivity {
         RecyclerView coursesRecyclerView = findViewById(R.id.recycler_view_courses);
         coursesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Curs> cursuri = AppData.getDatabase().cursDao().getAllCourses();
+        List<Curs> cursuri;
+        if (currentUser.isStudent()) {
+            // Student: Show only enrolled courses for students
+            cursuri = AppData.getDatabase()
+                    .enrollmentDao()
+                    .getCoursesForStudent(currentUser.getId());
+        } else if (currentUser.isProfesor()) {
+            // Profesor: Show courses taught by this professor
+            cursuri = AppData.getDatabase()
+                    .cursDao()
+                    .getCoursesByProfesor(currentUser.getId());
+        } else {
+            // Admin: show all courses
+            cursuri = AppData.getDatabase().cursDao().getAllCourses();
+        }
 
         CourseAdapter adapter = new CourseAdapter(cursuri, this::openCourse);
         coursesRecyclerView.setAdapter(adapter);

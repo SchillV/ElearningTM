@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
+import com.tm.elearningtm.database.DatabaseSeeder;
 
 public class Login extends AppCompatActivity {
 
@@ -41,8 +42,13 @@ public class Login extends AppCompatActivity {
 
         User user = AppData.getDatabase().userDao().getUserByEmail(email);
 
-        if (user == null || !user.getPassHash().equals(parola)) {
-            Toast.makeText(this, "Email sau parolă incorectă", Toast.LENGTH_SHORT).show();
+        if (user == null) {
+            Toast.makeText(this, "Email-ul nu există", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!user.getPassHash().equals(parola)) {
+            Toast.makeText(this, "Parolă incorectă", Toast.LENGTH_SHORT).show();
             return;
         }
 
