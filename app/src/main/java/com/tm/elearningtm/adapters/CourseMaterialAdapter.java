@@ -16,6 +16,7 @@ import com.tm.elearningtm.activities.MaterialDetail;
 import com.tm.elearningtm.classes.MaterialCurs;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseMaterialAdapter extends RecyclerView.Adapter<CourseMaterialAdapter.ViewHolder> {
@@ -23,7 +24,14 @@ public class CourseMaterialAdapter extends RecyclerView.Adapter<CourseMaterialAd
     private final List<MaterialCurs> materials;
 
     public CourseMaterialAdapter(List<MaterialCurs> materials) {
-        this.materials = materials;
+        this.materials = new ArrayList<>(materials);
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateMaterials(List<MaterialCurs> newMaterials) {
+        this.materials.clear();
+        this.materials.addAll(newMaterials);
+        notifyDataSetChanged();
     }
 
     @NonNull

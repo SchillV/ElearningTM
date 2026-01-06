@@ -9,44 +9,55 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.adapters.AssignmentAdapter;
-import com.tm.elearningtm.classes.Tema;
 import com.tm.elearningtm.database.AppData;
+import com.tm.elearningtm.viewmodel.CourseViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class CourseAssignments extends Fragment {
 
+    private AssignmentAdapter adapter;
+
     public static CourseAssignments newInstance(int courseId) {
-        // Unused, but kept for consistency
         return new CourseAssignments();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_course_assignments, container, false);
+        return inflater.inflate(R.layout.fragment_course_assignments, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_assignments);
         TextView emptyView = view.findViewById(R.id.text_empty_assignments);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        List<Tema> assignments = AppData.getDatabase().temaDao().getTemeForCurs(AppData.getCursCurent().getId());
+        adapter = new AssignmentAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
 
-        if (assignments.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        } else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-            AssignmentAdapter adapter = new AssignmentAdapter(assignments);
-            recyclerView.setAdapter(adapter);
-        }
-
-        return view;
+        CourseViewModel viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+        viewModel.getAssignmentsForCourse(AppData.getCursCurent().getId()).observe(getViewLifecycleOwner(), assignments -> {
+            if (assignments.isEmpty()) {
+                recyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            } else {
+                recyclerView.setVisibility(View.VISIBLE);
+                emptyView.setVisibility(View.GONE);
+                // The adapter needs a method to update its data
+                // For now, we create a new one each time.
+                adapter = new AssignmentAdapter(assignments);
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 }

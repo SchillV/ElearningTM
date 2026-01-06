@@ -15,6 +15,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.activities.admin.ManageCoursesActivity;
+import com.tm.elearningtm.activities.admin.ManageEnrollmentsActivity;
 import com.tm.elearningtm.activities.admin.ManageUsersActivity;
 import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.database.DatabaseSeeder;
@@ -99,13 +101,13 @@ public class AdminDashboard extends AppCompatActivity {
         // Course Management Card
         CardView manageCoursesCard = findViewById(R.id.card_manage_courses);
         manageCoursesCard.setOnClickListener(v -> {
-            Toast.makeText(this, "Course Management - Coming soon!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, ManageCoursesActivity.class));
         });
 
         // Enrollment Management Card
         CardView manageEnrollmentsCard = findViewById(R.id.card_manage_enrollments);
         manageEnrollmentsCard.setOnClickListener(v -> {
-            Toast.makeText(this, "Enrollment Management - Coming soon!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, ManageEnrollmentsActivity.class));
         });
 
         // Database Management Card

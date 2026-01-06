@@ -1,5 +1,6 @@
 package com.tm.elearningtm.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -19,6 +20,7 @@ import com.tm.elearningtm.classes.Tema;
 import com.tm.elearningtm.database.AppData;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
@@ -26,7 +28,14 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
     private final List<Tema> assignments;
 
     public AssignmentAdapter(List<Tema> assignments) {
-        this.assignments = assignments;
+        this.assignments = new ArrayList<>(assignments);
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateAssignments(List<Tema> newAssignments) {
+        this.assignments.clear();
+        this.assignments.addAll(newAssignments);
+        notifyDataSetChanged();
     }
 
     @NonNull

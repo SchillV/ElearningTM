@@ -9,18 +9,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.adapters.CourseMaterialAdapter;
-import com.tm.elearningtm.classes.Curs;
-import com.tm.elearningtm.classes.MaterialCurs;
 import com.tm.elearningtm.database.AppData;
+import com.tm.elearningtm.viewmodel.CourseViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class CourseMaterials extends Fragment {
+
+    private CourseMaterialAdapter adapter;
 
     public static CourseMaterials newInstance() {
         return new CourseMaterials();
@@ -40,18 +42,22 @@ public class CourseMaterials extends Fragment {
         TextView emptyView = view.findViewById(R.id.text_empty_materials);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        Curs currentCourse = AppData.getCursCurent();
-        if (currentCourse != null) {
-            List<MaterialCurs> materials = AppData.getDatabase().materialDao().getMaterialeForCurs(currentCourse.getId());
+        adapter = new CourseMaterialAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
+        CourseViewModel viewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+        viewModel.getMaterialsForCourse(AppData.getCursCurent().getId()).observe(getViewLifecycleOwner(), materials -> {
             if (materials.isEmpty()) {
                 recyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
             } else {
                 recyclerView.setVisibility(View.VISIBLE);
                 emptyView.setVisibility(View.GONE);
-                CourseMaterialAdapter adapter = new CourseMaterialAdapter(materials);
+                // The adapter needs a method to update its data
+                // For now, we create a new one each time.
+                adapter = new CourseMaterialAdapter(materials);
                 recyclerView.setAdapter(adapter);
             }
-        }
+        });
     }
 }

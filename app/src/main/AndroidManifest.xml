@@ -68,6 +68,9 @@
         <activity
             android:name=".activities.admin.EditUserActivity"
             android:exported="false" />
+        <activity
+            android:name=".activities.admin.ManageCoursesActivity"
+            android:exported="false" />
 
         <receiver android:name=".broadcasts.DeadlineReceiver" />
 

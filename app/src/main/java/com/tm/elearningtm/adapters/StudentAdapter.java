@@ -1,5 +1,6 @@
 package com.tm.elearningtm.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,16 @@ import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
 
-    private final List<User> students;
+    private List<User> students;
     private final boolean isTeacher;
 
     public StudentAdapter(List<User> students, boolean isTeacher) {
-        this.students = students;
+        this.students = new ArrayList<>(students);
         this.isTeacher = isTeacher;
     }
 
@@ -33,6 +35,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_student, parent, false);
         return new ViewHolder(view);
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateStudents(List<User> newStudents) {
+        this.students.clear();
+        this.students.addAll(newStudents);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -48,10 +57,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                         .setTitle("Remove Student")
                         .setMessage("Are you sure you want to remove " + student.getNume() + " from this course?")
                         .setPositiveButton("Remove", (dialog, which) -> {
+                            // Just perform the database operation. LiveData will handle the UI update.
                             AppData.getDatabase().enrollmentDao().deleteEnrollment(student.getId(), AppData.getCursCurent().getId());
-                            students.remove(position);
-                            notifyItemRemoved(position);
-                            notifyItemRangeChanged(position, students.size());
                             Toast.makeText(v.getContext(), student.getNume() + " has been removed.", Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton("Cancel", null)

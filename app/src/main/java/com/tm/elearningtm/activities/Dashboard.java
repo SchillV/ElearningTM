@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,11 +18,14 @@ import com.tm.elearningtm.adapters.CourseAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
+import com.tm.elearningtm.viewmodel.DashboardViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity implements CourseAdapter.OnCourseListener {
+
+    private CourseAdapter adapter;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -74,23 +78,27 @@ public class Dashboard extends AppCompatActivity {
 
         RecyclerView coursesRecyclerView = findViewById(R.id.recycler_view_courses);
         coursesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        List<Curs> cursuri;
-        if (currentUser.isStudent()) {
-            cursuri = AppData.getDatabase().enrollmentDao().getCoursesForStudent(currentUser.getId());
-        } else if (currentUser.isProfesor()) {
-            cursuri = AppData.getDatabase().cursDao().getCoursesByProfesor(currentUser.getId());
-        } else {
-            cursuri = AppData.getDatabase().cursDao().getAllCourses();
-        }
-
-        CourseAdapter adapter = new CourseAdapter(cursuri, this::openCourse);
+        adapter = new CourseAdapter(new ArrayList<>(), this);
         coursesRecyclerView.setAdapter(adapter);
+
+        setupViewModel(currentUser);
 
         logoutButton.setOnClickListener(v -> logout());
     }
 
-    private void openCourse(Curs curs) {
+    private void setupViewModel(User currentUser) {
+        DashboardViewModel viewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+        if (currentUser.isStudent()) {
+            viewModel.getCoursesForStudent(currentUser.getId()).observe(this, courses -> adapter.updateCourses(courses));
+        } else if (currentUser.isProfesor()) {
+            viewModel.getCoursesForProfessor(currentUser.getId()).observe(this, courses -> adapter.updateCourses(courses));
+        } else { // Admin
+            viewModel.getAllCourses().observe(this, courses -> adapter.updateCourses(courses));
+        }
+    }
+
+    @Override
+    public void onCourseClick(Curs curs) {
         Intent intent = new Intent(this, CourseDetail.class);
         intent.putExtra("COURSE_ID", curs.getId());
         startActivity(intent);

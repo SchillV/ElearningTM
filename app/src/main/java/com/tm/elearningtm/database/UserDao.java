@@ -33,6 +33,9 @@ public interface UserDao {
     void deleteById(int userId);
 
     // ========== SELECT - Basic ==========
+    @Query("SELECT * FROM users")
+    List<User> getAll();
+
     @Query("SELECT * FROM users WHERE id = :userId")
     User getUserById(int userId);
 
