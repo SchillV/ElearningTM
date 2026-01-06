@@ -70,7 +70,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Student Submission View -->
+            <!-- Student Submission Input View -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/student_submission_card"
                 android:layout_width="match_parent"
@@ -101,47 +101,9 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Submitted View -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/submitted_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardElevation="2dp"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/text_submission_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        tools:text="Status: Graded" />
-
-                    <TextView
-                        android:id="@+id/text_your_submission"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/submission_background"
-                        android:padding="12dp"
-                        android:textColor="@color/textSecondary"
-                        android:textSize="14sp"
-                        tools:text="This is my submission content." />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Teacher Submissions List View -->
+            <!-- Submissions List (For Teacher and for Student's own submission) -->
             <LinearLayout
-                android:id="@+id/teacher_submissions_view"
+                android:id="@+id/submissions_list_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -150,6 +112,7 @@
                 tools:visibility="visible">
 
                 <TextView
+                    android:id="@+id/submissions_list_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"

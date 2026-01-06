@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.textfield.TextInputEditText;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.classes.Tema;
@@ -84,34 +83,28 @@ public class SubmissionDetail extends AppCompatActivity {
         submissionContentEditText.setText(submission.getContinut());
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "NewApi"})
     private void setupStudentView() {
-        findViewById(R.id.teacher_grading_card).setVisibility(View.GONE);
-        findViewById(R.id.button_save_grade).setVisibility(View.GONE);
+        findViewById(R.id.button_grade_submission).setVisibility(View.GONE);
 
         boolean isGraded = submission.getNota() != null;
-        boolean canEdit = !isGraded;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            canEdit = !isGraded && LocalDateTime.now().isBefore(assignment.getDeadline());
-        }
+        boolean canEdit = !isGraded && LocalDateTime.now().isBefore(assignment.getDeadline());
+
+        MaterialCardView gradeCard = findViewById(R.id.grade_feedback_card);
+        View studentActions = findViewById(R.id.student_action_buttons);
 
         if (isGraded) {
-            findViewById(R.id.student_action_buttons).setVisibility(View.GONE);
-            findViewById(R.id.grade_feedback_card).setVisibility(View.VISIBLE);
+            gradeCard.setVisibility(View.VISIBLE);
+            studentActions.setVisibility(View.GONE);
             submissionContentEditText.setEnabled(false);
 
             TextView gradeText = findViewById(R.id.text_grade);
             TextView feedbackText = findViewById(R.id.text_feedback);
-
             gradeText.setText(String.valueOf(submission.getNota()));
-            if (submission.getFeedback() != null && !submission.getFeedback().isEmpty()) {
-                feedbackText.setText(submission.getFeedback());
-            } else {
-                feedbackText.setText("No feedback provided.");
-            }
+            feedbackText.setText(submission.getFeedback() != null && !submission.getFeedback().isEmpty() ? submission.getFeedback() : "No feedback provided.");
         } else {
-            findViewById(R.id.student_action_buttons).setVisibility(View.VISIBLE);
-            findViewById(R.id.grade_feedback_card).setVisibility(View.GONE);
+            gradeCard.setVisibility(View.GONE);
+            studentActions.setVisibility(View.VISIBLE);
             submissionContentEditText.setEnabled(canEdit);
 
             Button saveButton = findViewById(R.id.button_save_submission);
@@ -145,27 +138,28 @@ public class SubmissionDetail extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setupTeacherView() {
         findViewById(R.id.student_action_buttons).setVisibility(View.GONE);
-        findViewById(R.id.grade_feedback_card).setVisibility(View.VISIBLE);
         submissionContentEditText.setEnabled(false);
 
-        TextView gradeText = findViewById(R.id.text_grade);
-        TextView feedbackText = findViewById(R.id.text_feedback);
+        MaterialCardView gradeCard = findViewById(R.id.grade_feedback_card);
+        Button gradeButton = findViewById(R.id.button_grade_submission);
 
         if (submission.getNota() != null) {
+            gradeCard.setVisibility(View.VISIBLE);
+            TextView gradeText = findViewById(R.id.text_grade);
+            TextView feedbackText = findViewById(R.id.text_feedback);
             gradeText.setText(String.valueOf(submission.getNota()));
+            feedbackText.setText(submission.getFeedback() != null && !submission.getFeedback().isEmpty() ? submission.getFeedback() : "No feedback provided.");
+            gradeButton.setText("Amend Grade");
         } else {
-            gradeText.setText("Not Graded");
+            gradeCard.setVisibility(View.GONE);
+            gradeButton.setText("Grade Submission");
         }
 
-        if (submission.getFeedback() != null && !submission.getFeedback().isEmpty()) {
-            feedbackText.setText(submission.getFeedback());
-        } else {
-            feedbackText.setText("No feedback provided.");
-        }
-        
-        findViewById(R.id.teacher_grading_card).setOnClickListener(v -> {
+        gradeButton.setVisibility(View.VISIBLE);
+        gradeButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, GradeSubmissionActivity.class);
             intent.putExtra("SUBMISSION_ID", submission.getId());
             startActivity(intent);
@@ -176,5 +170,15 @@ public class SubmissionDetail extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh data when returning from GradeSubmissionActivity
+        if (AppData.isProfesor()) {
+            submission = AppData.getDatabase().submisieDao().getSubmisieById(submission.getId());
+            setupTeacherView();
+        }
     }
 }

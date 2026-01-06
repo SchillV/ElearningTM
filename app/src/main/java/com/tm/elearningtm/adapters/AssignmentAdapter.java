@@ -1,6 +1,6 @@
 package com.tm.elearningtm.adapters;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
@@ -36,7 +37,6 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
         return new ViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Tema assignment = assignments.get(position);
@@ -48,20 +48,30 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
             holder.deadline.setText("Deadline: " + assignment.getDeadline().format(formatter));
         }
 
+        // Determine assignment status
         SubmisieStudent submission = AppData.getDatabase().submisieDao()
                 .getSubmisieByStudentAndTema(AppData.getUtilizatorCurent().getId(), assignment.getId());
 
-        if (submission != null && submission.getNota() != null) {
-            holder.itemView.setAlpha(0.6f); // Gray out the whole item
-            holder.itemView.setOnClickListener(null); // Disable click
+        Context context = holder.itemView.getContext();
+        if (submission != null) {
+            if (submission.getNota() != null) {
+                holder.status.setText("Graded");
+                holder.status.setBackground(ContextCompat.getDrawable(context, R.drawable.status_background_graded));
+            } else {
+                holder.status.setText("Submitted");
+                holder.status.setBackground(ContextCompat.getDrawable(context, R.drawable.status_background_submitted));
+            }
         } else {
-            holder.itemView.setAlpha(1.0f);
-            holder.itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(v.getContext(), SubmitAssignment.class);
-                intent.putExtra("ASSIGNMENT_ID", assignment.getId());
-                v.getContext().startActivity(intent);
-            });
+            holder.status.setText("Unsolved");
+            holder.status.setBackground(ContextCompat.getDrawable(context, R.drawable.status_background_unsolved));
         }
+
+        // Set click listener for the whole item
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), SubmitAssignment.class);
+            intent.putExtra("ASSIGNMENT_ID", assignment.getId());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -73,12 +83,14 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
         public final TextView title;
         public final TextView description;
         public final TextView deadline;
+        public final TextView status;
 
         public ViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.text_assignment_title);
             description = view.findViewById(R.id.text_assignment_description);
             deadline = view.findViewById(R.id.text_assignment_deadline);
+            status = view.findViewById(R.id.text_assignment_status);
         }
     }
 }

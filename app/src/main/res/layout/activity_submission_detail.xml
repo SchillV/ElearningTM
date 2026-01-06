@@ -78,8 +78,10 @@
                         android:id="@+id/edit_text_submission_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:minHeight="150dp"
                         android:background="@drawable/submission_background"
                         android:enabled="false"
+                        android:gravity="top"
                         android:padding="12dp"
                         android:textColor="@color/textSecondary"
                         android:textSize="16sp"
@@ -132,58 +134,10 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Teacher Grading View -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/teacher_grading_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:visibility="gone"
-                app:cardElevation="2dp"
-                tools:visibility="visible">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Grade (e.g., 9.5)">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edit_text_grade"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:hint="Feedback (optional)">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edit_text_feedback"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top"
-                            android:inputType="textMultiLine"
-                            android:minLines="3" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
     </ScrollView>
 
-    <!-- Action Buttons -->
+    <!-- Student Action Buttons -->
     <LinearLayout
         android:id="@+id/student_action_buttons"
         android:layout_width="match_parent"
@@ -207,16 +161,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="Save" />
+            android:text="Save Changes" />
     </LinearLayout>
 
+    <!-- Teacher Action Button -->
     <Button
-        android:id="@+id/button_save_grade"
+        android:id="@+id/button_grade_submission"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="16dp"
-        android:text="Save Grade &amp; Feedback"
+        android:text="Grade Submission"
+        android:textSize="18sp"
         android:visibility="gone"
         tools:visibility="visible" />
 
