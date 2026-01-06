@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
@@ -33,7 +34,10 @@ public class AdminDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
 
-        // Check if user is admin - redundant
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Check if user is admin
         if (!AppData.isAdmin()) {
             Toast.makeText(this, "Access denied - Admins only", Toast.LENGTH_SHORT).show();
             finish();
@@ -47,9 +51,6 @@ public class AdminDashboard extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void setupViews() {
-        TextView welcomeText = findViewById(R.id.text_admin_welcome);
-        welcomeText.setText("Welcome, " + AppData.getUtilizatorCurent().getNume());
-
         statsUsersText = findViewById(R.id.text_stat_users);
         statsCoursesText = findViewById(R.id.text_stat_courses);
         statsEnrollmentsText = findViewById(R.id.text_stat_enrollments);

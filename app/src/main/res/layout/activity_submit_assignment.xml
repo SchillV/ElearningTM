@@ -6,35 +6,22 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".activities.SubmitAssignment">
 
-    <!-- Header -->
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/text_header_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trimitere Temă"
-            android:textColor="@color/white"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:title="Submit Assignment"
+            app:titleTextColor="@color/white" />
 
-        <TextView
-            android:id="@+id/text_assignment_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            tools:text="Titlul Temei" />
-    </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -49,6 +36,16 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <TextView
+                android:id="@+id/text_assignment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/textPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Titlul Temei" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_submission_text"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -61,10 +58,8 @@
                     android:layout_height="200dp"
                     android:gravity="top"
                     android:hint="Răspunsul tău / descriere"
-                    android:inputType="textMultiLine" />
+                    android.inputType="textMultiLine" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- In a real app, you would add a button here to attach files -->
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

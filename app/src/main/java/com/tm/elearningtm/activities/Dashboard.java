@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +17,6 @@ import com.tm.elearningtm.adapters.CourseAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
-import com.tm.elearningtm.fragments.CourseOverview;
 
 import java.util.List;
 
@@ -27,6 +27,9 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         TextView welcomeText = findViewById(R.id.text_welcome);
         TextView roleText = findViewById(R.id.text_user_role);

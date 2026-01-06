@@ -15,7 +15,7 @@ import com.tm.elearningtm.database.DatabaseSeeder;
 public class Main extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static final int SPLASH_DURATION = 2000; // 2 seconds
+    private static final int SPLASH_DURATION = 500; // 0.5 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
