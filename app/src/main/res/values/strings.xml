@@ -22,4 +22,6 @@
     <string name="alege_deadline">Alege Deadline</string>
     <string name="data_limit_neselectat">Data limită: Neselectată</string>
     <string name="public_tema">Publică Tema</string>
+    <string name="create_or_delete_courses">Create or delete courses</string>
+    <string name="course_management">Course Management</string>
 </resources>

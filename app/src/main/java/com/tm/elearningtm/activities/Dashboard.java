@@ -3,6 +3,7 @@ package com.tm.elearningtm.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class Dashboard extends AppCompatActivity {
 
         TextView welcomeText = findViewById(R.id.text_welcome);
         TextView roleText = findViewById(R.id.text_user_role);
+        Button adminButton = findViewById(R.id.button_admin_panel);
         Button logoutButton = findViewById(R.id.button_logout);
 
         User currentUser = AppData.getUtilizatorCurent();
@@ -39,6 +41,15 @@ public class Dashboard extends AppCompatActivity {
 
         welcomeText.setText("Bine ai venit, " + currentUser.getNume() + "!");
         roleText.setText("Rol: " + currentUser.getRole());
+
+        if (AppData.isAdmin()) {
+            adminButton.setVisibility(View.VISIBLE);
+            adminButton.setOnClickListener(v -> {
+                startActivity(new Intent(this, AdminDashboard.class));
+            });
+        } else {
+            adminButton.setVisibility(View.GONE);
+        }
 
         RecyclerView coursesRecyclerView = findViewById(R.id.recycler_view_courses);
         coursesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
