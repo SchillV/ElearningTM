@@ -9,51 +9,43 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.adapters.StudentAdapter;
+import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
+
+import java.util.List;
 
 public class CourseStudents extends Fragment {
 
-    private static final String ARG_COURSE_ID = "course_id";
-    private int courseId;
-
-    public static CourseStudents newInstance(int courseId) {
-        CourseStudents fragment = new CourseStudents();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COURSE_ID, courseId);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            courseId = getArguments().getInt(ARG_COURSE_ID);
-        }
+    public static CourseStudents newInstance() {
+        return new CourseStudents();
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_course_students, container, false);
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_course_students, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_students);
+        TextView emptyView = view.findViewById(R.id.text_empty_students);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Check if user is professor or admin
-        if (!AppData.isProfesor() && !AppData.isAdmin()) {
-            TextView placeholderText = view.findViewById(R.id.text_placeholder);
-            placeholderText.setText("Student list is only visible to professors.");
-            return;
+        List<User> students = AppData.getDatabase().enrollmentDao().getStudentsForCourse(AppData.getCursCurent().getId());
+
+        if (students.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            StudentAdapter adapter = new StudentAdapter(students);
+            recyclerView.setAdapter(adapter);
         }
 
-        // TODO: load students from database
-        TextView placeholderText = view.findViewById(R.id.text_placeholder);
-        placeholderText.setText("Enrolled Students\n\n(Will show list of students with their progress)");
+        return view;
     }
 }

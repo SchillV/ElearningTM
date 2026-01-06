@@ -9,51 +9,43 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.adapters.GradeAdapter;
+import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.database.AppData;
+
+import java.util.List;
 
 public class CourseGrades extends Fragment {
 
-    private static final String ARG_COURSE_ID = "course_id";
-    private int courseId;
-
-    public static CourseGrades newInstance(int courseId) {
-        CourseGrades fragment = new CourseGrades();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COURSE_ID, courseId);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            courseId = getArguments().getInt(ARG_COURSE_ID);
-        }
+    public static CourseGrades newInstance() {
+        return new CourseGrades();
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_course_grades, container, false);
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_course_grades, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_grades);
+        TextView emptyView = view.findViewById(R.id.text_empty_grades);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Check if user is a student
-        if (!AppData.isStudent()) {
-            TextView placeholderText = view.findViewById(R.id.text_placeholder);
-            placeholderText.setText("Grades are only visible to students.");
-            return;
+        List<SubmisieStudent> submissions = AppData.getDatabase().submisieDao().getSubmissionsForStudentInCourse(AppData.getUtilizatorCurent().getId(), AppData.getCursCurent().getId());
+
+        if (submissions.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            GradeAdapter adapter = new GradeAdapter(submissions);
+            recyclerView.setAdapter(adapter);
         }
 
-        // TODO: Load from database
-        TextView placeholderText = view.findViewById(R.id.text_placeholder);
-        placeholderText.setText("My Grades\n\n(Will show all your grades and course average)");
+        return view;
     }
 }

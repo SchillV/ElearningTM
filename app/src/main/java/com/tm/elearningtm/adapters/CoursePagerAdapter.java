@@ -8,7 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.fragments.CourseAssignments;
 import com.tm.elearningtm.fragments.CourseGrades;
-import com.tm.elearningtm.fragments.CourseMaterial;
+import com.tm.elearningtm.fragments.CourseMaterials;
 import com.tm.elearningtm.fragments.CourseOverview;
 import com.tm.elearningtm.fragments.CourseStudents;
 
@@ -31,14 +31,14 @@ public class CoursePagerAdapter extends FragmentStateAdapter {
             case 0: // Overview
                 return CourseOverview.newInstance(courseId);
             case 1: // Materials
-                return CourseMaterial.newInstance(courseId);
+                return CourseMaterials.newInstance();
             case 2: // Assignments
                 return CourseAssignments.newInstance(courseId);
             case 3: // Grades (student) or Students (professor/admin)
                 if (isStudent) {
-                    return CourseGrades.newInstance(courseId);
+                    return CourseGrades.newInstance();
                 } else {
-                    return CourseStudents.newInstance(courseId);
+                    return CourseStudents.newInstance();
                 }
             default:
                 return CourseOverview.newInstance(courseId);

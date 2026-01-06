@@ -14,22 +14,31 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/text_assignment_title"
+            android:id="@+id/text_material_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/textPrimary"
             android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="Assignment Title" />
+            tools:text="Material Title" />
 
         <TextView
-            android:id="@+id/text_grade"
+            android:id="@+id/text_material_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="@color/textSecondary"
-            android:textSize="16sp"
-            tools:text="Grade: 9.5" />
+            android:textSize="14sp"
+            tools:text="Material Description" />
+
+        <TextView
+            android:id="@+id/text_material_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/textHint"
+            android:textSize="12sp"
+            tools:text="Posted on: 2024-01-01" />
 
     </LinearLayout>
 

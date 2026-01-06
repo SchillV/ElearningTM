@@ -76,4 +76,7 @@ public interface EnrollmentDao {
 
     @Query("SELECT COUNT(*) FROM course_enrollments WHERE student_id = :studentId AND is_active = 1")
     int getStudentCourseCount(int studentId);
+
+    @Query("SELECT COUNT(DISTINCT student_id) FROM course_enrollments WHERE course_id = :courseId AND is_active = 1")
+    int getStudentCountForCourse(int courseId);
 }

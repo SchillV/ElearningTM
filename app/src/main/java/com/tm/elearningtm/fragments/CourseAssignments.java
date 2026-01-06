@@ -9,43 +9,44 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.adapters.AssignmentAdapter;
+import com.tm.elearningtm.classes.Tema;
+import com.tm.elearningtm.database.AppData;
+
+import java.util.List;
 
 public class CourseAssignments extends Fragment {
 
-    private static final String ARG_COURSE_ID = "course_id";
-    private int courseId;
-
     public static CourseAssignments newInstance(int courseId) {
-        CourseAssignments fragment = new CourseAssignments();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COURSE_ID, courseId);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            courseId = getArguments().getInt(ARG_COURSE_ID);
-        }
+        // Unused, but kept for consistency
+        return new CourseAssignments();
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_course_assignments, container, false);
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_course_assignments, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_assignments);
+        TextView emptyView = view.findViewById(R.id.text_empty_assignments);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // TODO: Load from database
-        TextView placeholderText = view.findViewById(R.id.text_placeholder);
-        placeholderText.setText("Course Assignments\n\n(Will show all assignments with deadlines and submission status)");
+        List<Tema> assignments = AppData.getDatabase().temaDao().getTemeForCurs(AppData.getCursCurent().getId());
+
+        if (assignments.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            AssignmentAdapter adapter = new AssignmentAdapter(assignments);
+            recyclerView.setAdapter(adapter);
+        }
+
+        return view;
     }
 }

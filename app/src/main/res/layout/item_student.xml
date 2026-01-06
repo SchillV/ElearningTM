@@ -10,26 +10,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/text_assignment_title"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_student_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textColor="@color/textPrimary"
             android:textSize="18sp"
             android:textStyle="bold"
-            tools:text="Assignment Title" />
+            tools:text="Student Name" />
 
         <TextView
-            android:id="@+id/text_grade"
+            android:id="@+id/text_student_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:textColor="@color/textSecondary"
-            android:textSize="16sp"
-            tools:text="Grade: 9.5" />
+            android:textSize="14sp"
+            tools:text="student@example.com" />
 
     </LinearLayout>
 

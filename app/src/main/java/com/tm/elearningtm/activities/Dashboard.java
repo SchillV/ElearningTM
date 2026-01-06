@@ -43,6 +43,7 @@ public class Dashboard extends AppCompatActivity {
             return;
         }
 
+        getSupportActionBar().setTitle("Welcome, " + currentUser.getNume() + "!");
         welcomeText.setText("Bine ai venit, " + currentUser.getNume() + "!");
         roleText.setText("Rol: " + currentUser.getRole());
 

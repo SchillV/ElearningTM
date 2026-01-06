@@ -64,4 +64,8 @@ public interface SubmisieDao {
 
     @Query("SELECT COUNT(*) FROM submisii WHERE tema_id = :temaId AND nota IS NULL")
     int getUngradedCount(int temaId);
+
+    // ========== SELECT - By Student and Course ==========
+    @Query("SELECT s.* FROM submisii s JOIN teme t ON s.tema_id = t.id WHERE s.student_id = :studentId AND t.curs_id = :cursId")
+    List<SubmisieStudent> getSubmissionsForStudentInCourse(int studentId, int cursId);
 }
