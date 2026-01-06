@@ -36,7 +36,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_system_stats"
@@ -66,7 +67,8 @@
                                 android:layout_weight="1"
                                 android:text="Total Users:"
                                 android:textColor="@color/textSecondary"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
 
                             <TextView
                                 android:id="@+id/text_stat_users"
@@ -75,7 +77,8 @@
                                 android:text="0"
                                 android:textColor="@color/textPrimary"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <View
@@ -96,7 +99,8 @@
                                 android:layout_weight="1"
                                 android:text="Total Courses:"
                                 android:textColor="@color/textSecondary"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
 
                             <TextView
                                 android:id="@+id/text_stat_courses"
@@ -105,7 +109,8 @@
                                 android:text="0"
                                 android:textColor="@color/textPrimary"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <View
@@ -126,7 +131,8 @@
                                 android:layout_weight="1"
                                 android:text="Active Enrollments:"
                                 android:textColor="@color/textSecondary"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
 
                             <TextView
                                 android:id="@+id/text_stat_enrollments"
@@ -135,7 +141,8 @@
                                 android:text="0"
                                 android:textColor="@color/textPrimary"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
 
                         <View
@@ -156,7 +163,8 @@
                                 android:layout_weight="1"
                                 android:text="Total Submissions:"
                                 android:textColor="@color/textSecondary"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
 
                             <TextView
                                 android:id="@+id/text_stat_submissions"
@@ -165,7 +173,8 @@
                                 android:text="0"
                                 android:textColor="@color/textPrimary"
                                 android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
                         </LinearLayout>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -182,7 +191,8 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/card_system_stats" />
+                    app:layout_constraintTop_toBottomOf="@id/card_system_stats"
+                    tools:ignore="HardcodedText" />
 
                 <!-- User Management Card -->
                 <androidx.cardview.widget.CardView
@@ -213,7 +223,8 @@
                             android:text="User Management"
                             android:textColor="@color/textPrimary"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -221,7 +232,8 @@
                             android:layout_marginTop="4dp"
                             android:text="Add, edit, or remove users"
                             android:textColor="@color/textSecondary"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -295,7 +307,8 @@
                             android:text="Enrollment Management"
                             android:textColor="@color/textPrimary"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -303,7 +316,8 @@
                             android:layout_marginTop="4dp"
                             android:text="Manage student enrollments"
                             android:textColor="@color/textSecondary"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -336,7 +350,8 @@
                             android:text="Database Management"
                             android:textColor="@color/textPrimary"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -344,7 +359,8 @@
                             android:layout_marginTop="4dp"
                             android:text="Clear or regenerate data"
                             android:textColor="@color/textSecondary"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -359,7 +375,8 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/card_manage_enrollments" />
+                    app:layout_constraintTop_toBottomOf="@id/card_manage_enrollments"
+                    tools:ignore="HardcodedText" />
 
                 <Button
                     android:id="@+id/button_logout"
@@ -372,7 +389,8 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/button_view_all_courses" />
+                    app:layout_constraintTop_toBottomOf="@id/button_view_all_courses"
+                    tools:ignore="HardcodedText" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

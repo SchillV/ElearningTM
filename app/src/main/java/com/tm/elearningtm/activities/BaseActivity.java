@@ -2,7 +2,6 @@ package com.tm.elearningtm.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +20,7 @@ import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
+@SuppressWarnings("deprecation")
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected DrawerLayout drawerLayout;

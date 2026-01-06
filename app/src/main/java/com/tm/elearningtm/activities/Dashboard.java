@@ -1,10 +1,15 @@
 package com.tm.elearningtm.activities;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +27,7 @@ import java.util.ArrayList;
 public class Dashboard extends BaseActivity implements CourseAdapter.OnCourseListener {
 
     private CourseAdapter adapter;
+    private static final int NOTIFICATION_PERMISSION_CODE = 101;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -30,6 +36,7 @@ public class Dashboard extends BaseActivity implements CourseAdapter.OnCourseLis
         setContentView(R.layout.activity_dashboard);
         setupNavDrawer(R.id.nav_dashboard);
         setupFab();
+        requestNotificationPermission();
 
         User currentUser = AppData.getUtilizatorCurent();
         if (currentUser == null) {
@@ -72,5 +79,13 @@ public class Dashboard extends BaseActivity implements CourseAdapter.OnCourseLis
         Intent intent = new Intent(this, CourseDetail.class);
         intent.putExtra("COURSE_ID", curs.getId());
         startActivity(intent);
+    }
+
+    private void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION_CODE);
+            }
+        }
     }
 }

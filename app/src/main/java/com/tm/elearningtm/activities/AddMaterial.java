@@ -50,7 +50,7 @@ public class AddMaterial extends BaseActivity {
             existingMaterial = AppData.getDatabase().materialDao().getMaterialById(materialId);
             setupEditMode();
         } else {
-            getSupportActionBar().setTitle("Add Material");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Add Material");
             publishButton.setText("Publish Material");
         }
 
@@ -66,7 +66,7 @@ public class AddMaterial extends BaseActivity {
 
     @SuppressLint("SetTextI18n")
     private void setupEditMode() {
-        getSupportActionBar().setTitle("Edit Material");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit Material");
         publishButton.setText("Save Changes");
 
         if (existingMaterial != null) {

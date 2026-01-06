@@ -10,6 +10,8 @@ import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.database.AppData;
 
+import java.util.Objects;
+
 public class AddCourseActivity extends BaseActivity {
 
     private TextInputEditText titleEditText;
@@ -38,7 +40,7 @@ public class AddCourseActivity extends BaseActivity {
             existingCourse = AppData.getDatabase().cursDao().getCursById(courseId);
             setupEditMode();
         } else {
-            getSupportActionBar().setTitle("Create Course");
+            Objects.requireNonNull(getSupportActionBar()).setTitle("Create Course");
             saveButton.setText("Create Course");
         }
 
@@ -47,7 +49,7 @@ public class AddCourseActivity extends BaseActivity {
 
     @SuppressLint("SetTextI18n")
     private void setupEditMode() {
-        getSupportActionBar().setTitle("Edit Course");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit Course");
         saveButton.setText("Save Changes");
 
         if (existingCourse != null) {
@@ -58,9 +60,9 @@ public class AddCourseActivity extends BaseActivity {
     }
 
     private void saveData() {
-        String title = titleEditText.getText().toString().trim();
-        String category = categoryEditText.getText().toString().trim();
-        String description = descriptionEditText.getText().toString().trim();
+        String title = Objects.requireNonNull(titleEditText.getText()).toString().trim();
+        String category = Objects.requireNonNull(categoryEditText.getText()).toString().trim();
+        String description = Objects.requireNonNull(descriptionEditText.getText()).toString().trim();
 
         if (title.isEmpty() || category.isEmpty() || description.isEmpty()) {
             Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();

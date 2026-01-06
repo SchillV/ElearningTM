@@ -39,11 +39,11 @@
                         android:padding="16dp">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_layout_name"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Full Name">
+                            android:hint="Full Name"
+                            tools:ignore="HardcodedText">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/edit_text_name"
@@ -52,13 +52,13 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/input_layout_email"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:enabled="false"
-                            android:hint="Email (cannot be changed)">
+                            android:hint="Email (cannot be changed)"
+                            tools:ignore="HardcodedText">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/edit_text_email"
@@ -88,14 +88,16 @@
                             android:text="Change Password"
                             android:textColor="@color/textPrimary"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="New Password"
-                            app:passwordToggleEnabled="true">
+                            app:passwordToggleEnabled="true"
+                            tools:ignore="HardcodedText">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/edit_text_new_password"
@@ -110,7 +112,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:hint="Confirm New Password"
-                            app:passwordToggleEnabled="true">
+                            app:passwordToggleEnabled="true"
+                            tools:ignore="HardcodedText">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/edit_text_confirm_password"
@@ -130,7 +133,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:padding="16dp"
-            android:text="Save Changes" />
+            android:text="Save Changes"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 

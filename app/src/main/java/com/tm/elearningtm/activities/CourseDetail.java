@@ -21,8 +21,6 @@ import com.tm.elearningtm.adapters.CoursePagerAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.database.AppData;
 
-import java.util.Objects;
-
 @SuppressWarnings("deprecation")
 public class CourseDetail extends AppCompatActivity {
     private int courseId;
