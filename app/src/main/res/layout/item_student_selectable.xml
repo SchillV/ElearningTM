@@ -39,16 +39,12 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/button_remove_student"
+        <Button
+            android:id="@+id/button_add_student"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Remove Student"
-            android:src="@android:drawable/ic_menu_delete"
-            android:visibility="gone"
-            app:tint="@color/error"
-            tools:visibility="visible" />
+            android:text="Add" />
 
     </LinearLayout>
 

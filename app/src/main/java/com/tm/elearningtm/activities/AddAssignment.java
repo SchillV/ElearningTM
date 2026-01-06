@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -37,6 +36,7 @@ public class AddAssignment extends AppCompatActivity {
     private boolean isEditMode = false;
     private Tema existingAssignment = null;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +67,9 @@ public class AddAssignment extends AppCompatActivity {
         publishButton.setOnClickListener(v -> saveData());
     }
 
+    @SuppressLint("SetTextI18n")
     private void setupEditMode() {
-        getSupportActionBar().setTitle("Edit Assignment");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit Assignment");
         publishButton.setText("Save Changes");
 
         if (existingAssignment != null) {
@@ -107,6 +108,7 @@ public class AddAssignment extends AppCompatActivity {
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Tema newAssignment = new Tema(title, description, selectedDeadline);
+                newAssignment.setCursId(courseId); // <-- THE FIX
                 AppData.getDatabase().temaDao().insert(newAssignment);
                 Toast.makeText(this, "Assignment published!", Toast.LENGTH_SHORT).show();
             }

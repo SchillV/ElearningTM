@@ -37,6 +37,9 @@
             android:name=".activities.AddMaterial"
             android:exported="false" />
         <activity
+            android:name=".activities.AddCourseActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CourseDetail"
             android:exported="false" />
         <activity
@@ -47,6 +50,12 @@
             android:exported="false" />
         <activity
             android:name=".activities.SubmissionDetail"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GradeSubmissionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AssignStudentActivity"
             android:exported="false" />
     </application>
 

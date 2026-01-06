@@ -107,11 +107,11 @@ public class SubmitAssignment extends AppCompatActivity {
                 }
 
                 SubmisieStudent newSubmission = new SubmisieStudent(AppData.getUtilizatorCurent(), submissionContent);
-                newSubmission.setTemaId(assignment.getId());
+                newSubmission.setTemaId(assignment.getId()); // <-- THE FIX
                 AppData.getDatabase().submisieDao().insert(newSubmission);
 
                 Toast.makeText(this, "Assignment submitted successfully!", Toast.LENGTH_SHORT).show();
-                recreate();
+                recreate(); // Recreate the activity to show the submission list
             });
         }
     }

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -53,8 +52,7 @@ public class Dashboard extends AppCompatActivity {
         if (AppData.isProfesor() || AppData.isAdmin()) {
             createCourseButton.setVisibility(View.VISIBLE);
             createCourseButton.setOnClickListener(v -> {
-                // TODO: Create AddCourseActivity
-                Toast.makeText(this, "Create Course - Coming Soon!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, AddCourseActivity.class));
             });
         } else {
             createCourseButton.setVisibility(View.GONE);

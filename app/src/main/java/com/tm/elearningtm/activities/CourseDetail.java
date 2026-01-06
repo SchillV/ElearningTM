@@ -2,9 +2,12 @@ package com.tm.elearningtm.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -101,6 +104,25 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (AppData.isProfesor()) {
+            getMenuInflater().inflate(R.menu.menu_course_teacher, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_edit_course) {
+            Intent intent = new Intent(this, AddCourseActivity.class);
+            intent.putExtra("EDIT_COURSE_ID", course.getId());
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
@@ -110,5 +132,9 @@ public class CourseDetail extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadCourse();
+        // To refresh the title if it was edited
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(course.getTitlu());
+        }
     }
 }
