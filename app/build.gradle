@@ -46,10 +46,17 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+
+    // Database dependencies
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava3:$room_version"
     implementation "androidx.lifecycle:lifecycle-livedata:2.7.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.7.0"
     implementation 'at.favre.lib:bcrypt:0.10.2'
+
+    // Ui dependencies
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.fragment:fragment:1.6.2'
 }
