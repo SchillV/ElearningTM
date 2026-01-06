@@ -60,17 +60,15 @@ public class DatabaseSeeder {
         Log.d(TAG, "Hashing passwords for test users...");
 
         // ========== ADMIN ==========
-        User admin = new User();
-        admin.setId(0);
-        admin.setNume("Administrator");
-        admin.setEmail("admin@univ.ro");
-        admin.setPassHash(PasswordHelper.hashPassword("admin123"));
-        admin.setRole("ADMIN");
+        User admin = User.createAdmin(
+                "Administrator",
+                "admin@univ.ro",
+                PasswordHelper.hashPassword("admin123")
+        );
         long adminId = db.userDao().insert(admin);
 
         // ========== PROFESSORS ==========
         User prof1 = User.createProfesor(
-                0,
                 "Ion Popescu",
                 "popescu@univ.ro",
                 PasswordHelper.hashPassword("prof123"),
@@ -80,7 +78,6 @@ public class DatabaseSeeder {
         long prof1Id = db.userDao().insert(prof1);
 
         User prof2 = User.createProfesor(
-                0,
                 "Maria Ionescu",
                 "ionescu@univ.ro",
                 PasswordHelper.hashPassword("prof123"),
@@ -90,7 +87,6 @@ public class DatabaseSeeder {
         long prof2Id = db.userDao().insert(prof2);
 
         User prof3 = User.createProfesor(
-                0,
                 "Alexandru Gheorghiu",
                 "gheorghiu@univ.ro",
                 PasswordHelper.hashPassword("prof123"),
@@ -101,7 +97,6 @@ public class DatabaseSeeder {
 
         // ========== STUDENTS ==========
         User student1 = User.createStudent(
-                0,
                 "Andrei Georgescu",
                 "andrei@stud.univ.ro",
                 PasswordHelper.hashPassword("student123"),
@@ -112,7 +107,6 @@ public class DatabaseSeeder {
         long student1Id = db.userDao().insert(student1);
 
         User student2 = User.createStudent(
-                0,
                 "Elena Popa",
                 "elena@stud.univ.ro",
                 PasswordHelper.hashPassword("student123"),
@@ -123,7 +117,6 @@ public class DatabaseSeeder {
         long student2Id = db.userDao().insert(student2);
 
         User student3 = User.createStudent(
-                0,
                 "Mihai Dumitrescu",
                 "mihai@stud.univ.ro",
                 PasswordHelper.hashPassword("student123"),
@@ -134,7 +127,6 @@ public class DatabaseSeeder {
         long student3Id = db.userDao().insert(student3);
 
         User student4 = User.createStudent(
-                0,
                 "Ana Marinescu",
                 "ana@stud.univ.ro",
                 PasswordHelper.hashPassword("student123"),
@@ -145,7 +137,6 @@ public class DatabaseSeeder {
         db.userDao().insert(student4);
 
         User student5 = User.createStudent(
-                0,
                 "Cristian Vasile",
                 "cristian@stud.univ.ro",
                 PasswordHelper.hashPassword("student123"),

@@ -35,11 +35,20 @@ public class User {
     public User() {
     }
 
+    // Convenience constructor for Admins
+    public static User createAdmin(String nume, String email, String passHash) {
+        User user = new User();
+        user.nume = nume;
+        user.email = email;
+        user.passHash = passHash;
+        user.role = "ADMIN";
+        return user;
+    }
+
     // Convenience constructor for Students
-    public static User createStudent(int id, String nume, String email, String passHash,
+    public static User createStudent(String nume, String email, String passHash,
                                      int numarMatricol, int anStudiu, String grupa) {
         User user = new User();
-        user.id = id;
         user.nume = nume;
         user.email = email;
         user.passHash = passHash;
@@ -51,10 +60,9 @@ public class User {
     }
 
     // Convenience constructor for Professors
-    public static User createProfesor(int id, String nume, String email, String passHash,
+    public static User createProfesor(String nume, String email, String passHash,
                                       String gradDidactic, String departament) {
         User user = new User();
-        user.id = id;
         user.nume = nume;
         user.email = email;
         user.passHash = passHash;

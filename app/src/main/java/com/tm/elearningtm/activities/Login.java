@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
-import com.tm.elearningtm.database.DatabaseSeeder;
 import com.tm.elearningtm.database.PasswordHelper;
 
 public class Login extends AppCompatActivity {
@@ -30,7 +29,6 @@ public class Login extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> attemptLogin());
         AppData.initialize(this);
-        //DatabaseSeeder.seedDatabase(this);
     }
 
     private void attemptLogin() {

@@ -6,9 +6,9 @@
     <item android:drawable="@color/colorPrimary"/>
 
     <!-- App logo/icon in center -->
-    <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/ic_launcher"/>
-    </item>
+    <item
+        android:width="108dp"
+        android:height="108dp"
+        android:drawable="@drawable/splash_icon"
+        android:gravity="center" />
 </layer-list>

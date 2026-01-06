@@ -12,7 +12,7 @@ import com.tm.elearningtm.R;
 import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.database.DatabaseSeeder;
 
-public class MainActivity extends AppCompatActivity {
+public class Main extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int SPLASH_DURATION = 2000; // 2 seconds

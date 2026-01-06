@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ElearningTM"
         tools:targetApi="31">
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.Main"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.database.AppData;
@@ -132,7 +133,7 @@ public class AdminDashboard extends AppCompatActivity {
         // Make it red to emphasize danger
         AlertDialog dialog = builder.create();
         dialog.show();
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.error));
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this, R.color.error));
     }
 
     private void clearDatabase() {
@@ -141,7 +142,7 @@ public class AdminDashboard extends AppCompatActivity {
 
         // Logout and restart
         AppData.logout();
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Main.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
