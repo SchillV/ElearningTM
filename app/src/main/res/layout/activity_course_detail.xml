@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     android:fitsSystemWindows="true"
-    tools:context=".activities.CourseDetail">
+    tools:context=".activities.CourseDetail"
+    tools:ignore="Overdraw">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -54,6 +54,7 @@
         android:visibility="gone"
         app:backgroundTint="@color/colorAccent"
         app:tint="@color/white"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        tools:ignore="HardcodedText" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

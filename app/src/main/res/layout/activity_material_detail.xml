@@ -7,7 +7,8 @@
     android:background="@color/backgroundColor"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".activities.MaterialDetail">
+    tools:context=".activities.MaterialDetail"
+    tools:ignore="Overdraw">
 
     <include layout="@layout/reusable_toolbar" />
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".fragments.CourseStudents">
+    tools:context=".fragments.CourseStudents"
+    tools:ignore="Overdraw">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_students"
@@ -23,7 +24,8 @@
         android:textColor="@color/textSecondary"
         android:textSize="16sp"
         android:visibility="gone"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        tools:ignore="HardcodedText" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_student"
@@ -35,6 +37,7 @@
         android:src="@android:drawable/ic_input_add"
         android:visibility="gone"
         app:tint="@color/white"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        tools:ignore="HardcodedText" />
 
 </FrameLayout>

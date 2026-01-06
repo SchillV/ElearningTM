@@ -7,7 +7,8 @@
     android:background="@color/backgroundColor"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context=".activities.SubmitAssignment">
+    tools:context=".activities.SubmitAssignment"
+    tools:ignore="Overdraw">
 
     <include layout="@layout/reusable_toolbar" />
 
@@ -85,7 +86,6 @@
                     android:padding="16dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_layout_submission_text"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -96,7 +96,8 @@
                             android:layout_height="150dp"
                             android:gravity="top"
                             android:hint="Your submission..."
-                            android:inputType="textMultiLine" />
+                            android:inputType="textMultiLine"
+                            tools:ignore="HardcodedText" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -119,7 +120,8 @@
                     android:text="Submissions"
                     android:textColor="@color/textPrimary"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="HardcodedText" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_submissions"
@@ -139,6 +141,7 @@
         android:layout_margin="16dp"
         android:padding="16dp"
         android:text="Submit Assignment"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

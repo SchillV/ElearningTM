@@ -1,7 +1,6 @@
 package com.tm.elearningtm.adapters;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
-import com.tm.elearningtm.activities.CourseDetail;
 import com.tm.elearningtm.classes.Curs;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
 
-    private List<Curs> courses;
+    private final List<Curs> courses;
     private final OnCourseListener onCourseListener;
 
     public CourseAdapter(List<Curs> courses, OnCourseListener onCourseListener) {
@@ -54,10 +52,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         return courses.size();
     }
 
+    @SuppressWarnings("deprecation")
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView title;
         public final TextView description;
-        OnCourseListener onCourseListener;
+        final OnCourseListener onCourseListener;
 
         public ViewHolder(View view, OnCourseListener onCourseListener) {
             super(view);

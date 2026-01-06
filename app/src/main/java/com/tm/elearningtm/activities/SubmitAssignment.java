@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class SubmitAssignment extends AppCompatActivity {
 
     private Tema assignment;

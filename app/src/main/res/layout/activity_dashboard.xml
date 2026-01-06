@@ -7,7 +7,8 @@
     android:background="@color/backgroundColor"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".activities.Dashboard">
+    tools:context=".activities.Dashboard"
+    tools:ignore="Overdraw">
 
     <include layout="@layout/reusable_toolbar" />
 
@@ -74,7 +75,8 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/button_create_course"
             app:layout_constraintEnd_toStartOf="@+id/button_admin_panel"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/button_admin_panel"
@@ -89,7 +91,8 @@
             app:layout_constraintBottom_toTopOf="@+id/button_create_course"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_catalogue"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/button_create_course"
@@ -103,7 +106,8 @@
             app:layout_constraintBottom_toTopOf="@id/button_logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/button_logout"

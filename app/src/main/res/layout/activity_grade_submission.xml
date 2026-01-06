@@ -7,7 +7,8 @@
     android:background="@color/backgroundColor"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".activities.GradeSubmissionActivity">
+    tools:context=".activities.GradeSubmissionActivity"
+    tools:ignore="Overdraw">
 
     <include layout="@layout/reusable_toolbar" />
 
@@ -37,7 +38,8 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Grade (e.g., 9.5)">
+                        android:hint="Grade (e.g., 9.5)"
+                        tools:ignore="HardcodedText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_text_grade"
@@ -51,7 +53,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:hint="Feedback (optional)">
+                        android:hint="Feedback (optional)"
+                        tools:ignore="HardcodedText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_text_feedback"
@@ -74,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="16dp"
-        android:text="Save Grade &amp; Feedback" />
+        android:text="Save Grade &amp; Feedback"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

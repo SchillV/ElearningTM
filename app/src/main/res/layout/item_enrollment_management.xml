@@ -47,7 +47,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Delete Enrollment"
             android:src="@android:drawable/ic_menu_delete"
-            app:tint="@color/error" />
+            app:tint="@color/error"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 

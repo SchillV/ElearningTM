@@ -76,18 +76,4 @@ public abstract class AppDatabase extends RoomDatabase {
             db.execSQL("PRAGMA foreign_keys=ON;");
         }
     };
-
-    public static void closeDatabase() {
-        if (INSTANCE != null) {
-            INSTANCE.close();
-            INSTANCE = null;
-        }
-    }
-
-    public static void destroyInstance() {
-        if (INSTANCE != null) {
-            INSTANCE.close();
-            INSTANCE = null;
-        }
-    }
 }

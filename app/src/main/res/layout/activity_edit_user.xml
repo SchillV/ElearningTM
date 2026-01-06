@@ -7,7 +7,8 @@
     android:background="@color/backgroundColor"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".activities.admin.EditUserActivity">
+    tools:context=".activities.admin.EditUserActivity"
+    tools:ignore="Overdraw">
 
     <include layout="@layout/reusable_toolbar" />
 
@@ -34,11 +35,11 @@
                     android:padding="16dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_layout_user_name"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="User Name">
+                        android:hint="User Name"
+                        tools:ignore="HardcodedText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_text_user_name"
@@ -47,13 +48,13 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_layout_user_email"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:enabled="false"
-                        android:hint="Email (cannot be changed)">
+                        android:hint="Email (cannot be changed)"
+                        tools:ignore="HardcodedText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_text_user_email"
@@ -66,7 +67,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:text="User Role"
-                        android:textColor="@color/textSecondary" />
+                        android:textColor="@color/textSecondary"
+                        tools:ignore="HardcodedText" />
 
                     <Spinner
                         android:id="@+id/spinner_user_role"
@@ -86,6 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="16dp"
-        android:text="Save Changes" />
+        android:text="Save Changes"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

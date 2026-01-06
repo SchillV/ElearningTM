@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme -->
     <style name="Base.Theme.ElearningTM" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color -->
@@ -17,7 +17,7 @@
 
         <!-- Status bar -->
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightStatusBar" >false</item>
     </style>
 
     <style name="Theme.ElearningTM" parent="Base.Theme.ElearningTM" />

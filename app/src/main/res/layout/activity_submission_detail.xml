@@ -7,7 +7,8 @@
     android:background="@color/backgroundColor"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".activities.SubmissionDetail">
+    tools:context=".activities.SubmissionDetail"
+    tools:ignore="Overdraw">
 
     <include layout="@layout/reusable_toolbar" />
 
@@ -72,12 +73,15 @@
                         android:layout_marginBottom="8dp"
                         android:text="Submission Content"
                         android:textColor="@color/textPrimary"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <EditText
+                        android:inputType="textLongMessage"
                         android:id="@+id/edit_text_submission_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:autofillHints=""
                         android:minHeight="150dp"
                         android:background="@drawable/submission_background"
                         android:enabled="false"
@@ -85,7 +89,8 @@
                         android:padding="12dp"
                         android:textColor="@color/textSecondary"
                         android:textSize="16sp"
-                        tools:text="This is the student submission content." />
+                        tools:text="This is the student submission content."
+                        tools:ignore="LabelFor" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -111,7 +116,8 @@
                         android:layout_marginBottom="8dp"
                         android:text="Grade &amp; Feedback"
                         android:textColor="@color/textPrimary"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/text_grade"
@@ -140,6 +146,7 @@
     <!-- Student Action Buttons -->
     <LinearLayout
         android:id="@+id/student_action_buttons"
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -153,15 +160,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="Delete" />
+            android:text="Delete"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/button_save_submission"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="Save Changes" />
+            android:text="Save Changes"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <!-- Teacher Action Button -->
@@ -174,6 +184,7 @@
         android:text="Grade Submission"
         android:textSize="18sp"
         android:visibility="gone"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

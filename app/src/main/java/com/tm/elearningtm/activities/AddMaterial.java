@@ -1,5 +1,6 @@
 package com.tm.elearningtm.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class AddMaterial extends AppCompatActivity {
 
     private TextInputEditText titleEditText;
@@ -32,6 +34,7 @@ public class AddMaterial extends AppCompatActivity {
     private boolean isEditMode = false;
     private MaterialCurs existingMaterial = null;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +72,9 @@ public class AddMaterial extends AppCompatActivity {
         typeSpinner.setAdapter(adapter);
     }
 
+    @SuppressLint("SetTextI18n")
     private void setupEditMode() {
-        getSupportActionBar().setTitle("Edit Material");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit Material");
         publishButton.setText("Save Changes");
 
         if (existingMaterial != null) {

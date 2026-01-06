@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class SubmissionDetail extends AppCompatActivity {
 
     private SubmisieStudent submission;

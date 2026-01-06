@@ -31,13 +31,6 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
         this.assignments = new ArrayList<>(assignments);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void updateAssignments(List<Tema> newAssignments) {
-        this.assignments.clear();
-        this.assignments.addAll(newAssignments);
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,6 +39,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Tema assignment = assignments.get(position);

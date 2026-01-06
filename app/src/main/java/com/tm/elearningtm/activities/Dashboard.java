@@ -54,24 +54,18 @@ public class Dashboard extends AppCompatActivity implements CourseAdapter.OnCour
         welcomeText.setText("Bine ai venit, " + currentUser.getNume() + "!");
         roleText.setText("Rol: " + currentUser.getRole());
 
-        catalogueButton.setOnClickListener(v -> {
-            startActivity(new Intent(this, CatalogueActivity.class));
-        });
+        catalogueButton.setOnClickListener(v -> startActivity(new Intent(this, CatalogueActivity.class)));
 
         if (AppData.isProfesor() || AppData.isAdmin()) {
             createCourseButton.setVisibility(View.VISIBLE);
-            createCourseButton.setOnClickListener(v -> {
-                startActivity(new Intent(this, AddCourseActivity.class));
-            });
+            createCourseButton.setOnClickListener(v -> startActivity(new Intent(this, AddCourseActivity.class)));
         } else {
             createCourseButton.setVisibility(View.GONE);
         }
 
         if (AppData.isAdmin()) {
             adminButton.setVisibility(View.VISIBLE);
-            adminButton.setOnClickListener(v -> {
-                startActivity(new Intent(this, AdminDashboard.class));
-            });
+            adminButton.setOnClickListener(v -> startActivity(new Intent(this, AdminDashboard.class)));
         } else {
             adminButton.setVisibility(View.GONE);
         }

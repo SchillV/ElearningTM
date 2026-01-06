@@ -21,7 +21,7 @@ import java.util.List;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
 
-    private List<User> students;
+    private final List<User> students;
     private final boolean isTeacher;
 
     public StudentAdapter(List<User> students, boolean isTeacher) {
@@ -52,18 +52,16 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
         if (isTeacher) {
             holder.removeButton.setVisibility(View.VISIBLE);
-            holder.removeButton.setOnClickListener(v -> {
-                new AlertDialog.Builder(v.getContext())
-                        .setTitle("Remove Student")
-                        .setMessage("Are you sure you want to remove " + student.getNume() + " from this course?")
-                        .setPositiveButton("Remove", (dialog, which) -> {
-                            // Just perform the database operation. LiveData will handle the UI update.
-                            AppData.getDatabase().enrollmentDao().deleteEnrollment(student.getId(), AppData.getCursCurent().getId());
-                            Toast.makeText(v.getContext(), student.getNume() + " has been removed.", Toast.LENGTH_SHORT).show();
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .show();
-            });
+            holder.removeButton.setOnClickListener(v -> new AlertDialog.Builder(v.getContext())
+                    .setTitle("Remove Student")
+                    .setMessage("Are you sure you want to remove " + student.getNume() + " from this course?")
+                    .setPositiveButton("Remove", (dialog, which) -> {
+                        // Just perform the database operation. LiveData will handle the UI update.
+                        AppData.getDatabase().enrollmentDao().deleteEnrollment(student.getId(), AppData.getCursCurent().getId());
+                        Toast.makeText(v.getContext(), student.getNume() + " has been removed.", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show());
         } else {
             holder.removeButton.setVisibility(View.GONE);
         }

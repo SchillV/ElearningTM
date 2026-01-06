@@ -14,12 +14,10 @@ import com.tm.elearningtm.fragments.CourseStudents;
 
 public class CoursePagerAdapter extends FragmentStateAdapter {
 
-    private final int courseId;
     private final boolean isStudent;
 
-    public CoursePagerAdapter(@NonNull FragmentActivity fragmentActivity, int courseId) {
+    public CoursePagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
-        this.courseId = courseId;
         this.isStudent = AppData.isStudent();
     }
 
@@ -29,11 +27,11 @@ public class CoursePagerAdapter extends FragmentStateAdapter {
         // Common tabs for everyone
         switch (position) {
             case 0: // Overview
-                return CourseOverview.newInstance(courseId);
+                return CourseOverview.newInstance();
             case 1: // Materials
                 return CourseMaterials.newInstance();
             case 2: // Assignments
-                return CourseAssignments.newInstance(courseId);
+                return CourseAssignments.newInstance();
             case 3: // Grades (student) or Students (professor/admin)
                 if (isStudent) {
                     return CourseGrades.newInstance();
@@ -41,7 +39,7 @@ public class CoursePagerAdapter extends FragmentStateAdapter {
                     return CourseStudents.newInstance();
                 }
             default:
-                return CourseOverview.newInstance(courseId);
+                return CourseOverview.newInstance();
         }
     }
 

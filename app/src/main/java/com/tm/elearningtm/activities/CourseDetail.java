@@ -21,10 +21,8 @@ import com.tm.elearningtm.adapters.CoursePagerAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.database.AppData;
 
+@SuppressWarnings("deprecation")
 public class CourseDetail extends AppCompatActivity {
-
-    private static final String TAG = "CourseDetailActivity";
-
     private int courseId;
     private Curs course;
 
@@ -68,7 +66,7 @@ public class CourseDetail extends AppCompatActivity {
     private void setupTabs() {
         ViewPager2 viewPager = findViewById(R.id.view_pager);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
-        CoursePagerAdapter pagerAdapter = new CoursePagerAdapter(this, courseId);
+        CoursePagerAdapter pagerAdapter = new CoursePagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(pagerAdapter.getTabTitle(position))).attach();
     }

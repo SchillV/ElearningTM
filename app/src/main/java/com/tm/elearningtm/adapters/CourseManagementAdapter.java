@@ -47,20 +47,18 @@ public class CourseManagementAdapter extends RecyclerView.Adapter<CourseManageme
             v.getContext().startActivity(intent);
         });
 
-        holder.deleteButton.setOnClickListener(v -> {
-            new AlertDialog.Builder(v.getContext())
-                    .setTitle("Delete Course")
-                    .setMessage("Are you sure you want to delete '" + course.getTitlu() + "'?")
-                    .setPositiveButton("Delete", (dialog, which) -> {
-                        AppData.getDatabase().cursDao().delete(course);
-                        courses.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, courses.size());
-                        Toast.makeText(v.getContext(), course.getTitlu() + " has been deleted.", Toast.LENGTH_SHORT).show();
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .show();
-        });
+        holder.deleteButton.setOnClickListener(v -> new AlertDialog.Builder(v.getContext())
+                .setTitle("Delete Course")
+                .setMessage("Are you sure you want to delete '" + course.getTitlu() + "'?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    AppData.getDatabase().cursDao().delete(course);
+                    courses.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, courses.size());
+                    Toast.makeText(v.getContext(), course.getTitlu() + " has been deleted.", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancel", null)
+                .show());
     }
 
     @Override

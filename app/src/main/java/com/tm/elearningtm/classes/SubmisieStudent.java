@@ -49,9 +49,6 @@ public class SubmisieStudent {
 
     private String feedback;
 
-    @Ignore
-    private User student; // loaded separately
-
     // Full and Empty constructors for Room
     public SubmisieStudent() {
     }
@@ -69,7 +66,7 @@ public class SubmisieStudent {
 
     @Ignore
     public SubmisieStudent(User student, String continut) {
-        this.student = student;
+        // loaded separately
         this.studentId = student.getId();
         this.continut = continut;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -101,11 +98,4 @@ public class SubmisieStudent {
     public String getFeedback() { return feedback; }
     public void setFeedback(String feedback) { this.feedback = feedback; }
 
-    public User getStudent() { return student; }
-    public void setStudent(User student) {
-        this.student = student;
-        if (student != null) {
-            this.studentId = student.getId();
-        }
-    }
 }

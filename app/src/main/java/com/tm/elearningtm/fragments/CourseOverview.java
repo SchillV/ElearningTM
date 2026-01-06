@@ -23,7 +23,7 @@ public class CourseOverview extends Fragment {
 
     private Curs course;
 
-    public static CourseOverview newInstance(int courseId) {
+    public static CourseOverview newInstance() {
         return new CourseOverview();
     }
 
@@ -39,6 +39,7 @@ public class CourseOverview extends Fragment {
         return inflater.inflate(R.layout.fragment_course_overview, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -63,7 +64,7 @@ public class CourseOverview extends Fragment {
         }
     }
 
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     private void setupStudentStats(View view) {
         int assignmentsCount = AppData.getDatabase().temaDao().getTemeCountForCurs(course.getId());
         List<SubmisieStudent> submissions = AppData.getDatabase().submisieDao().getSubmissionsForStudentInCourse(AppData.getUtilizatorCurent().getId(), course.getId());
@@ -89,6 +90,7 @@ public class CourseOverview extends Fragment {
         ((TextView) view.findViewById(R.id.text_stat3_label)).setText("Materials");
     }
 
+    @SuppressLint("SetTextI18n")
     private void setupTeacherStats(View view) {
         int studentCount = AppData.getDatabase().enrollmentDao().getStudentCountForCourse(course.getId());
         int assignmentsCount = AppData.getDatabase().temaDao().getTemeCountForCurs(course.getId());

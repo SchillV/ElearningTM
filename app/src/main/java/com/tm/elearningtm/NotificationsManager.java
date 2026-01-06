@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 
 public class NotificationsManager {
 

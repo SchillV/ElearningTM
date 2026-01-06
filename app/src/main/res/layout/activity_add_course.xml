@@ -7,7 +7,8 @@
     android:background="@color/backgroundColor"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".activities.AddCourseActivity">
+    tools:context=".activities.AddCourseActivity"
+    tools:ignore="Overdraw">
 
     <include layout="@layout/reusable_toolbar" />
 
@@ -34,11 +35,11 @@
                     android:padding="16dp">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_layout_course_title"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Course Title">
+                        android:hint="Course Title"
+                        tools:ignore="HardcodedText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_text_course_title"
@@ -48,12 +49,12 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_layout_course_category"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Category">
+                        android:hint="Category"
+                        tools:ignore="HardcodedText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_text_course_category"
@@ -64,12 +65,12 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/input_layout_course_description"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Course Description">
+                        android:hint="Course Description"
+                        tools:ignore="HardcodedText">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_text_course_description"
@@ -92,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="16dp"
-        android:text="Save Course" />
+        android:text="Save Course"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

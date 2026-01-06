@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class AssignStudentActivity extends AppCompatActivity {
 
     private SelectableStudentAdapter adapter;

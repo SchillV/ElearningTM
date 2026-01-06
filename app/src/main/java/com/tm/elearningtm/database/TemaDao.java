@@ -16,10 +16,7 @@ public interface TemaDao {
 
     // ========== INSERT ==========
     @Insert
-    long insert(Tema tema);
-
-    @Insert
-    List<Long> insertAll(List<Tema> teme);
+    void insert(Tema tema);
 
     // ========== UPDATE ==========
     @Update
@@ -28,9 +25,6 @@ public interface TemaDao {
     // ========== DELETE ==========
     @Delete
     void delete(Tema tema);
-
-    @Query("DELETE FROM teme WHERE id = :temaId")
-    void deleteById(int temaId);
 
     // ========== SELECT - Basic ==========
     @Query("SELECT * FROM teme WHERE id = :temaId")
@@ -41,15 +35,9 @@ public interface TemaDao {
 
     // ========== SELECT - By Course ==========
     @Query("SELECT * FROM teme WHERE curs_id = :cursId")
-    List<Tema> getTemeForCurs(int cursId);
-
-    @Query("SELECT * FROM teme WHERE curs_id = :cursId")
     LiveData<List<Tema>> getTemeForCursLive(int cursId);
 
     // ========== SELECT - By Deadline ==========
-    @Query("SELECT * FROM teme WHERE curs_id = :cursId ORDER BY deadline ASC")
-    LiveData<List<Tema>> getTemeOrderedByDeadline(int cursId);
-
     @Query("SELECT * FROM teme WHERE deadline > :currentDate ORDER BY deadline ASC")
     LiveData<List<Tema>> getUpcomingTeme(String currentDate);
 

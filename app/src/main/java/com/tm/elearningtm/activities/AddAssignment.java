@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class AddAssignment extends AppCompatActivity {
 
     private TextInputEditText titleEditText;

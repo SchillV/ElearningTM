@@ -24,7 +24,7 @@ public class CourseAssignments extends Fragment {
 
     private AssignmentAdapter adapter;
 
-    public static CourseAssignments newInstance(int courseId) {
+    public static CourseAssignments newInstance() {
         return new CourseAssignments();
     }
 

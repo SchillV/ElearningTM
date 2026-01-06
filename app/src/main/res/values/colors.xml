@@ -15,24 +15,13 @@
     <color name="textHint">#BDBDBD</color>
 
     <!-- Status Colors -->
-    <color name="success">#4CAF50</color>
-    <color name="warning">#FF9800</color>
     <color name="error">#F44336</color>
-    <color name="info">#2196F3</color>
 
     <!-- Grade Colors -->
-    <color name="gradeExcellent">#4CAF50</color>
-    <color name="gradeGood">#8BC34A</color>
-    <color name="gradeAverage">#FFC107</color>
-    <color name="gradePoor">#FF5722</color>
 
     <!-- Role Colors -->
-    <color name="adminColor">#9C27B0</color>
-    <color name="profesorColor">#1976D2</color>
-    <color name="studentColor">#00897B</color>
 
     <!-- Standard Colors -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="transparent">#00000000</color>
 </resources>

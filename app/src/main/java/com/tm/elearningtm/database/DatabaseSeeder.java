@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+@SuppressWarnings("unused")
 public class DatabaseSeeder {
 
     private static final String TAG = "DatabaseSeeder";
@@ -261,73 +262,80 @@ public class DatabaseSeeder {
         List<Curs> cursuri = db.cursDao().getAllCourses();
 
         for (Curs curs : cursuri) {
-            if (curs.getTitlu().equals("Tehnologii Mobile")) {
-                // TM assignments
-                Tema tema1 = new Tema(
-                        "Proiect Android - Calculator",
-                        "Creați o aplicație calculator cu operații de bază (+, -, *, /). " +
-                                "Trebuie să aibă un UI plăcut și să gestioneze corect erorile.",
-                        LocalDateTime.now().plusDays(14)
-                );
-                tema1.setCursId(curs.getId());
-                db.temaDao().insert(tema1);
+            switch (curs.getTitlu()) {
+                case "Tehnologii Mobile": {
+                    // TM assignments
+                    Tema tema1 = new Tema(
+                            "Proiect Android - Calculator",
+                            "Creați o aplicație calculator cu operații de bază (+, -, *, /). " +
+                                    "Trebuie să aibă un UI plăcut și să gestioneze corect erorile.",
+                            LocalDateTime.now().plusDays(14)
+                    );
+                    tema1.setCursId(curs.getId());
+                    db.temaDao().insert(tema1);
 
-                Tema tema2 = new Tema(
-                        "RecyclerView și Adapters",
-                        "Implementați o listă de produse folosind RecyclerView. " +
-                                "Fiecare item trebuie să afișeze imagine, nume, preț.",
-                        LocalDateTime.now().plusDays(21)
-                );
-                tema2.setCursId(curs.getId());
-                db.temaDao().insert(tema2);
+                    Tema tema2 = new Tema(
+                            "RecyclerView și Adapters",
+                            "Implementați o listă de produse folosind RecyclerView. " +
+                                    "Fiecare item trebuie să afișeze imagine, nume, preț.",
+                            LocalDateTime.now().plusDays(21)
+                    );
+                    tema2.setCursId(curs.getId());
+                    db.temaDao().insert(tema2);
 
-                Tema tema3 = new Tema(
-                        "Integrare API REST",
-                        "Conectați aplicația la un API public (ex: OpenWeather) și afișați date.",
-                        LocalDateTime.now().plusDays(28)
-                );
-                tema3.setCursId(curs.getId());
-                db.temaDao().insert(tema3);
+                    Tema tema3 = new Tema(
+                            "Integrare API REST",
+                            "Conectați aplicația la un API public (ex: OpenWeather) și afișați date.",
+                            LocalDateTime.now().plusDays(28)
+                    );
+                    tema3.setCursId(curs.getId());
+                    db.temaDao().insert(tema3);
 
-            } else if (curs.getTitlu().equals("Baze de Date")) {
-                // BD assignments
-                Tema tema1 = new Tema(
-                        "Design Bază de Date - Bibliotecă",
-                        "Proiectați schema unei baze de date pentru o bibliotecă. " +
-                                "Includeți diagrama ER, normalizare, și justificări.",
-                        LocalDateTime.now().plusDays(10)
-                );
-                tema1.setCursId(curs.getId());
-                db.temaDao().insert(tema1);
+                    break;
+                }
+                case "Baze de Date": {
+                    // BD assignments
+                    Tema tema1 = new Tema(
+                            "Design Bază de Date - Bibliotecă",
+                            "Proiectați schema unei baze de date pentru o bibliotecă. " +
+                                    "Includeți diagrama ER, normalizare, și justificări.",
+                            LocalDateTime.now().plusDays(10)
+                    );
+                    tema1.setCursId(curs.getId());
+                    db.temaDao().insert(tema1);
 
-                Tema tema2 = new Tema(
-                        "Query-uri SQL Avansate",
-                        "Rezolvați 15 exerciții SQL care acoperă JOIN-uri, subquery-uri, " +
-                                "funcții de agregare, și window functions.",
-                        LocalDateTime.now().plusDays(17)
-                );
-                tema2.setCursId(curs.getId());
-                db.temaDao().insert(tema2);
+                    Tema tema2 = new Tema(
+                            "Query-uri SQL Avansate",
+                            "Rezolvați 15 exerciții SQL care acoperă JOIN-uri, subquery-uri, " +
+                                    "funcții de agregare, și window functions.",
+                            LocalDateTime.now().plusDays(17)
+                    );
+                    tema2.setCursId(curs.getId());
+                    db.temaDao().insert(tema2);
 
-            } else if (curs.getTitlu().equals("Algoritmi Fundamentali")) {
-                // AF assignments
-                Tema tema1 = new Tema(
-                        "Implementare Sortări",
-                        "Implementați QuickSort, MergeSort, și HeapSort. " +
-                                "Comparați performanța pe diferite seturi de date.",
-                        LocalDateTime.now().plusDays(7)
-                );
-                tema1.setCursId(curs.getId());
-                db.temaDao().insert(tema1);
+                    break;
+                }
+                case "Algoritmi Fundamentali": {
+                    // AF assignments
+                    Tema tema1 = new Tema(
+                            "Implementare Sortări",
+                            "Implementați QuickSort, MergeSort, și HeapSort. " +
+                                    "Comparați performanța pe diferite seturi de date.",
+                            LocalDateTime.now().plusDays(7)
+                    );
+                    tema1.setCursId(curs.getId());
+                    db.temaDao().insert(tema1);
 
-                Tema tema2 = new Tema(
-                        "Probleme de Grafuri",
-                        "Rezolvați 5 probleme de grafuri: BFS, DFS, Dijkstra, " +
-                                "componente conexe, ciclu eulerian.",
-                        LocalDateTime.now().plusDays(14)
-                );
-                tema2.setCursId(curs.getId());
-                db.temaDao().insert(tema2);
+                    Tema tema2 = new Tema(
+                            "Probleme de Grafuri",
+                            "Rezolvați 5 probleme de grafuri: BFS, DFS, Dijkstra, " +
+                                    "componente conexe, ciclu eulerian.",
+                            LocalDateTime.now().plusDays(14)
+                    );
+                    tema2.setCursId(curs.getId());
+                    db.temaDao().insert(tema2);
+                    break;
+                }
             }
         }
 

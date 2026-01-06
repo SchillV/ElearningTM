@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("deprecation")
 public class CatalogueActivity extends AppCompatActivity {
 
     private List<CatalogueGrade> allGrades;

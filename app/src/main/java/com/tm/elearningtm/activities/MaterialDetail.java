@@ -21,6 +21,7 @@ import com.tm.elearningtm.database.AppData;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class MaterialDetail extends AppCompatActivity {
 
     private MaterialCurs material;

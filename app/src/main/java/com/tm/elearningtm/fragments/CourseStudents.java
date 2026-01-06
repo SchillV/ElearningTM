@@ -18,7 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.activities.AssignStudentActivity;
 import com.tm.elearningtm.adapters.StudentAdapter;
-import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.viewmodel.CourseViewModel;
 

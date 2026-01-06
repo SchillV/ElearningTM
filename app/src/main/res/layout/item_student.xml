@@ -48,7 +48,8 @@
             android:src="@android:drawable/ic_menu_delete"
             android:visibility="gone"
             app:tint="@color/error"
-            tools:visibility="visible" />
+            tools:visibility="visible"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 

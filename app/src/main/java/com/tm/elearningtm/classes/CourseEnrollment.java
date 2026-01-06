@@ -6,10 +6,6 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-/**
- * Junction table representing the many-to-many relationship
- * between Students and Courses.
- */
 @Entity(
         tableName = "course_enrollments",
         foreignKeys = {
@@ -49,19 +45,10 @@ public class CourseEnrollment {
     @ColumnInfo(name = "is_active")
     private boolean isActive; // false if student dropped the course
 
-    // Empty constructor for Room
+    // Full and empty constructors for Room
     public CourseEnrollment() {
     }
 
-    // Constructor
-    public CourseEnrollment(int studentId, int courseId, long enrollmentDate, boolean isActive) {
-        this.studentId = studentId;
-        this.courseId = courseId;
-        this.enrollmentDate = enrollmentDate;
-        this.isActive = isActive;
-    }
-
-    // Convenience constructor (sets current time and active=true)
     public CourseEnrollment(int studentId, int courseId) {
         this.studentId = studentId;
         this.courseId = courseId;

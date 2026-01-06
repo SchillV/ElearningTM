@@ -1,5 +1,6 @@
 package com.tm.elearningtm.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ public class UserManagementAdapter extends RecyclerView.Adapter<UserManagementAd
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = users.get(position);
@@ -48,20 +50,18 @@ public class UserManagementAdapter extends RecyclerView.Adapter<UserManagementAd
             v.getContext().startActivity(intent);
         });
 
-        holder.deleteButton.setOnClickListener(v -> {
-            new AlertDialog.Builder(v.getContext())
-                    .setTitle("Delete User")
-                    .setMessage("Are you sure you want to delete " + user.getNume() + "?")
-                    .setPositiveButton("Delete", (dialog, which) -> {
-                        AppData.getDatabase().userDao().delete(user);
-                        users.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, users.size());
-                        Toast.makeText(v.getContext(), user.getNume() + " has been deleted.", Toast.LENGTH_SHORT).show();
-                    })
-                    .setNegativeButton("Cancel", null)
-                    .show();
-        });
+        holder.deleteButton.setOnClickListener(v -> new AlertDialog.Builder(v.getContext())
+                .setTitle("Delete User")
+                .setMessage("Are you sure you want to delete " + user.getNume() + "?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    AppData.getDatabase().userDao().delete(user);
+                    users.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, users.size());
+                    Toast.makeText(v.getContext(), user.getNume() + " has been deleted.", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancel", null)
+                .show());
     }
 
     @Override

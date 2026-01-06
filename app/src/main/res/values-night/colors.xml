@@ -15,13 +15,9 @@
     <color name="textHint">#808080</color>
 
     <!-- Status Colors -->
-    <color name="success">#66BB6A</color>
-    <color name="warning">#FFA726</color>
     <color name="error">#EF5350</color>
-    <color name="info">#42A5F5</color>
 
     <!-- Standard Colors -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="transparent">#00000000</color>
 </resources>

@@ -1,12 +1,11 @@
+//file:noinspection GrDeprecatedAPIUsage
 plugins {
     alias(libs.plugins.android.application)
 }
 
 android {
     namespace 'com.tm.elearningtm'
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.tm.elearningtm"
@@ -48,15 +47,17 @@ dependencies {
     androidTestImplementation libs.espresso.core
 
     // Database dependencies
-    implementation "androidx.room:room-runtime:$room_version"
+    implementation libs.room.runtime
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-rxjava3:$room_version"
-    implementation "androidx.lifecycle:lifecycle-livedata:2.7.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel:2.7.0"
-    implementation 'at.favre.lib:bcrypt:0.10.2'
+    implementation libs.room.rxjava3
+    implementation libs.lifecycle.livedata
+    implementation libs.lifecycle.viewmodel
+    implementation libs.bcrypt
 
     // Ui dependencies
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'androidx.fragment:fragment:1.6.2'
+    //noinspection UseTomlInstead
+    implementation 'com.google.android.material:material:1.13.0'
+    //noinspection UseTomlInstead
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    implementation libs.fragment
 }

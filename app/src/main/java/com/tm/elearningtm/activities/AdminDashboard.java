@@ -94,21 +94,15 @@ public class AdminDashboard extends AppCompatActivity {
     private void setupClickListeners() {
         // User Management Card
         CardView manageUsersCard = findViewById(R.id.card_manage_users);
-        manageUsersCard.setOnClickListener(v -> {
-            startActivity(new Intent(this, ManageUsersActivity.class));
-        });
+        manageUsersCard.setOnClickListener(v -> startActivity(new Intent(this, ManageUsersActivity.class)));
 
         // Course Management Card
         CardView manageCoursesCard = findViewById(R.id.card_manage_courses);
-        manageCoursesCard.setOnClickListener(v -> {
-            startActivity(new Intent(this, ManageCoursesActivity.class));
-        });
+        manageCoursesCard.setOnClickListener(v -> startActivity(new Intent(this, ManageCoursesActivity.class)));
 
         // Enrollment Management Card
         CardView manageEnrollmentsCard = findViewById(R.id.card_manage_enrollments);
-        manageEnrollmentsCard.setOnClickListener(v -> {
-            startActivity(new Intent(this, ManageEnrollmentsActivity.class));
-        });
+        manageEnrollmentsCard.setOnClickListener(v -> startActivity(new Intent(this, ManageEnrollmentsActivity.class)));
 
         // Database Management Card
         CardView databaseCard = findViewById(R.id.card_database);

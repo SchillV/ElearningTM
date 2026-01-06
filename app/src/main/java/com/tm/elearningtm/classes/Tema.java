@@ -10,8 +10,6 @@ import androidx.room.TypeConverters;
 import com.tm.elearningtm.database.Converters;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(
         tableName = "teme",
@@ -39,9 +37,6 @@ public class Tema {
 
     private LocalDateTime deadline;
 
-    @Ignore
-    private List<SubmisieStudent> submisii;
-
     // Full and Empty constructors for Room
     public Tema() {
     }
@@ -54,7 +49,6 @@ public class Tema {
         this.cursId = cursId;
         this.dataCreare = dataCreare;
         this.deadline = deadline;
-        this.submisii = new ArrayList<>();
     }
 
     @Ignore
@@ -65,12 +59,6 @@ public class Tema {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             this.dataCreare = LocalDateTime.now();
         }
-        this.submisii = new ArrayList<>();
-    }
-
-    public void adaugaSubmisie(SubmisieStudent submisie) {
-        if (submisii == null) submisii = new ArrayList<>();
-        submisii.add(submisie);
     }
 
     // Getters and Setters
@@ -91,10 +79,4 @@ public class Tema {
 
     public LocalDateTime getDeadline() { return deadline; }
     public void setDeadline(LocalDateTime deadline) { this.deadline = deadline; }
-
-    public List<SubmisieStudent> getSubmisiiStudenti() {
-        if (submisii == null) submisii = new ArrayList<>();
-        return submisii;
-    }
-    public void setSubmisii(List<SubmisieStudent> submisii) { this.submisii = submisii; }
 }

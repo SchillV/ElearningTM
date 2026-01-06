@@ -17,10 +17,10 @@ import com.tm.elearningtm.database.AppData;
 import java.util.Arrays;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class EditUserActivity extends AppCompatActivity {
 
     private TextInputEditText nameEditText;
-    private TextInputEditText emailEditText;
     private Spinner roleSpinner;
 
     private User existingUser = null;
@@ -36,7 +36,7 @@ public class EditUserActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Edit User");
 
         nameEditText = findViewById(R.id.edit_text_user_name);
-        emailEditText = findViewById(R.id.edit_text_user_email);
+        TextInputEditText emailEditText = findViewById(R.id.edit_text_user_email);
         roleSpinner = findViewById(R.id.spinner_user_role);
         Button saveButton = findViewById(R.id.button_save_user);
 

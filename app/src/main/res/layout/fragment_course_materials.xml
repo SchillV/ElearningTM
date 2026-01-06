@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".fragments.CourseMaterials">
+    tools:context=".fragments.CourseMaterials"
+    tools:ignore="Overdraw">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_materials"
@@ -22,6 +23,7 @@
         android:textColor="@color/textSecondary"
         android:textSize="16sp"
         android:visibility="gone"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        tools:ignore="HardcodedText" />
 
 </FrameLayout>

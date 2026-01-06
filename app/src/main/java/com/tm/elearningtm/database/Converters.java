@@ -1,9 +1,13 @@
 package com.tm.elearningtm.database;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 import androidx.room.TypeConverter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class Converters {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
@@ -13,10 +17,7 @@ public class Converters {
         if (value == null) {
             return null;
         }
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            return LocalDateTime.parse(value, formatter);
-        }
-        return null;
+        return LocalDateTime.parse(value, formatter);
     }
 
     @TypeConverter
@@ -24,9 +25,6 @@ public class Converters {
         if (date == null) {
             return null;
         }
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            return date.format(formatter);
-        }
-        return null;
+        return date.format(formatter);
     }
 }

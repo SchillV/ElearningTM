@@ -1,5 +1,6 @@
 package com.tm.elearningtm.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class EnrollmentManagementAdapter extends RecyclerView.Adapter<Enrollment
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CourseEnrollment enrollment = enrollments.get(position);
@@ -49,6 +51,8 @@ public class EnrollmentManagementAdapter extends RecyclerView.Adapter<Enrollment
         }
 
         holder.deleteButton.setOnClickListener(v -> {
+            assert course != null;
+            assert student != null;
             new AlertDialog.Builder(v.getContext())
                     .setTitle("Delete Enrollment")
                     .setMessage("Are you sure you want to unenroll " + student.getNume() + " from " + course.getTitlu() + "?")

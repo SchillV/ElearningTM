@@ -3,7 +3,6 @@ package com.tm.elearningtm.classes;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -50,17 +49,6 @@ public class MaterialCurs {
         this.cursId = cursId;
         this.tipMaterial = tipMaterial;
         this.dataCreare = dataCreare;
-    }
-
-    @Ignore
-    public MaterialCurs(int id, String titlu, String descriere, String tipMaterial) {
-        this.id = id;
-        this.titlu = titlu;
-        this.descriere = descriere;
-        this.tipMaterial = tipMaterial;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            this.dataCreare = LocalDateTime.now();
-        }
     }
 
     // Getters and Setters

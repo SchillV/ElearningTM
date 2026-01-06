@@ -1,5 +1,6 @@
 package com.tm.elearningtm.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ import com.tm.elearningtm.database.AppData;
 
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class AddCourseActivity extends AppCompatActivity {
 
     private TextInputEditText titleEditText;
@@ -24,6 +26,7 @@ public class AddCourseActivity extends AppCompatActivity {
     private boolean isEditMode = false;
     private Curs existingCourse = null;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +54,9 @@ public class AddCourseActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> saveData());
     }
 
+    @SuppressLint("SetTextI18n")
     private void setupEditMode() {
-        getSupportActionBar().setTitle("Edit Course");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit Course");
         saveButton.setText("Save Changes");
 
         if (existingCourse != null) {

@@ -62,24 +62,4 @@ public class PasswordHelper {
         }
     }
 
-    public static boolean isPasswordValid(String password) {
-        if (password == null) {
-            return false;
-        }
-
-        // Minimum length of 6 characters
-        return password.length() >= 6;
-    }
-
-    public static String getPasswordValidationError(String password) {
-        if (password == null || password.isEmpty()) {
-            return "Parola nu poate fi goală";
-        }
-
-        if (password.length() < 6) {
-            return "Parola trebuie să aibă cel puțin 6 caractere";
-        }
-
-        return null;
-    }
 }

@@ -15,6 +15,7 @@ import com.tm.elearningtm.database.AppData;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class ManageEnrollmentsActivity extends AppCompatActivity {
 
     @Override

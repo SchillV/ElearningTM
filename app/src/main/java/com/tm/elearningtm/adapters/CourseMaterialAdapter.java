@@ -27,13 +27,6 @@ public class CourseMaterialAdapter extends RecyclerView.Adapter<CourseMaterialAd
         this.materials = new ArrayList<>(materials);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void updateMaterials(List<MaterialCurs> newMaterials) {
-        this.materials.clear();
-        this.materials.addAll(newMaterials);
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,7 +42,7 @@ public class CourseMaterialAdapter extends RecyclerView.Adapter<CourseMaterialAd
         holder.title.setText(material.getTitlu());
         holder.description.setText(material.getDescriere());
 
-        DateTimeFormatter formatter = null;
+        DateTimeFormatter formatter;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             holder.date.setText("Posted on: " + material.getDataCreare().format(formatter));
