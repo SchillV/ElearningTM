@@ -5,18 +5,12 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.database.AppData;
 
-import java.util.Objects;
-
-@SuppressWarnings("deprecation")
-public class AddCourseActivity extends AppCompatActivity {
+public class AddCourseActivity extends BaseActivity {
 
     private TextInputEditText titleEditText;
     private TextInputEditText categoryEditText;
@@ -31,10 +25,7 @@ public class AddCourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        setupToolbarWithBackButton();
 
         titleEditText = findViewById(R.id.edit_text_course_title);
         categoryEditText = findViewById(R.id.edit_text_course_category);
@@ -56,7 +47,7 @@ public class AddCourseActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void setupEditMode() {
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit Course");
+        getSupportActionBar().setTitle("Edit Course");
         saveButton.setText("Save Changes");
 
         if (existingCourse != null) {
@@ -67,9 +58,9 @@ public class AddCourseActivity extends AppCompatActivity {
     }
 
     private void saveData() {
-        String title = Objects.requireNonNull(titleEditText.getText()).toString().trim();
-        String category = Objects.requireNonNull(categoryEditText.getText()).toString().trim();
-        String description = Objects.requireNonNull(descriptionEditText.getText()).toString().trim();
+        String title = titleEditText.getText().toString().trim();
+        String category = categoryEditText.getText().toString().trim();
+        String description = descriptionEditText.getText().toString().trim();
 
         if (title.isEmpty() || category.isEmpty() || description.isEmpty()) {
             Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
@@ -88,11 +79,5 @@ public class AddCourseActivity extends AppCompatActivity {
             Toast.makeText(this, "Course created!", Toast.LENGTH_SHORT).show();
         }
         finish();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

@@ -6,8 +6,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,11 +20,9 @@ import com.tm.elearningtm.models.CatalogueGrade;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-@SuppressWarnings("deprecation")
-public class CatalogueActivity extends AppCompatActivity {
+public class CatalogueActivity extends BaseActivity {
 
     private List<CatalogueGrade> allGrades;
     private RecyclerView recyclerView;
@@ -38,11 +34,7 @@ public class CatalogueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogue);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Catalogue");
+        setupNavDrawer(R.id.nav_catalogue);
 
         recyclerView = findViewById(R.id.recycler_view_catalogue);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -130,11 +122,5 @@ public class CatalogueActivity extends AppCompatActivity {
 
         adapter = new CatalogueAdapter(filteredGrades);
         recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 }

@@ -21,6 +21,8 @@ import com.tm.elearningtm.adapters.CoursePagerAdapter;
 import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.database.AppData;
 
+import java.util.Objects;
+
 @SuppressWarnings("deprecation")
 public class CourseDetail extends AppCompatActivity {
     private int courseId;
@@ -120,18 +122,15 @@ public class CourseDetail extends AppCompatActivity {
             intent.putExtra("EDIT_COURSE_ID", course.getId());
             startActivity(intent);
             return true;
+        } else if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         loadCourse();
         // To refresh the title if it was edited

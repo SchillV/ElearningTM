@@ -9,8 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
@@ -22,10 +20,7 @@ import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.database.DatabaseSeeder;
 import com.tm.elearningtm.database.AppDatabase;
 
-import java.util.Objects;
-
-
-public class AdminDashboard extends AppCompatActivity {
+public class AdminDashboard extends BaseActivity {
 
     private static final String TAG = "AdminDashboard";
 
@@ -38,12 +33,8 @@ public class AdminDashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
+        setupNavDrawer(R.id.nav_admin_dashboard);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Admin Dashboard");
-
-        // Check if user is admin
         if (!AppData.isAdmin()) {
             Toast.makeText(this, "Access denied - Admins only", Toast.LENGTH_SHORT).show();
             finish();
@@ -68,15 +59,12 @@ public class AdminDashboard extends AppCompatActivity {
         try {
             AppDatabase db = AppData.getDatabase();
 
-            // Load stats from database
             int totalUsers = db.userDao().getUserCount();
             int totalStudents = db.userDao().getStudentCount();
             int totalCourses = db.cursDao().getCourseCount();
             int totalEnrollments = db.enrollmentDao().getAllActiveEnrollments().size();
-            // This could be slow if there are many submissions, but it's fine for this app.
             int totalSubmissions = db.submisieDao().getAllSubmissions().size();
 
-            // Display stats
             statsUsersText.setText(totalUsers + " (" + totalStudents + " students)");
             statsCoursesText.setText(String.valueOf(totalCourses));
             statsEnrollmentsText.setText(String.valueOf(totalEnrollments));
@@ -84,64 +72,35 @@ public class AdminDashboard extends AppCompatActivity {
         } catch (Exception e) {
             Log.e(TAG, "Error loading statistics", e);
             Toast.makeText(this, "Error loading statistics.", Toast.LENGTH_LONG).show();
-            statsUsersText.setText("Error");
-            statsCoursesText.setText("Error");
-            statsEnrollmentsText.setText("Error");
-            statsSubmissionsText.setText("Error");
         }
     }
 
     private void setupClickListeners() {
-        // User Management Card
-        CardView manageUsersCard = findViewById(R.id.card_manage_users);
-        manageUsersCard.setOnClickListener(v -> startActivity(new Intent(this, ManageUsersActivity.class)));
-
-        // Course Management Card
-        CardView manageCoursesCard = findViewById(R.id.card_manage_courses);
-        manageCoursesCard.setOnClickListener(v -> startActivity(new Intent(this, ManageCoursesActivity.class)));
-
-        // Enrollment Management Card
-        CardView manageEnrollmentsCard = findViewById(R.id.card_manage_enrollments);
-        manageEnrollmentsCard.setOnClickListener(v -> startActivity(new Intent(this, ManageEnrollmentsActivity.class)));
-
-        // Database Management Card
-        CardView databaseCard = findViewById(R.id.card_database);
-        databaseCard.setOnClickListener(v -> showDatabaseOptions());
-
-        // View All Courses Button
-        Button viewCoursesButton = findViewById(R.id.button_view_all_courses);
-        viewCoursesButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Dashboard.class);
-            startActivity(intent);
-        });
-
-        // Logout Button
-        Button logoutButton = findViewById(R.id.button_logout);
-        logoutButton.setOnClickListener(v -> logout());
+        findViewById(R.id.card_manage_users).setOnClickListener(v -> startActivity(new Intent(this, ManageUsersActivity.class)));
+        findViewById(R.id.card_manage_courses).setOnClickListener(v -> startActivity(new Intent(this, ManageCoursesActivity.class)));
+        findViewById(R.id.card_manage_enrollments).setOnClickListener(v -> startActivity(new Intent(this, ManageEnrollmentsActivity.class)));
+        findViewById(R.id.card_database).setOnClickListener(v -> showDatabaseOptions());
+        findViewById(R.id.button_view_all_courses).setOnClickListener(v -> startActivity(new Intent(this, Dashboard.class)));
+        findViewById(R.id.button_logout).setOnClickListener(v -> logout());
     }
 
     private void showDatabaseOptions() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Database Management");
-        builder.setMessage("Choose an action:");
-
-        builder.setPositiveButton("Clear Database", (dialog, which) -> confirmClearDatabase());
-        builder.setNeutralButton("Regenerate Data", (dialog, which) -> confirmRegenerateData());
-        builder.setNegativeButton("Cancel", null);
-
-        builder.show();
+        new AlertDialog.Builder(this)
+                .setTitle("Database Management")
+                .setMessage("Choose an action:")
+                .setPositiveButton("Clear Database", (dialog, which) -> confirmClearDatabase())
+                .setNeutralButton("Regenerate Data", (dialog, which) -> confirmRegenerateData())
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void confirmClearDatabase() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("⚠️ Warning");
-        builder.setMessage("This will DELETE ALL DATA from the database. This action cannot be undone!\n\nAre you sure?");
-
-        builder.setPositiveButton("Yes, Delete Everything", (dialog, which) -> clearDatabase());
-        builder.setNegativeButton("Cancel", null);
-
-        // Make it red to emphasize danger
-        AlertDialog dialog = builder.create();
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("⚠️ Warning")
+                .setMessage("This will DELETE ALL DATA from the database. This action cannot be undone!\n\nAre you sure?")
+                .setPositiveButton("Yes, Delete Everything", (d, which) -> clearDatabase())
+                .setNegativeButton("Cancel", null)
+                .create();
         dialog.show();
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(this, R.color.error));
     }
@@ -149,36 +108,22 @@ public class AdminDashboard extends AppCompatActivity {
     private void clearDatabase() {
         AppData.getDatabase().clearAllTables();
         Toast.makeText(this, "Database cleared successfully", Toast.LENGTH_SHORT).show();
-
-        // Logout and restart
-        AppData.logout();
-        Intent intent = new Intent(this, Main.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+        logout();
     }
 
     private void confirmRegenerateData() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Regenerate Test Data");
-        builder.setMessage("This will clear all existing data and create fresh test data.\n\nContinue?");
-
-        builder.setPositiveButton("Yes, Regenerate", (dialog, which) -> regenerateData());
-        builder.setNegativeButton("Cancel", null);
-
-        builder.show();
+        new AlertDialog.Builder(this)
+                .setTitle("Regenerate Test Data")
+                .setMessage("This will clear all existing data and create fresh test data.\n\nContinue?")
+                .setPositiveButton("Yes, Regenerate", (dialog, which) -> regenerateData())
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void regenerateData() {
-        // Clear existing data
         AppData.getDatabase().clearAllTables();
-
-        // Regenerate test data
         DatabaseSeeder.seedDatabase(this);
-
         Toast.makeText(this, "Test data regenerated! Please wait...", Toast.LENGTH_SHORT).show();
-
-        // Wait a moment for seeding to complete, then reload
         new android.os.Handler().postDelayed(() -> {
             loadStatistics();
             Toast.makeText(this, "✓ Data regenerated successfully", Toast.LENGTH_SHORT).show();
@@ -196,7 +141,6 @@ public class AdminDashboard extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Reload statistics when returning to this screen
         loadStatistics();
     }
 }

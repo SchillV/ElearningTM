@@ -8,9 +8,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.tm.elearningtm.NotificationsManager;
 import com.tm.elearningtm.R;
@@ -23,8 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings("deprecation")
-public class AddMaterial extends AppCompatActivity {
+public class AddMaterial extends BaseActivity {
 
     private TextInputEditText titleEditText;
     private TextInputEditText contentEditText;
@@ -39,10 +35,7 @@ public class AddMaterial extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_material);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        setupToolbarWithBackButton();
 
         titleEditText = findViewById(R.id.edit_text_material_title);
         contentEditText = findViewById(R.id.edit_text_material_content);
@@ -51,7 +44,6 @@ public class AddMaterial extends AppCompatActivity {
 
         setupSpinner();
 
-        // Check if we are in edit mode
         if (getIntent().hasExtra("EDIT_MATERIAL_ID")) {
             isEditMode = true;
             int materialId = getIntent().getIntExtra("EDIT_MATERIAL_ID", -1);
@@ -74,14 +66,13 @@ public class AddMaterial extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void setupEditMode() {
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Edit Material");
+        getSupportActionBar().setTitle("Edit Material");
         publishButton.setText("Save Changes");
 
         if (existingMaterial != null) {
             titleEditText.setText(existingMaterial.getTitlu());
             contentEditText.setText(existingMaterial.getDescriere());
 
-            // Set spinner selection
             String[] materialTypes = getResources().getStringArray(R.array.material_types);
             int spinnerPosition = Arrays.asList(materialTypes).indexOf(existingMaterial.getTipMaterial());
             if (spinnerPosition >= 0) {
@@ -101,14 +92,12 @@ public class AddMaterial extends AppCompatActivity {
         }
 
         if (isEditMode && existingMaterial != null) {
-            // Update existing material
             existingMaterial.setTitlu(title);
             existingMaterial.setDescriere(content);
             existingMaterial.setTipMaterial(type);
             AppData.getDatabase().materialDao().update(existingMaterial);
             Toast.makeText(this, "Material updated!", Toast.LENGTH_SHORT).show();
         } else {
-            // Create new material
             int courseId = getIntent().getIntExtra("COURSE_ID", -1);
             if (courseId == -1) {
                 Toast.makeText(this, "Invalid course", Toast.LENGTH_SHORT).show();
@@ -125,19 +114,13 @@ public class AddMaterial extends AppCompatActivity {
                         NotificationsManager.sendNotification(this,
                                 "New Announcement in " + AppData.getDatabase().cursDao().getCursById(courseId).getTitlu(),
                                 title,
-                                (int) newMaterialId + student.getId()); // Unique ID per student
+                                (int) newMaterialId + student.getId());
                     }
                 }
 
                 Toast.makeText(this, "Material published!", Toast.LENGTH_SHORT).show();
             }
         }
-        finish(); // Go back to the detail screen
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        finish();
     }
 }
