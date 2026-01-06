@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.tm.elearningtm.R;
-import com.tm.elearningtm.classes.Curs;
 import com.tm.elearningtm.classes.Tema;
 import com.tm.elearningtm.database.AppData;
 
@@ -30,9 +29,13 @@ public class AddAssignment extends AppCompatActivity {
     private TextInputEditText titleEditText;
     private TextInputEditText descriptionEditText;
     private TextView deadlineText;
+    private Button publishButton;
 
     private LocalDateTime selectedDeadline;
     private LocalDate selectedDate;
+
+    private boolean isEditMode = false;
+    private Tema existingAssignment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +44,74 @@ public class AddAssignment extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        // Bind views
         titleEditText = findViewById(R.id.edit_text_assignment_title);
         descriptionEditText = findViewById(R.id.edit_text_assignment_description);
         deadlineText = findViewById(R.id.text_deadline_value);
+        publishButton = findViewById(R.id.button_publish_assignment);
 
         Button selectDateButton = findViewById(R.id.button_select_date);
-        Button publishButton = findViewById(R.id.button_publish_assignment);
-
         selectDateButton.setOnClickListener(v -> showDatePicker());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            publishButton.setOnClickListener(v -> publishAssignment());
+
+        if (getIntent().hasExtra("EDIT_ASSIGNMENT_ID")) {
+            isEditMode = true;
+            int assignmentId = getIntent().getIntExtra("EDIT_ASSIGNMENT_ID", -1);
+            existingAssignment = AppData.getDatabase().temaDao().getTemaById(assignmentId);
+            setupEditMode();
+        } else {
+            getSupportActionBar().setTitle("Add Assignment");
+            publishButton.setText("Publish Assignment");
         }
+
+        publishButton.setOnClickListener(v -> saveData());
+    }
+
+    private void setupEditMode() {
+        getSupportActionBar().setTitle("Edit Assignment");
+        publishButton.setText("Save Changes");
+
+        if (existingAssignment != null) {
+            titleEditText.setText(existingAssignment.getTitlu());
+            descriptionEditText.setText(existingAssignment.getDescriere());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                selectedDeadline = existingAssignment.getDeadline();
+                updateDeadlineText();
+            }
+        }
+    }
+
+    private void saveData() {
+        String title = Objects.requireNonNull(titleEditText.getText()).toString().trim();
+        String description = Objects.requireNonNull(descriptionEditText.getText()).toString().trim();
+
+        if (title.isEmpty() || selectedDeadline == null) {
+            Toast.makeText(this, "Title and deadline are required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (isEditMode && existingAssignment != null) {
+            existingAssignment.setTitlu(title);
+            existingAssignment.setDescriere(description);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                existingAssignment.setDeadline(selectedDeadline);
+            }
+            AppData.getDatabase().temaDao().update(existingAssignment);
+            Toast.makeText(this, "Assignment updated!", Toast.LENGTH_SHORT).show();
+        } else {
+            int courseId = getIntent().getIntExtra("COURSE_ID", -1);
+            if (courseId == -1) {
+                Toast.makeText(this, "Invalid course", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Tema newAssignment = new Tema(title, description, selectedDeadline);
+                AppData.getDatabase().temaDao().insert(newAssignment, courseId);
+                Toast.makeText(this, "Assignment published!", Toast.LENGTH_SHORT).show();
+            }
+        }
+        finish();
     }
 
     private void showDatePicker() {
@@ -62,7 +119,6 @@ public class AddAssignment extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             today = LocalDate.now();
         }
-
         DatePickerDialog dateDialog = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             dateDialog = new DatePickerDialog(
@@ -76,9 +132,9 @@ public class AddAssignment extends AppCompatActivity {
                     today.getDayOfMonth()
             );
         }
-
-        assert dateDialog != null;
-        dateDialog.show();
+        if (dateDialog != null) {
+            dateDialog.show();
+        }
     }
 
     private void showTimePicker() {
@@ -87,39 +143,22 @@ public class AddAssignment extends AppCompatActivity {
                 (view, hour, minute) -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         selectedDeadline = selectedDate.atTime(hour, minute);
-                        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
-                        deadlineText.setText("Deadline: " + selectedDeadline.format(formatter));
+                        updateDeadlineText();
                     }
                 },
                 23,
                 59,
                 true
         );
-
         timeDialog.show();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void publishAssignment() {
-        String title = Objects.requireNonNull(titleEditText.getText()).toString().trim();
-        String description = Objects.requireNonNull(descriptionEditText.getText()).toString().trim();
-
-        if (title.isEmpty() || selectedDeadline == null) {
-            Toast.makeText(this, "Titlul și deadline-ul sunt obligatorii", Toast.LENGTH_SHORT).show();
-            return;
+    @SuppressLint("SetTextI18n")
+    private void updateDeadlineText() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT);
+            deadlineText.setText("Deadline: " + selectedDeadline.format(formatter));
         }
-
-        int courseId = getIntent().getIntExtra("COURSE_ID", -1);
-        if (courseId == -1) {
-            Toast.makeText(this, "Curs invalid", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Tema tema = new Tema(title, description, selectedDeadline);
-        AppData.getDatabase().temaDao().insert(tema);
-
-        Toast.makeText(this, "Tema publicată!", Toast.LENGTH_SHORT).show();
-        finish();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.tm.elearningtm.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,7 +40,7 @@ public class SubmitAssignment extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         int assignmentId = getIntent().getIntExtra("ASSIGNMENT_ID", -1);
         assignment = AppData.getDatabase().temaDao().getTemaById(assignmentId);
@@ -60,6 +61,7 @@ public class SubmitAssignment extends AppCompatActivity {
     }
 
     private void populateAssignmentDetails() {
+        getSupportActionBar().setTitle(assignment.getTitlu());
         TextView titleText = findViewById(R.id.text_assignment_title);
         TextView deadlineText = findViewById(R.id.text_assignment_deadline);
         TextView descriptionText = findViewById(R.id.text_assignment_description);
@@ -78,24 +80,48 @@ public class SubmitAssignment extends AppCompatActivity {
         Button submitButton = findViewById(R.id.button_submit_assignment);
         TextInputEditText submissionText = findViewById(R.id.edit_text_submission);
 
-        submitButton.setOnClickListener(v -> {
-            String submissionContent = Objects.requireNonNull(submissionText.getText()).toString().trim();
-            if (submissionContent.isEmpty()) {
-                Toast.makeText(this, "Please enter your submission.", Toast.LENGTH_SHORT).show();
-                return;
+        // Check for existing submission
+        SubmisieStudent existingSubmission = AppData.getDatabase().submisieDao().getSubmisieByStudentAndTema(AppData.getUtilizatorCurent().getId(), assignment.getId());
+
+        if (existingSubmission != null) {
+            // Already submitted
+            findViewById(R.id.student_submission_card).setVisibility(View.GONE);
+            submitButton.setVisibility(View.GONE);
+            findViewById(R.id.submitted_view).setVisibility(View.VISIBLE);
+
+            TextView statusText = findViewById(R.id.text_submission_status);
+            TextView yourSubmissionText = findViewById(R.id.text_your_submission);
+
+            if (existingSubmission.getNota() != null) {
+                statusText.setText("Status: Graded (Grade: " + existingSubmission.getNota() + ")");
+            } else {
+                statusText.setText("Status: Submitted");
             }
+            yourSubmissionText.setText(existingSubmission.getContinut());
 
-            SubmisieStudent submission = new SubmisieStudent(AppData.getUtilizatorCurent(), submissionContent);
-            AppData.getDatabase().submisieDao().insert(submission);
+        } else {
+            // Not submitted yet
+            findViewById(R.id.submitted_view).setVisibility(View.GONE);
+            submitButton.setOnClickListener(v -> {
+                String submissionContent = Objects.requireNonNull(submissionText.getText()).toString().trim();
+                if (submissionContent.isEmpty()) {
+                    Toast.makeText(this, "Please enter your submission.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-            Toast.makeText(this, "Assignment submitted successfully!", Toast.LENGTH_SHORT).show();
-            finish();
-        });
+                SubmisieStudent newSubmission = new SubmisieStudent(AppData.getUtilizatorCurent(), submissionContent);
+                AppData.getDatabase().submisieDao().insert(newSubmission, assignment.getId());
+
+                Toast.makeText(this, "Assignment submitted successfully!", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+        }
     }
 
     private void setupTeacherView() {
         findViewById(R.id.student_submission_card).setVisibility(View.GONE);
         findViewById(R.id.button_submit_assignment).setVisibility(View.GONE);
+        findViewById(R.id.submitted_view).setVisibility(View.GONE);
         findViewById(R.id.teacher_submissions_view).setVisibility(View.VISIBLE);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_submissions);
@@ -116,11 +142,13 @@ public class SubmitAssignment extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_edit_assignment) {
-            // TODO: Implement edit assignment functionality
-            Toast.makeText(this, "Edit Assignment - Coming Soon!", Toast.LENGTH_SHORT).show();
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_edit_assignment) {
+            Intent intent = new Intent(this, AddAssignment.class);
+            intent.putExtra("EDIT_ASSIGNMENT_ID", assignment.getId());
+            startActivity(intent);
             return true;
-        } else if (item.getItemId() == R.id.action_delete_assignment) {
+        } else if (itemId == R.id.action_delete_assignment) {
             new AlertDialog.Builder(this)
                     .setTitle("Delete Assignment")
                     .setMessage("Are you sure you want to delete this assignment?")

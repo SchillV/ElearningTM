@@ -24,4 +24,10 @@
     <string name="public_tema">Publică Tema</string>
     <string name="create_or_delete_courses">Create or delete courses</string>
     <string name="course_management">Course Management</string>
+    <string-array name="material_types">
+        <item>LECTIE</item>
+        <item>LABORATOR</item>
+        <item>ANUNT</item>
+        <item>RESURSA</item>
+    </string-array>
 </resources>

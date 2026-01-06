@@ -86,8 +86,9 @@ public class CourseDetail extends AppCompatActivity {
         builder.setTitle("Add to Course");
         builder.setItems(options, (dialog, item) -> {
             if (options[item].equals("Add Material")) {
-                // TODO: Create an AddMaterialActivity
-                Toast.makeText(this, "Add Material - Coming Soon!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, AddMaterial.class);
+                intent.putExtra("COURSE_ID", courseId);
+                startActivity(intent);
             } else if (options[item].equals("Add Assignment")) {
                 Intent intent = new Intent(this, AddAssignment.class);
                 intent.putExtra("COURSE_ID", courseId);

@@ -1,6 +1,7 @@
 package com.tm.elearningtm.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.activities.MaterialDetail;
 import com.tm.elearningtm.classes.MaterialCurs;
 
 import java.time.format.DateTimeFormatter;
@@ -44,6 +46,12 @@ public class CourseMaterialAdapter extends RecyclerView.Adapter<CourseMaterialAd
             formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             holder.date.setText("Posted on: " + material.getDataCreare().format(formatter));
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), MaterialDetail.class);
+            intent.putExtra("MATERIAL_ID", material.getId());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

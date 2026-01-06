@@ -37,7 +37,13 @@
             android:name=".activities.AddAssignment"
             android:exported="false" />
         <activity
+            android:name=".activities.AddMaterial"
+            android:exported="false" />
+        <activity
             android:name=".activities.CourseDetail"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MaterialDetail"
             android:exported="false" />
     </application>
 
