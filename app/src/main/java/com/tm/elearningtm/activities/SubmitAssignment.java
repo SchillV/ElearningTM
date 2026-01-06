@@ -1,6 +1,7 @@
 package com.tm.elearningtm.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -106,10 +107,11 @@ public class SubmitAssignment extends AppCompatActivity {
                 }
 
                 SubmisieStudent newSubmission = new SubmisieStudent(AppData.getUtilizatorCurent(), submissionContent);
+                newSubmission.setTemaId(assignment.getId());
                 AppData.getDatabase().submisieDao().insert(newSubmission);
 
                 Toast.makeText(this, "Assignment submitted successfully!", Toast.LENGTH_SHORT).show();
-                recreate(); // Recreate the activity to show the submission list
+                recreate();
             });
         }
     }
@@ -148,7 +150,9 @@ public class SubmitAssignment extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.action_edit_assignment) {
-            // TODO: Implement this
+            Intent intent = new Intent(this, AddAssignment.class);
+            intent.putExtra("EDIT_ASSIGNMENT_ID", assignment.getId());
+            startActivity(intent);
             return true;
         } else if (itemId == R.id.action_delete_assignment) {
             new AlertDialog.Builder(this)
