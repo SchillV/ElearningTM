@@ -1,59 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
+    android:background="@color/backgroundColor"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
     tools:context=".activities.Login">
 
     <TextView
         android:id="@+id/text_app_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Elearning login"
+        android:layout_marginBottom="48dp"
+        android:text="Elearning Platform"
+        android:textColor="@color/colorPrimary"
         android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="64dp" />
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edit_text_username"
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Adresă instituțională"
-        android:inputType="textEmailAddress"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/text_app_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="64dp" />
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
 
-    <EditText
-        android:id="@+id/edit_text_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Parolă"
-        android:inputType="textPassword"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_username"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Adresă instituțională"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Parolă"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Autentificare"
+        android:layout_marginTop="24dp"
         android:padding="16dp"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="48dp" />
+        android:text="Autentificare"
+        android:textSize="18sp" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

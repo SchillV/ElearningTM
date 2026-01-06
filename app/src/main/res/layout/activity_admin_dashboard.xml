@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/gradient_header"
+            android:background="@color/colorPrimary"
             android:padding="24dp"
             android:elevation="4dp">
 
@@ -209,15 +209,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/circle_background_admin"
-                    android:gravity="center"
-                    android:text="👥"
-                    android:textSize="24sp" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    app:tint="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -269,15 +268,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/circle_background_admin"
-                    android:gravity="center"
-                    android:text="📚"
-                    android:textSize="24sp" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@android:drawable/ic_menu_agenda"
+                    app:tint="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -329,15 +327,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/circle_background_admin"
-                    android:gravity="center"
-                    android:text="📝"
-                    android:textSize="24sp" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@android:drawable/ic_menu_edit"
+                    app:tint="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -389,15 +386,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/circle_background_admin"
-                    android:gravity="center"
-                    android:text="🗄️"
-                    android:textSize="24sp" />
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@android:drawable/ic_menu_save"
+                    app:tint="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="0dp"

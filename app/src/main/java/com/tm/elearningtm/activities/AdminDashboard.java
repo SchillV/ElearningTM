@@ -3,6 +3,7 @@ package com.tm.elearningtm.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class AdminDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
 
-        // Check if user is admin
+        // Check if user is admin - redundant
         if (!AppData.isAdmin()) {
             Toast.makeText(this, "Access denied - Admins only", Toast.LENGTH_SHORT).show();
             finish();
@@ -57,19 +58,28 @@ public class AdminDashboard extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void loadStatistics() {
-        AppDatabase db = AppData.getDatabase();
+        try {
+            AppDatabase db = AppData.getDatabase();
 
-        // Load stats from database
-        int totalUsers = db.userDao().getUserCount();
-        int totalStudents = db.userDao().getStudentCount();
-        int totalCourses = db.cursDao().getCourseCount();
-        int totalEnrollments = db.enrollmentDao().getAllActiveEnrollments().size();
+            // Load stats from database
+            int totalUsers = db.userDao().getUserCount();
+            int totalStudents = db.userDao().getStudentCount();
+            int totalCourses = db.cursDao().getCourseCount();
+            int totalEnrollments = db.enrollmentDao().getAllActiveEnrollments().size();
 
-        // Display stats
-        statsUsersText.setText(totalUsers + " (" + totalStudents + " students)");
-        statsCoursesText.setText(String.valueOf(totalCourses));
-        statsEnrollmentsText.setText(String.valueOf(totalEnrollments));
-        statsSubmissionsText.setText("N/A"); // We'll implement this later
+            // Display stats
+            statsUsersText.setText(totalUsers + " (" + totalStudents + " students)");
+            statsCoursesText.setText(String.valueOf(totalCourses));
+            statsEnrollmentsText.setText(String.valueOf(totalEnrollments));
+            statsSubmissionsText.setText("N/A"); // To be implemented
+        } catch (Exception e) {
+            Log.e(TAG, "Error loading statistics", e);
+            Toast.makeText(this, "Error loading statistics.", Toast.LENGTH_LONG).show();
+            statsUsersText.setText("Error");
+            statsCoursesText.setText("Error");
+            statsEnrollmentsText.setText("Error");
+            statsSubmissionsText.setText("Error");
+        }
     }
 
     private void setupClickListeners() {

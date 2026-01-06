@@ -1,62 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical"
     tools:context=".activities.SubmitAssignment">
 
-    <TextView
-        android:id="@+id/text_header_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trimitere temă"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/text_assignment_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Titlu temă"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/text_header_submit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_layout_submission_text"
+    <!-- Header -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@id/text_assignment_title"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_text_submission"
+        <TextView
+            android:id="@+id/text_header_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trimitere Temă"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_assignment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:text="Titlul Temei" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:hint="Răspunsul tău / descriere"
-            android:gravity="top"
-            android:inputType="textMultiLine" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_submission_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_submission"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="top"
+                    android:hint="Răspunsul tău / descriere"
+                    android:inputType="textMultiLine" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- In a real app, you would add a button here to attach files -->
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/button_submit_assignment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Trimite tema"
-        android:textSize="16sp"
-        android:paddingVertical="12dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:text="Trimite Tema"
+        android:textSize="18sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

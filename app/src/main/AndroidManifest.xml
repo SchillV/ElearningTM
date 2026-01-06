@@ -31,6 +31,9 @@
             android:name=".activities.Dashboard"
             android:exported="false" />
         <activity
+            android:name=".activities.AdminDashboard"
+            android:exported="false" />
+        <activity
             android:name=".activities.AddAssignment"
             android:exported="false" />
         <activity
