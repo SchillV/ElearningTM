@@ -41,15 +41,6 @@
             android:textSize="12sp"
             tools:text="Deadline: 2024-12-31 23:59" />
 
-        <Button
-            android:id="@+id/button_submit"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="8dp"
-            android:text="View &amp; Submit" />
-
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -23,12 +23,10 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.cardview.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,38 +34,84 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/text_assignment_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="Titlul Temei" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_layout_submission_text"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_text_submission"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:gravity="top"
-                    android:hint="Răspunsul tău / descriere"
-                    android.inputType="textMultiLine" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
+                    <TextView
+                        android:id="@+id/text_assignment_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:text="Assignment Title" />
+
+                    <TextView
+                        android:id="@+id/text_assignment_deadline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:textColor="@color/textSecondary"
+                        android:textSize="14sp"
+                        tools:text="Deadline: 2024-12-31 23:59" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/textHint" />
+
+                    <TextView
+                        android:id="@+id/text_assignment_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/textSecondary"
+                        android:textSize="16sp"
+                        tools:text="This is the full description of the assignment." />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/input_layout_submission_text"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_submission"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:gravity="top"
+                            android:hint="Your submission..."
+                            android:inputType="textMultiLine" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    </ScrollView>
 
     <Button
         android:id="@+id/button_submit_assignment"
@@ -75,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:padding="16dp"
-        android:text="Trimite Tema"
+        android:text="Submit Assignment"
         android:textSize="18sp" />
 
 </LinearLayout>
