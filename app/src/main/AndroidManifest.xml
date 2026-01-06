@@ -33,6 +33,9 @@
         <activity
             android:name=".activities.AddAssignment"
             android:exported="false" />
+        <activity
+            android:name=".activities.CourseDetail"
+            android:exported="false" />
     </application>
 
 </manifest>
