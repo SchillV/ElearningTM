@@ -53,6 +53,9 @@ public interface CursDao {
     @Query("SELECT * FROM courses WHERE categorie = :categorie")
     List<Curs> getCoursesByCategory(String categorie);
 
+    @Query("SELECT DISTINCT categorie FROM courses")
+    List<String> getAllCategories();
+
     @Query("SELECT * FROM courses WHERE categorie = :categorie")
     LiveData<List<Curs>> getCoursesByCategoryLive(String categorie);
 

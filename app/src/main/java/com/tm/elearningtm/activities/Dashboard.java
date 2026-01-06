@@ -36,6 +36,7 @@ public class Dashboard extends AppCompatActivity {
         TextView roleText = findViewById(R.id.text_user_role);
         Button adminButton = findViewById(R.id.button_admin_panel);
         Button createCourseButton = findViewById(R.id.button_create_course);
+        Button catalogueButton = findViewById(R.id.button_catalogue);
         Button logoutButton = findViewById(R.id.button_logout);
 
         User currentUser = AppData.getUtilizatorCurent();
@@ -48,6 +49,10 @@ public class Dashboard extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("Welcome, " + currentUser.getNume() + "!");
         welcomeText.setText("Bine ai venit, " + currentUser.getNume() + "!");
         roleText.setText("Rol: " + currentUser.getRole());
+
+        catalogueButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, CatalogueActivity.class));
+        });
 
         if (AppData.isProfesor() || AppData.isAdmin()) {
             createCourseButton.setVisibility(View.VISIBLE);

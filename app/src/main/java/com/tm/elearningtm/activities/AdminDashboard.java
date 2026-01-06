@@ -19,6 +19,8 @@ import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.database.DatabaseSeeder;
 import com.tm.elearningtm.database.AppDatabase;
 
+import java.util.Objects;
+
 
 public class AdminDashboard extends AppCompatActivity {
 
@@ -36,6 +38,7 @@ public class AdminDashboard extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Admin Dashboard");
 
         // Check if user is admin
         if (!AppData.isAdmin()) {
@@ -67,12 +70,14 @@ public class AdminDashboard extends AppCompatActivity {
             int totalStudents = db.userDao().getStudentCount();
             int totalCourses = db.cursDao().getCourseCount();
             int totalEnrollments = db.enrollmentDao().getAllActiveEnrollments().size();
+            // This could be slow if there are many submissions, but it's fine for this app.
+            int totalSubmissions = db.submisieDao().getAllSubmissions().size();
 
             // Display stats
             statsUsersText.setText(totalUsers + " (" + totalStudents + " students)");
             statsCoursesText.setText(String.valueOf(totalCourses));
             statsEnrollmentsText.setText(String.valueOf(totalEnrollments));
-            statsSubmissionsText.setText("N/A"); // To be implemented
+            statsSubmissionsText.setText(String.valueOf(totalSubmissions));
         } catch (Exception e) {
             Log.e(TAG, "Error loading statistics", e);
             Toast.makeText(this, "Error loading statistics.", Toast.LENGTH_LONG).show();
@@ -88,21 +93,18 @@ public class AdminDashboard extends AppCompatActivity {
         CardView manageUsersCard = findViewById(R.id.card_manage_users);
         manageUsersCard.setOnClickListener(v -> {
             Toast.makeText(this, "User Management - Coming soon!", Toast.LENGTH_SHORT).show();
-            // TODO: Open ManageUsersActivity
         });
 
         // Course Management Card
         CardView manageCoursesCard = findViewById(R.id.card_manage_courses);
         manageCoursesCard.setOnClickListener(v -> {
             Toast.makeText(this, "Course Management - Coming soon!", Toast.LENGTH_SHORT).show();
-            // TODO: Open ManageCoursesActivity
         });
 
         // Enrollment Management Card
         CardView manageEnrollmentsCard = findViewById(R.id.card_manage_enrollments);
         manageEnrollmentsCard.setOnClickListener(v -> {
             Toast.makeText(this, "Enrollment Management - Coming soon!", Toast.LENGTH_SHORT).show();
-            // TODO: Open ManageEnrollmentsActivity
         });
 
         // Database Management Card

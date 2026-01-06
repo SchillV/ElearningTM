@@ -27,6 +27,9 @@ public interface SubmisieDao {
     void delete(SubmisieStudent submisie);
 
     // ========== SELECT - Basic ==========
+    @Query("SELECT * FROM submisii")
+    List<SubmisieStudent> getAllSubmissions();
+
     @Query("SELECT * FROM submisii WHERE id = :submisieId")
     SubmisieStudent getSubmisieById(int submisieId);
 

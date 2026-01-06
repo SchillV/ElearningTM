@@ -57,6 +57,9 @@
         <activity
             android:name=".activities.AssignStudentActivity"
             android:exported="false" />
+        <activity
+            android:name=".activities.CatalogueActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
