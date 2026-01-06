@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".activities.Dashboard">
 
     <include layout="@layout/reusable_toolbar" />
@@ -17,10 +17,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/bine_ai_venit_nume_utilizator"
         android:textColor="@color/textPrimary"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="@string/bine_ai_venit_nume_utilizator" />
 
     <TextView
         android:id="@+id/text_user_role"
@@ -28,9 +28,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="@string/rol_student_profesor"
         android:textColor="@color/textSecondary"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="@string/rol_student_profesor" />
 
     <TextView
         android:id="@+id/text_courses_title"
@@ -56,12 +56,25 @@
         tools:listitem="@layout/item_course" />
 
     <Button
+        android:id="@+id/button_create_course"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:paddingVertical="12dp"
+        android:text="Create New Course"
+        android:textSize="16sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <Button
         android:id="@+id/button_admin_panel"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:paddingVertical="12dp"
         android:text="Admin Panel"

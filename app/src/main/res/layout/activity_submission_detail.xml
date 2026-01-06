@@ -87,6 +87,51 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Grade & Feedback View -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/grade_feedback_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:cardElevation="2dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Grade &amp; Feedback"
+                        android:textColor="@color/textPrimary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_grade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:text="9.5" />
+
+                    <TextView
+                        android:id="@+id/text_feedback"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/submission_background"
+                        android:padding="12dp"
+                        android:textColor="@color/textSecondary"
+                        tools:text="This is the teacher\'s feedback." />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- Teacher Grading View -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/teacher_grading_card"

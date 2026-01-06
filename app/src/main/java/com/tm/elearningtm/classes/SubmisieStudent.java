@@ -47,6 +47,8 @@ public class SubmisieStudent {
 
     private Double nota;
 
+    private String feedback;
+
     @Ignore
     private User student; // loaded separately
 
@@ -55,13 +57,14 @@ public class SubmisieStudent {
     }
 
     public SubmisieStudent(int id, int studentId, int temaId, String continut,
-                           LocalDateTime dataSubmisie, Double nota) {
+                           LocalDateTime dataSubmisie, Double nota, String feedback) {
         this.id = id;
         this.studentId = studentId;
         this.temaId = temaId;
         this.continut = continut;
         this.dataSubmisie = dataSubmisie;
         this.nota = nota;
+        this.feedback = feedback;
     }
 
     @Ignore
@@ -73,6 +76,7 @@ public class SubmisieStudent {
             this.dataSubmisie = LocalDateTime.now();
         }
         this.nota = null;
+        this.feedback = null;
     }
 
     // Getters and Setters
@@ -93,6 +97,9 @@ public class SubmisieStudent {
 
     public Double getNota() { return nota; }
     public void setNota(Double nota) { this.nota = nota; }
+
+    public String getFeedback() { return feedback; }
+    public void setFeedback(String feedback) { this.feedback = feedback; }
 
     public User getStudent() { return student; }
     public void setStudent(User student) {

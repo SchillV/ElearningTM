@@ -423,7 +423,8 @@ public class DatabaseSeeder {
                     "Am implementat calculatorul conform cerințelor. " +
                             "Am folosit ConstraintLayout pentru UI și am gestionat toate cazurile de eroare.",
                     LocalDateTime.now().minusDays(2),
-                    9.5  // Already graded
+                    9.5,
+                    "Felicitari!"
             );
             db.submisieDao().insert(sub1);
 
@@ -434,7 +435,8 @@ public class DatabaseSeeder {
                     teme.get(0).getId(),
                     "Proiect finalizat. Aplicația funcționează corect și are un design modern.",
                     LocalDateTime.now().minusDays(1),
-                    8.0  // Already graded
+                    8.0,
+                    "Am gasit un bug pe pagina de autentificare. In rest foarte bine!"
             );
             db.submisieDao().insert(sub2);
 
@@ -445,7 +447,8 @@ public class DatabaseSeeder {
                     teme.get(1).getId(),
                     "RecyclerView implementat. Am adăugat și funcționalitate de click pe items.",
                     LocalDateTime.now().minusHours(5),
-                    null  // Not graded yet
+                    null,
+                    null
             );
             db.submisieDao().insert(sub3);
 

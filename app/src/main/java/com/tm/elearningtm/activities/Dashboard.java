@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,6 +20,7 @@ import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Dashboard extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class Dashboard extends AppCompatActivity {
         TextView welcomeText = findViewById(R.id.text_welcome);
         TextView roleText = findViewById(R.id.text_user_role);
         Button adminButton = findViewById(R.id.button_admin_panel);
+        Button createCourseButton = findViewById(R.id.button_create_course);
         Button logoutButton = findViewById(R.id.button_logout);
 
         User currentUser = AppData.getUtilizatorCurent();
@@ -43,9 +46,19 @@ public class Dashboard extends AppCompatActivity {
             return;
         }
 
-        getSupportActionBar().setTitle("Welcome, " + currentUser.getNume() + "!");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Welcome, " + currentUser.getNume() + "!");
         welcomeText.setText("Bine ai venit, " + currentUser.getNume() + "!");
         roleText.setText("Rol: " + currentUser.getRole());
+
+        if (AppData.isProfesor() || AppData.isAdmin()) {
+            createCourseButton.setVisibility(View.VISIBLE);
+            createCourseButton.setOnClickListener(v -> {
+                // TODO: Create AddCourseActivity
+                Toast.makeText(this, "Create Course - Coming Soon!", Toast.LENGTH_SHORT).show();
+            });
+        } else {
+            createCourseButton.setVisibility(View.GONE);
+        }
 
         if (AppData.isAdmin()) {
             adminButton.setVisibility(View.VISIBLE);
@@ -61,17 +74,10 @@ public class Dashboard extends AppCompatActivity {
 
         List<Curs> cursuri;
         if (currentUser.isStudent()) {
-            // Student: Show only enrolled courses for students
-            cursuri = AppData.getDatabase()
-                    .enrollmentDao()
-                    .getCoursesForStudent(currentUser.getId());
+            cursuri = AppData.getDatabase().enrollmentDao().getCoursesForStudent(currentUser.getId());
         } else if (currentUser.isProfesor()) {
-            // Profesor: Show courses taught by this professor
-            cursuri = AppData.getDatabase()
-                    .cursDao()
-                    .getCoursesByProfesor(currentUser.getId());
+            cursuri = AppData.getDatabase().cursDao().getCoursesByProfesor(currentUser.getId());
         } else {
-            // Admin: show all courses
             cursuri = AppData.getDatabase().cursDao().getAllCourses();
         }
 

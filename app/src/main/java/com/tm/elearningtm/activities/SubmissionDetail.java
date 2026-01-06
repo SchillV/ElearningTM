@@ -1,6 +1,7 @@
 package com.tm.elearningtm.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,18 +14,22 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.SubmisieStudent;
+import com.tm.elearningtm.classes.Tema;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class SubmissionDetail extends AppCompatActivity {
 
     private SubmisieStudent submission;
+    private Tema assignment;
     private User student;
     private EditText submissionContentEditText;
 
@@ -46,10 +51,11 @@ public class SubmissionDetail extends AppCompatActivity {
             return;
         }
 
+        assignment = AppData.getDatabase().temaDao().getTemaById(submission.getTemaId());
         student = AppData.getDatabase().userDao().getUserById(submission.getStudentId());
 
-        if (student == null) {
-            Toast.makeText(this, "Student not found", Toast.LENGTH_SHORT).show();
+        if (assignment == null || student == null) {
+            Toast.makeText(this, "Error loading data", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -78,76 +84,91 @@ public class SubmissionDetail extends AppCompatActivity {
         submissionContentEditText.setText(submission.getContinut());
     }
 
+    @SuppressLint("SetTextI18n")
     private void setupStudentView() {
         findViewById(R.id.teacher_grading_card).setVisibility(View.GONE);
         findViewById(R.id.button_save_grade).setVisibility(View.GONE);
 
-        Button saveButton = findViewById(R.id.button_save_submission);
-        Button deleteButton = findViewById(R.id.button_delete_submission);
-
-        // Allow editing only if the submission has not been graded
         boolean isGraded = submission.getNota() != null;
-        submissionContentEditText.setEnabled(!isGraded);
-        saveButton.setEnabled(!isGraded);
-        deleteButton.setEnabled(!isGraded);
+        boolean canEdit = !isGraded;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            canEdit = !isGraded && LocalDateTime.now().isBefore(assignment.getDeadline());
+        }
 
-        saveButton.setOnClickListener(v -> {
-            String newContent = submissionContentEditText.getText().toString().trim();
-            if (newContent.isEmpty()) {
-                Toast.makeText(this, "Submission content cannot be empty", Toast.LENGTH_SHORT).show();
-                return;
+        if (isGraded) {
+            findViewById(R.id.student_action_buttons).setVisibility(View.GONE);
+            findViewById(R.id.grade_feedback_card).setVisibility(View.VISIBLE);
+            submissionContentEditText.setEnabled(false);
+
+            TextView gradeText = findViewById(R.id.text_grade);
+            TextView feedbackText = findViewById(R.id.text_feedback);
+
+            gradeText.setText(String.valueOf(submission.getNota()));
+            if (submission.getFeedback() != null && !submission.getFeedback().isEmpty()) {
+                feedbackText.setText(submission.getFeedback());
+            } else {
+                feedbackText.setText("No feedback provided.");
             }
-            submission.setContinut(newContent);
-            AppData.getDatabase().submisieDao().update(submission);
-            Toast.makeText(this, "Submission updated!", Toast.LENGTH_SHORT).show();
-            finish();
-        });
+        } else {
+            findViewById(R.id.student_action_buttons).setVisibility(View.VISIBLE);
+            findViewById(R.id.grade_feedback_card).setVisibility(View.GONE);
+            submissionContentEditText.setEnabled(canEdit);
 
-        deleteButton.setOnClickListener(v -> new AlertDialog.Builder(this)
-                .setTitle("Delete Submission")
-                .setMessage("Are you sure you want to delete your submission?")
-                .setPositiveButton("Delete", (dialog, which) -> {
-                    AppData.getDatabase().submisieDao().delete(submission);
-                    Toast.makeText(this, "Submission deleted", Toast.LENGTH_SHORT).show();
-                    finish();
-                })
-                .setNegativeButton("Cancel", null)
-                .show());
+            Button saveButton = findViewById(R.id.button_save_submission);
+            Button deleteButton = findViewById(R.id.button_delete_submission);
+
+            saveButton.setEnabled(canEdit);
+            deleteButton.setEnabled(canEdit);
+
+            saveButton.setOnClickListener(v -> {
+                String newContent = submissionContentEditText.getText().toString().trim();
+                if (newContent.isEmpty()) {
+                    Toast.makeText(this, "Submission content cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                submission.setContinut(newContent);
+                AppData.getDatabase().submisieDao().update(submission);
+                Toast.makeText(this, "Submission updated!", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+
+            deleteButton.setOnClickListener(v -> new AlertDialog.Builder(this)
+                    .setTitle("Delete Submission")
+                    .setMessage("Are you sure you want to delete your submission?")
+                    .setPositiveButton("Delete", (dialog, which) -> {
+                        AppData.getDatabase().submisieDao().delete(submission);
+                        Toast.makeText(this, "Submission deleted", Toast.LENGTH_SHORT).show();
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show());
+        }
     }
 
     private void setupTeacherView() {
         findViewById(R.id.student_action_buttons).setVisibility(View.GONE);
-        findViewById(R.id.teacher_grading_card).setVisibility(View.VISIBLE);
-        findViewById(R.id.button_save_grade).setVisibility(View.VISIBLE);
+        findViewById(R.id.grade_feedback_card).setVisibility(View.VISIBLE);
+        submissionContentEditText.setEnabled(false);
 
-        TextInputEditText gradeEditText = findViewById(R.id.edit_text_grade);
-        TextInputEditText feedbackEditText = findViewById(R.id.edit_text_feedback);
-        Button saveGradeButton = findViewById(R.id.button_save_grade);
+        TextView gradeText = findViewById(R.id.text_grade);
+        TextView feedbackText = findViewById(R.id.text_feedback);
 
         if (submission.getNota() != null) {
-            gradeEditText.setText(String.valueOf(submission.getNota()));
+            gradeText.setText(String.valueOf(submission.getNota()));
+        } else {
+            gradeText.setText("Not Graded");
         }
-        // feedbackEditText.setText(submission.getFeedback()); // Assuming a feedback field exists
 
-        saveGradeButton.setOnClickListener(v -> {
-            String gradeStr = Objects.requireNonNull(gradeEditText.getText()).toString().trim();
-            String feedback = Objects.requireNonNull(feedbackEditText.getText()).toString().trim();
-
-            if (gradeStr.isEmpty()) {
-                Toast.makeText(this, "Grade cannot be empty", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            try {
-                double grade = Double.parseDouble(gradeStr);
-                submission.setNota(grade);
-                // submission.setFeedback(feedback); // Assuming a feedback field exists
-                AppData.getDatabase().submisieDao().update(submission);
-                Toast.makeText(this, "Grade saved!", Toast.LENGTH_SHORT).show();
-                finish();
-            } catch (NumberFormatException e) {
-                Toast.makeText(this, "Invalid grade format", Toast.LENGTH_SHORT).show();
-            }
+        if (submission.getFeedback() != null && !submission.getFeedback().isEmpty()) {
+            feedbackText.setText(submission.getFeedback());
+        } else {
+            feedbackText.setText("No feedback provided.");
+        }
+        
+        findViewById(R.id.teacher_grading_card).setOnClickListener(v -> {
+            Intent intent = new Intent(this, GradeSubmissionActivity.class);
+            intent.putExtra("SUBMISSION_ID", submission.getId());
+            startActivity(intent);
         });
     }
 
