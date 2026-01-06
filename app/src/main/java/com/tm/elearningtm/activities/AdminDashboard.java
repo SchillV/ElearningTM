@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.tm.elearningtm.R;
+import com.tm.elearningtm.activities.admin.ManageUsersActivity;
 import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.database.DatabaseSeeder;
 import com.tm.elearningtm.database.AppDatabase;
@@ -92,7 +93,7 @@ public class AdminDashboard extends AppCompatActivity {
         // User Management Card
         CardView manageUsersCard = findViewById(R.id.card_manage_users);
         manageUsersCard.setOnClickListener(v -> {
-            Toast.makeText(this, "User Management - Coming soon!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, ManageUsersActivity.class));
         });
 
         // Course Management Card

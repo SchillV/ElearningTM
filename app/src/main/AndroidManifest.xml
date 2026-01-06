@@ -60,6 +60,9 @@
         <activity
             android:name=".activities.CatalogueActivity"
             android:exported="false" />
+        <activity
+            android:name=".activities.admin.ManageUsersActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

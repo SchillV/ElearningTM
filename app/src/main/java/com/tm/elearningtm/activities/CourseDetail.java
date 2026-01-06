@@ -84,7 +84,7 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     private void showAddOptionsDialog() {
-        final CharSequence[] options = {"Add Material", "Add Assignment", "Cancel"};
+        final CharSequence[] options = {"Add Material", "Add Assignment", "Assign Student", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add to Course");
         builder.setItems(options, (dialog, item) -> {
@@ -94,6 +94,10 @@ public class CourseDetail extends AppCompatActivity {
                 startActivity(intent);
             } else if (options[item].equals("Add Assignment")) {
                 Intent intent = new Intent(this, AddAssignment.class);
+                intent.putExtra("COURSE_ID", courseId);
+                startActivity(intent);
+            } else if (options[item].equals("Assign Student")) {
+                Intent intent = new Intent(this, AssignStudentActivity.class);
                 intent.putExtra("COURSE_ID", courseId);
                 startActivity(intent);
             } else if (options[item].equals("Cancel")) {
