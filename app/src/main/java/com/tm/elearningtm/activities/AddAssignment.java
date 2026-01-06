@@ -116,7 +116,7 @@ public class AddAssignment extends AppCompatActivity {
         }
 
         Tema tema = new Tema(title, description, selectedDeadline);
-        AppData.getDatabase().temaDao().insert(tema, courseId);
+        AppData.getDatabase().temaDao().insert(tema);
 
         Toast.makeText(this, "Tema publicată!", Toast.LENGTH_SHORT).show();
         finish();
