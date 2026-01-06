@@ -51,4 +51,5 @@ dependencies {
     implementation "androidx.room:room-rxjava3:$room_version"
     implementation "androidx.lifecycle:lifecycle-livedata:2.7.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.7.0"
+    implementation 'at.favre.lib:bcrypt:0.10.2'
 }

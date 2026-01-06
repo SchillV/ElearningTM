@@ -12,6 +12,7 @@ import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 import com.tm.elearningtm.database.DatabaseSeeder;
+import com.tm.elearningtm.database.PasswordHelper;
 
 public class Login extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class Login extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> attemptLogin());
         AppData.initialize(this);
-        DatabaseSeeder.seedDatabase(this);
+        //DatabaseSeeder.seedDatabase(this);
     }
 
     private void attemptLogin() {
@@ -48,7 +49,7 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        if (!user.getPassHash().equals(parola)) {
+        if (!PasswordHelper.checkPassword(parola, user.getPassHash())) {
             Toast.makeText(this, "Parolă incorectă", Toast.LENGTH_SHORT).show();
             return;
         }

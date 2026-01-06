@@ -10,28 +10,17 @@ import com.tm.elearningtm.classes.MaterialCurs;
 import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.classes.Tema;
 import com.tm.elearningtm.classes.User;
-import com.tm.elearningtm.database.AppDatabase;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-/**
- * Seeds the database with test data for development.
- * Run this once when the app first starts.
- */
 public class DatabaseSeeder {
 
     private static final String TAG = "DatabaseSeeder";
     private static final Executor executor = Executors.newSingleThreadExecutor();
 
-    /**
-     * Seeds the database with test data.
-     * This runs asynchronously to avoid blocking the UI.
-     *
-     * @param context Application context
-     */
     public static void seedDatabase(Context context) {
         executor.execute(() -> {
             AppDatabase db = AppData.getDatabase();
@@ -52,7 +41,7 @@ public class DatabaseSeeder {
                 seedMaterials(db);
                 seedSubmissions(db);
 
-                Log.d(TAG, "✅ Database seeded successfully!");
+                Log.d(TAG, "Database seeded successfully!");
                 Log.d(TAG, "Test Credentials:");
                 Log.d(TAG, "  Professor: popescu@univ.ro / prof123");
                 Log.d(TAG, "  Professor: ionescu@univ.ro / prof123");
@@ -66,16 +55,15 @@ public class DatabaseSeeder {
         });
     }
 
-    /**
-     * Create test users (professors and students)
-     */
     private static void seedUsers(AppDatabase db) {
+        Log.d(TAG, "Hashing passwords for test users...");
+
         // ========== PROFESSORS ==========
         User prof1 = User.createProfesor(
                 0,
                 "Ion Popescu",
                 "popescu@univ.ro",
-                "prof123",  // In production, hash this!
+                PasswordHelper.hashPassword("prof123"),
                 "CONFERENTIAR",
                 "Informatică"
         );
@@ -85,7 +73,7 @@ public class DatabaseSeeder {
                 0,
                 "Maria Ionescu",
                 "ionescu@univ.ro",
-                "prof123",
+                PasswordHelper.hashPassword("prof123"),
                 "LECTOR",
                 "Matematică"
         );
@@ -95,7 +83,7 @@ public class DatabaseSeeder {
                 0,
                 "Alexandru Gheorghiu",
                 "gheorghiu@univ.ro",
-                "prof123",
+                PasswordHelper.hashPassword("prof123"),
                 "PROFESOR",
                 "Informatică"
         );
@@ -106,7 +94,7 @@ public class DatabaseSeeder {
                 0,
                 "Andrei Georgescu",
                 "andrei@stud.univ.ro",
-                "student123",
+                PasswordHelper.hashPassword("student123"),
                 12345,
                 3,
                 "A1"
@@ -117,7 +105,7 @@ public class DatabaseSeeder {
                 0,
                 "Elena Popa",
                 "elena@stud.univ.ro",
-                "student123",
+                PasswordHelper.hashPassword("student123"),
                 12346,
                 3,
                 "A1"
@@ -128,7 +116,7 @@ public class DatabaseSeeder {
                 0,
                 "Mihai Dumitrescu",
                 "mihai@stud.univ.ro",
-                "student123",
+                PasswordHelper.hashPassword("student123"),
                 12347,
                 3,
                 "A2"
@@ -139,7 +127,7 @@ public class DatabaseSeeder {
                 0,
                 "Ana Marinescu",
                 "ana@stud.univ.ro",
-                "student123",
+                PasswordHelper.hashPassword("student123"),
                 12348,
                 2,
                 "B1"
@@ -150,19 +138,16 @@ public class DatabaseSeeder {
                 0,
                 "Cristian Vasile",
                 "cristian@stud.univ.ro",
-                "student123",
+                PasswordHelper.hashPassword("student123"),
                 12349,
                 2,
                 "B1"
         );
         db.userDao().insert(student5);
 
-        Log.d(TAG, "✓ Created 3 professors and 5 students");
+        Log.d(TAG, "✓ Created 3 professors and 5 students with hashed passwords");
     }
 
-    /**
-     * Create test courses
-     */
     private static void seedCourses(AppDatabase db) {
         // Get professors
         User prof1 = db.userDao().getUserByEmail("popescu@univ.ro");
@@ -226,9 +211,6 @@ public class DatabaseSeeder {
         Log.d(TAG, "✓ Created 5 courses");
     }
 
-    /**
-     * Enroll students in courses
-     */
     private static void seedEnrollments(AppDatabase db) {
         User andrei = db.userDao().getUserByEmail("andrei@stud.univ.ro");
         User elena = db.userDao().getUserByEmail("elena@stud.univ.ro");
@@ -269,9 +251,6 @@ public class DatabaseSeeder {
         Log.d(TAG, "✓ Created course enrollments");
     }
 
-    /**
-     * Create assignments (teme) for courses
-     */
     private static void seedAssignments(AppDatabase db) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             Log.d(TAG, "⚠ Skipping assignments - requires API 26+");
@@ -354,9 +333,6 @@ public class DatabaseSeeder {
         Log.d(TAG, "✓ Created assignments for courses");
     }
 
-    /**
-     * Create course materials
-     */
     private static void seedMaterials(AppDatabase db) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             Log.d(TAG, "⚠ Skipping materials - requires API 26+");
@@ -424,9 +400,6 @@ public class DatabaseSeeder {
         Log.d(TAG, "✓ Created materials for courses");
     }
 
-    /**
-     * Create some test submissions
-     */
     private static void seedSubmissions(AppDatabase db) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             Log.d(TAG, "⚠ Skipping submissions - requires API 26+");
