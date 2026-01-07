@@ -120,6 +120,18 @@ public class CourseDetail extends AppCompatActivity {
             intent.putExtra("EDIT_COURSE_ID", course.getId());
             startActivity(intent);
             return true;
+        } else if (item.getItemId() == R.id.action_delete_course) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete Course")
+                    .setMessage("Are you sure you want to delete this course?")
+                    .setPositiveButton("Delete", (dialog, which) -> {
+                        AppData.getDatabase().cursDao().delete(course);
+                        Toast.makeText(this, "Course deleted", Toast.LENGTH_SHORT).show();
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+            return true;
         } else if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;

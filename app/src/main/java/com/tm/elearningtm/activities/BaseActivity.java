@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
@@ -74,11 +75,19 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             View headerView = navigationView.getHeaderView(0);
             TextView navHeaderName = headerView.findViewById(R.id.text_nav_header_name);
             TextView navHeaderEmail = headerView.findViewById(R.id.text_nav_header_email);
+            ImageView navHeaderRole = headerView.findViewById(R.id.image_nav_header_role);
 
             User currentUser = AppData.getUtilizatorCurent();
             if (currentUser != null) {
                 navHeaderName.setText(currentUser.getNume());
                 navHeaderEmail.setText(currentUser.getEmail());
+                if (currentUser.isStudent()) {
+                    navHeaderRole.setImageResource(R.drawable.ic_student);
+                } else if (currentUser.isProfesor()) {
+                    navHeaderRole.setImageResource(R.drawable.ic_profesor);
+                } else {
+                    navHeaderRole.setImageResource(R.drawable.ic_admin);
+                }
             }
         }
     }

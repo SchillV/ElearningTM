@@ -2,8 +2,6 @@
     <string name="app_name">ElearningTM</string>
     <!-- Strings related to login -->
     <string name="cursurile_mele">Cursurile mele:</string>
-    <string name="rol_student_profesor" tools:ignore="Typos">Rol: [Student/Profesor]</string>
-    <string name="bine_ai_venit_nume_utilizator">Bine ai venit, [Nume Utilizator]!</string>
     <string name="titlul_temei">Titlul Temei</string>
     <string name="descriere_i_instruc_iuni">Descriere și instrucțiuni</string>
     <string name="alege_deadline" tools:ignore="Typos">Alege Deadline</string>

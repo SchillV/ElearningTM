@@ -19,16 +19,21 @@ public class DeadlineReceiver extends BroadcastReceiver {
         // Ensure AppData is initialized before use in a background context.
         AppData.initialize(context.getApplicationContext());
 
+        if (AppData.isAdmin()) {
+            return; // Admins should not receive notifications.
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             List<Tema> upcomingAssignments = AppData.getDatabase().temaDao().getUpcomingTemeDirect(LocalDateTime.now().plusDays(1).toString());
 
             for (Tema assignment : upcomingAssignments) {
-                // In a real app, you might check if the user is still enrolled
-                // and wants this notification before sending it.
-                NotificationsManager.sendNotification(context,
-                        "Deadline approaching!",
-                        "The deadline for '" + assignment.getTitlu() + "' is tomorrow.",
-                        assignment.getId());
+                // Only send notifications to students enrolled in the course
+                if (!AppData.isProfesor()) {
+                    NotificationsManager.sendNotification(context,
+                            "Deadline approaching!",
+                            "The deadline for '" + assignment.getTitlu() + "' is tomorrow.",
+                            assignment.getId());
+                }
             }
         }
     }

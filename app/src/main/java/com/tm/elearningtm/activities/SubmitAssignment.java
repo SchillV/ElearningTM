@@ -24,6 +24,7 @@ import com.tm.elearningtm.R;
 import com.tm.elearningtm.adapters.SubmissionAdapter;
 import com.tm.elearningtm.classes.SubmisieStudent;
 import com.tm.elearningtm.classes.Tema;
+import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
 import java.time.LocalDateTime;
@@ -109,13 +110,21 @@ public class SubmitAssignment extends AppCompatActivity {
                 }
 
                 SubmisieStudent newSubmission = new SubmisieStudent(AppData.getUtilizatorCurent(), submissionContent);
-                newSubmission.setTemaId(assignment.getId()); // <-- THE FIX
+                newSubmission.setTemaId(assignment.getId());
                 AppData.getDatabase().submisieDao().insert(newSubmission);
 
-                NotificationsManager.sendNotification(this, 
-                    "Assignment Submitted!", 
-                    "Your work for '" + assignment.getTitlu() + "' has been received.", 
+                NotificationsManager.sendNotification(this,
+                    "Assignment Submitted!",
+                    "Your work for '" + assignment.getTitlu() + "' has been received.",
                     (int) System.currentTimeMillis());
+
+                User teacher = AppData.getDatabase().userDao().getUserById(AppData.getCursCurent().getProfesorId());
+                if (teacher != null) {
+                    NotificationsManager.sendNotification(this,
+                        "New Submission!",
+                        "A new submission for '" + assignment.getTitlu() + "' is available.",
+                        (int) System.currentTimeMillis() + 1); // Avoid notification ID collision
+                }
 
                 Toast.makeText(this, "Assignment submitted successfully!", Toast.LENGTH_SHORT).show();
                 recreate(); // Recreate the activity to show the submission list
@@ -167,6 +176,12 @@ public class SubmitAssignment extends AppCompatActivity {
                     .setMessage("Are you sure you want to delete this assignment?")
                     .setPositiveButton("Delete", (dialog, which) -> {
                         AppData.getDatabase().temaDao().delete(assignment);
+
+                        NotificationsManager.sendNotification(this,
+                            "Assignment Deleted!",
+                            "The assignment '" + assignment.getTitlu() + "' has been deleted.",
+                            assignment.getId());
+
                         Toast.makeText(this, "Assignment deleted", Toast.LENGTH_SHORT).show();
                         finish();
                     })

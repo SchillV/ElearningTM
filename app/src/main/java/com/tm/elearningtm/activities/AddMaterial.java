@@ -96,6 +96,12 @@ public class AddMaterial extends BaseActivity {
             existingMaterial.setDescriere(content);
             existingMaterial.setTipMaterial(type);
             AppData.getDatabase().materialDao().update(existingMaterial);
+            
+            NotificationsManager.sendNotification(this,
+                "Material Updated!",
+                "The material '" + title + "' has been updated.",
+                existingMaterial.getId());
+
             Toast.makeText(this, "Material updated!", Toast.LENGTH_SHORT).show();
         } else {
             int courseId = getIntent().getIntExtra("COURSE_ID", -1);
@@ -107,6 +113,11 @@ public class AddMaterial extends BaseActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 MaterialCurs newMaterial = new MaterialCurs(0, title, content, courseId, type, LocalDateTime.now());
                 long newMaterialId = AppData.getDatabase().materialDao().insert(newMaterial);
+
+                NotificationsManager.sendNotification(this,
+                    "Material Published!",
+                    "The material '" + title + "' has been published.",
+                    (int) newMaterialId);
 
                 if ("ANUNT".equals(type)) {
                     List<User> students = AppData.getDatabase().enrollmentDao().getStudentsForCourse(courseId);

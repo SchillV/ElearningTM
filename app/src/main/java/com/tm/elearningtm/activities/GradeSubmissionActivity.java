@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.tm.elearningtm.NotificationsManager;
 import com.tm.elearningtm.R;
 import com.tm.elearningtm.classes.SubmisieStudent;
+import com.tm.elearningtm.classes.User;
 import com.tm.elearningtm.database.AppData;
 
 import java.util.Objects;
@@ -70,10 +71,16 @@ public class GradeSubmissionActivity extends AppCompatActivity {
             submission.setFeedback(feedback);
             AppData.getDatabase().submisieDao().update(submission);
 
-            NotificationsManager.sendNotification(this,
-                    "Submission Graded!",
-                    "You have received a grade for '" + AppData.getDatabase().temaDao().getTemaById(submission.getTemaId()).getTitlu() + "'.",
-                    submission.getId());
+            // This should be a push notification in a real app.
+            // For now, we'll send a local notification.
+            User student = AppData.getDatabase().userDao().getUserById(submission.getStudentId());
+            if (student != null) {
+                String studentName = student.getNume();
+                NotificationsManager.sendNotification(this,
+                        "Submission Graded!",
+                        "Student '" + studentName + "' has received a grade for '" + AppData.getDatabase().temaDao().getTemaById(submission.getTemaId()).getTitlu() + "'.",
+                        submission.getId());
+            }
 
             Toast.makeText(this, "Grade saved!", Toast.LENGTH_SHORT).show();
             finish();

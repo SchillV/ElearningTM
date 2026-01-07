@@ -18,8 +18,7 @@ import androidx.room.PrimaryKey;
                 @ForeignKey(
                         entity = Curs.class,
                         parentColumns = "id",
-                        childColumns = "course_id",
-                        onDelete = ForeignKey.CASCADE
+                        childColumns = "course_id"
                 )
         },
         indices = {
@@ -36,7 +35,7 @@ public class CourseEnrollment {
     @ColumnInfo(name = "student_id")
     private int studentId;
 
-    @ColumnInfo(name = "course_id")
+    @ColumnInfo(name = "course_id", defaultValue = "-1")
     private int courseId;
 
     @ColumnInfo(name = "enrollment_date")

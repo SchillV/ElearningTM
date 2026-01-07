@@ -10,10 +10,10 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="profile_image"
-        android:src="@mipmap/ic_launcher_round"
+        android:id="@+id/image_nav_header_role"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:contentDescription="role_image"
         tools:ignore="HardcodedText" />
 
     <TextView
