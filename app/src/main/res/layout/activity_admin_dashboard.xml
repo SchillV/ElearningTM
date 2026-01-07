@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.AdminDashboard"
     tools:openDrawer="start">
 
     <LinearLayout
@@ -14,7 +13,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/reusable_toolbar" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -25,7 +31,6 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp">
 
-                <!-- System Statistics -->
                 <TextView
                     android:id="@+id/title_system_overview"
                     android:layout_width="wrap_content"
@@ -197,17 +202,14 @@
                 <!-- User Management Card -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_manage_users"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:layout_marginEnd="8dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="2dp"
-                    app:layout_constraintEnd_toStartOf="@+id/card_manage_courses"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title_management">
 
                     <LinearLayout
@@ -240,18 +242,15 @@
                 <!-- Course Management Card -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_manage_courses"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="16dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="2dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/card_manage_users"
-                    app:layout_constraintTop_toBottomOf="@id/title_management">
+                    app:layout_constraintTop_toBottomOf="@id/card_manage_users">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -281,18 +280,15 @@
                 <!-- Enrollment Management Card -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_manage_enrollments"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="2dp"
-                    app:layout_constraintEnd_toStartOf="@+id/card_database"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/card_manage_users">
+                    app:layout_constraintTop_toBottomOf="@id/card_manage_courses">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -324,18 +320,15 @@
                 <!-- Database Management Card -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_database"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="2dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/card_manage_enrollments"
-                    app:layout_constraintTop_toBottomOf="@id/card_manage_courses">
+                    app:layout_constraintTop_toBottomOf="@id/card_manage_enrollments">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -363,35 +356,6 @@
                             tools:ignore="HardcodedText" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
-                <!-- Action Buttons -->
-                <Button
-                    android:id="@+id/button_view_all_courses"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="View All Courses"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/card_manage_enrollments"
-                    tools:ignore="HardcodedText" />
-
-                <Button
-                    android:id="@+id/button_logout"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Logout"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/button_view_all_courses"
-                    tools:ignore="HardcodedText" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

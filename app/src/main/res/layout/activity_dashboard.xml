@@ -26,28 +26,6 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/text_welcome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/bine_ai_venit_nume_utilizator" />
-
-                <TextView
-                    android:id="@+id/text_user_role"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_welcome"
-                    tools:text="@string/rol_student_profesor" />
-
-                <TextView
                     android:id="@+id/text_courses_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,7 +35,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_user_role" />
+                    tools:ignore="MissingConstraints" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_courses"

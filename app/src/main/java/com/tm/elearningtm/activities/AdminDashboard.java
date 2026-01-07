@@ -78,8 +78,6 @@ public class AdminDashboard extends BaseActivity {
         findViewById(R.id.card_manage_courses).setOnClickListener(v -> startActivity(new Intent(this, ManageCoursesActivity.class)));
         findViewById(R.id.card_manage_enrollments).setOnClickListener(v -> startActivity(new Intent(this, ManageEnrollmentsActivity.class)));
         findViewById(R.id.card_database).setOnClickListener(v -> showDatabaseOptions());
-        findViewById(R.id.button_view_all_courses).setOnClickListener(v -> startActivity(new Intent(this, Dashboard.class)));
-        findViewById(R.id.button_logout).setOnClickListener(v -> logout());
     }
 
     private void showDatabaseOptions() {
